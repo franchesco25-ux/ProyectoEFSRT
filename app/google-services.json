@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "774109496153",
+    "project_id": "proyecto-efsrt",
+    "storage_bucket": "proyecto-efsrt.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774109496153:android:e364e68c301ec91de34248",
+        "android_client_info": {
+          "package_name": "com.example.ingresosgastosapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5L37YatAppvW7Rbohs9W3KbKFu_ouXlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

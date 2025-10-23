@@ -1,0 +1,43 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:padding="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etMontoGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Monto del gasto"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etDescripcionGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción" />
+
+        <Spinner
+            android:id="@+id/spinnerCategoriaGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnGuardarGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Gasto"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

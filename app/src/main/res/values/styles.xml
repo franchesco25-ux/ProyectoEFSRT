@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomCardButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/teal_200</item> <!-- O el color que quieras -->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textAllCaps">false</item> <!-- Si quieres que no convierta a mayúsculas -->
+    </style>
+
+    <style name="CustomCardButton.GreenBorder" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/green_dark</item>
+        <item name="iconTint">@color/green_dark</item>
+        <item name="strokeColor">@color/green_dark</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+
+</resources>
