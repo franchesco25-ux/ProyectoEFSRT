@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IngresosGastosApp">
         <activity
+            android:name=".PruebaActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistorialGastosActivity"
             android:exported="false" />
         <activity

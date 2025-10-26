@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Add.AddFragment">
+
+    <EditText
+        android:id="@+id/addFirst_Name_et"
+        android:layout_width="377dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="FirstName"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <EditText
+        android:id="@+id/addLast_Name_et"
+        android:layout_width="377dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:hint="LastName"
+        android:inputType="text"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <EditText
+        android:id="@+id/addAge_et"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="number"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="262dp" />
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="193dp"
+        android:layout_height="50dp"
+        android:text="Button"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="388dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

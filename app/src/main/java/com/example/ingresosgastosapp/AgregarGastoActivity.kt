@@ -8,9 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ingresosgastosapp.Data.Gasto
 import com.example.ingresosgastosapp.DataBase.GastosDatabaseHelper
 import com.example.ingresosgastosapp.databinding.ActivityAgregarGastoBinding
+import java.time.LocalDate
+import android.util.Log
+
 
 class AgregarGastoActivity : AppCompatActivity() {
 
+    private val TAG = "AgregarGastoActivity"
     /*  Variables
     private lateinit var etMonto: EditText
     private lateinit var etDescripcion: EditText
@@ -38,7 +42,7 @@ class AgregarGastoActivity : AppCompatActivity() {
 
         db = GastosDatabaseHelper(this)
 
-        // "Categoría" como primera opción
+        /* Componente para aspecto visual*/
         categorias = arrayOf(
             "Categoría",
             "Alimentos",
@@ -55,10 +59,11 @@ class AgregarGastoActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item,
             categorias
         )
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategoriaGasto.adapter = adapter
 
-        binding.spinnerCategoriaGasto.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.spinnerCategoriaGasto.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -66,12 +71,18 @@ class AgregarGastoActivity : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                Toast.makeText(this@AgregarGastoActivity, "Elemento seleccionado $selectedItem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@AgregarGastoActivity,
+                    "Elemento seleccionado $selectedItem",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
         }
+        /* Componente visual */
 
 
         binding.btnGuardarGasto.setOnClickListener {
@@ -80,6 +91,9 @@ class AgregarGastoActivity : AppCompatActivity() {
             val monto = binding.etMontoGasto.text.toString().toInt()
             val descripcion = binding.etDescripcionGasto.text.toString()
             val categoria = binding.spinnerCategoriaGasto.selectedItem.toString()
+            val fecha = LocalDate.now().toString()
+
+            Log.i("Sistema", fecha)
 
             //inicializacion de clases
             val gasto = Gasto(0, monto, descripcion, categoria)
