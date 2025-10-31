@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         tvBalance.text = "Balance: $1000" //cambiar con una cuenta demo
 
         btnAgregarIngreso.setOnClickListener {
-            val intent = Intent(this, AgregarIngresoActivity::class.java)
+            val intent = Intent(this, PruebaActivity::class.java)
             startActivity(intent)
         }
 

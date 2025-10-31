@@ -16,11 +16,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
 import com.example.ingresosgastosapp.R
+import com.example.ingresosgastosapp.databinding.FragmentAddBinding
 import kotlin.jvm.java
 
 class AddFragment : Fragment() {
 
     private lateinit var mIngresosViewModel: IngresosViewModel
+
+    private lateinit var binding: FragmentAddBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +44,14 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val descripcion = view?.findViewById<EditText>(R.id.addLast_Name_et)!!.text.toString()
-        val monto = view?.findViewById<EditText>(R.id.addLast_Name_et)!!.text
+        val firstName = binding.addFirstNameEt.text.toString()
+        val lastName = binding.addLastNameEt.text.toString()
+        val age = binding.addAgeEt.text
 
-        if (inputCheck(monto, descripcion)){
+        if (inputCheck(firstName, lastName, age)){
+
             //Create User Object
-            val ingreso = Ingresos(0, Integer.parseInt(monto.toString()), descripcion)
+            val ingreso = Ingresos(0, firstName, lastName, Integer.parseInt(age.toString()))
 
             //add Data to Database
             mIngresosViewModel.addIngresos(ingreso)
@@ -59,7 +64,7 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(monto: Editable, descripcion: String): Boolean{
-        return !(TextUtils.isEmpty(descripcion) && monto.isEmpty())
+    private fun inputCheck(firstName: String, lastName: String, age:Editable): Boolean{
+        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
     }
 }

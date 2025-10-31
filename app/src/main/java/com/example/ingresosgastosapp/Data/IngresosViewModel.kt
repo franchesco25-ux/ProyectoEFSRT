@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class IngresosViewModel(application: Application) : AndroidViewModel(application) {
-    private val readAllData: LiveData<List<Ingresos>>
+     val readAllData: LiveData<List<Ingresos>>
     private val repository: IngresosRepository
 
     init{

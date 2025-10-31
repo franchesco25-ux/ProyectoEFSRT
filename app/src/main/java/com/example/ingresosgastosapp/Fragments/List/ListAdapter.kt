@@ -27,14 +27,22 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false))
     }
 
+    override fun getItemCount(): Int = userList.size
+
     override fun onBindViewHolder(
         holder: MyViewHolder,
         position: Int
     ) {
         val currentItem = userList[position]
         holder.id_txt.text = currentItem.id.toString()
+        holder.firstName.text = currentItem.firstName
+        holder.lastName.text = currentItem.lastName
+        holder.age_txt.text = currentItem.age_txt.toString()
     }
 
-    override fun getItemCount(): Int = userList.size
+    fun setData(user: List<Ingresos>){
+        this.userList = user
+        notifyDataSetChanged()
+    }
 
 }
