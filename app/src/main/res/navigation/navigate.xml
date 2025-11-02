@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigate"
+    app:startDestination="@id/listGastosFragment">
+
+    <fragment
+        android:id="@+id/listGastosFragment"
+        android:name="com.example.ingresosgastosapp.Fragments.List.ListGastosFragment"
+        android:label="Lista de Gastos"
+        tools:layout="@layout/fragment_list_gastos">
+
+        <action
+            android:id="@+id/action_listGastosFragment_to_addGastosFragment"
+            app:destination="@id/addGastosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addGastosFragment"
+        android:name="com.example.ingresosgastosapp.Fragments.Add.addGastos"
+        android:label="Agregar Gasto"
+        tools:layout="@layout/fragment_add_gastos">
+
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listGastosFragment" />
+    </fragment>
+</navigation>

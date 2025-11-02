@@ -3,8 +3,6 @@ package com.example.ingresosgastosapp
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ingresosgastosapp.Data.Gasto
-
 class HistorialActivity : AppCompatActivity() {
 
     /*

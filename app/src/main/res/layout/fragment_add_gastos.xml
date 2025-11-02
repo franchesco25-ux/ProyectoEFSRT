@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".Fragments.Add.AddFragment">
+    android:padding="20dp">
 
     <EditText
-        android:id="@+id/addDescripcion_et"
+        android:id="@+id/addDescripcionGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descripción del ingreso"
-        tools:ignore="MissingConstraints" />
+        android:hint="Descripción del gasto" />
 
     <EditText
-        android:id="@+id/addMonto_et"
+        android:id="@+id/addMontoGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
         android:hint="Monto" />
 
     <EditText
-        android:id="@+id/addCategoria_et"
+        android:id="@+id/addCategoriaGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Categoría"
-        tools:ignore="MissingConstraints" />
+        android:hint="Categoría" />
 
     <Button
-        android:id="@+id/add_btn"
+        android:id="@+id/addGasto_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:text="Agregar Ingreso" />
+        android:text="Agregar Gasto" />
+
 
 </LinearLayout>

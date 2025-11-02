@@ -6,7 +6,19 @@ class IngresosRepository (private val ingresosDAO: IngresosDAO) {
 
     val readAllData: LiveData<List<Ingresos>> = ingresosDAO.readAllData()
 
-    suspend fun addIngresos(ingresos: Ingresos){
-        ingresosDAO.addIngreso(ingresos)
+    suspend fun addIngresos(ingreso: Ingresos) {
+        ingresosDAO.addIngreso(ingreso)
+    }
+
+    suspend fun updateIngresos(ingreso: Ingresos) {
+        ingresosDAO.updateIngreso(ingreso)
+    }
+
+    suspend fun deleteIngresos(ingreso: Ingresos) {
+        ingresosDAO.deleteIngreso(ingreso)
+    }
+
+    suspend fun deleteAll() {
+        ingresosDAO.deleteAllIngresos()
     }
 }

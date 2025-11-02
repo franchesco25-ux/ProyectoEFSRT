@@ -1,16 +1,20 @@
 package com.example.ingresosgastosapp.Fragments.List
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ingresosgastosapp.Adapter.ListAdapter
 import com.example.ingresosgastosapp.Data.IngresosViewModel
+import com.example.ingresosgastosapp.MainActivity
 import com.example.ingresosgastosapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -31,6 +35,7 @@ class ListFragment : Fragment() {
         val adapter = ListAdapter()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
+        val btnVolver = view.findViewById<Button>(R.id.btnVolverMain)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -46,6 +51,13 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
-        return verView
+        btnVolver.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
+        return view
     }
+
 }

@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.compiler)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.room.common.jvm)
     testImplementation(libs.junit)
     implementation("androidx.fragment:fragment-ktx:1.8.9")
     androidTestImplementation(libs.androidx.junit)

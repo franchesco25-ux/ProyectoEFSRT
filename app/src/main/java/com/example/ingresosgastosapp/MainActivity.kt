@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ingresosgastosapp.Adapter.GastosAdapter
-import com.example.ingresosgastosapp.DataBase.GastosDatabaseHelper
-import com.example.ingresosgastosapp.databinding.ActivityMainBinding
+import androidx.lifecycle.Observer
+import com.example.ingresosgastosapp.Data.BalanceViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,20 +19,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnHistorial: Button
     private lateinit var btnExportarReportes: Button
 
-
+    private val balanceViewModel: BalanceViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         tvBalance = findViewById(R.id.tvBalance)
-        btnAgregarIngreso = findViewById(R.id.btnAgregarIngreso) //componente btm
-        btnAgregarGasto = findViewById(R.id.btnAgregarGasto) //cmpnte btm
-        btnHistorial = findViewById(R.id.btnHistorial) //cmpnte btm
-        btnExportarReportes = findViewById(R.id.btnExportarReportes) //cmpnte btm
+        btnAgregarIngreso = findViewById(R.id.btnAgregarIngreso)
+        btnAgregarGasto = findViewById(R.id.btnAgregarGasto)
+        btnHistorial = findViewById(R.id.btnHistorial)
+        btnExportarReportes = findViewById(R.id.btnExportarReportes)
 
-        tvBalance.text = "Balance: $1000" //cambiar con una cuenta demo
+        // 👀 Observa el balance en tiempo real
+        balanceViewModel.balance.observe(this, Observer { balance ->
+            val total = balance?.total ?: 0.0
+            tvBalance.text = "Balance: S/ %.2f".format(total)
+        })
 
         btnAgregarIngreso.setOnClickListener {
             val intent = Intent(this, PruebaActivity::class.java)
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnAgregarGasto.setOnClickListener {
-            val intent = Intent(this, AgregarGastoActivity::class.java)
+            val intent = Intent(this, GastosActivity::class.java)
             startActivity(intent)
         }
 
@@ -53,6 +55,5 @@ class MainActivity : AppCompatActivity() {
         btnExportarReportes.setOnClickListener {
             Toast.makeText(this, "Función Exportar Reportes próximamente", Toast.LENGTH_SHORT).show()
         }
-
     }
 }

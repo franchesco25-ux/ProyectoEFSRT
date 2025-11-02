@@ -7,20 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ingresosgastosapp.Adapter.GastosAdapter
-import com.example.ingresosgastosapp.DataBase.GastosDatabaseHelper
 import com.example.ingresosgastosapp.databinding.ActivityHistorialGastosBinding
 
 class HistorialGastosActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHistorialGastosBinding
-    private lateinit var db: GastosDatabaseHelper
-    private lateinit var gastosAdapter: GastosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistorialGastosBinding.inflate(layoutInflater)
-        db = GastosDatabaseHelper(this)
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,14 +34,11 @@ class HistorialGastosActivity : AppCompatActivity() {
             "Otros"
         )
 
-        gastosAdapter = GastosAdapter(db.allgetGastos(),categorias,this)
 
         binding.gastosRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.gastosRecyclerView.adapter = gastosAdapter
     }
 
     override fun onResume(){
         super.onResume()
-        gastosAdapter.refreshData(db.allgetGastos())
     }
 }

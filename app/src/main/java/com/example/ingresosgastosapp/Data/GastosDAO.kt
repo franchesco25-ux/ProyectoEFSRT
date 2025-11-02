@@ -8,22 +8,21 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
-
 @Dao
-interface IngresosDAO {
+interface GastosDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addIngreso(ingreso: Ingresos)
+    suspend fun addGasto(gastos: Gastos)
 
     @Update
-    suspend fun updateIngreso(ingreso: Ingresos)
+    suspend fun updateGasto(gastos: Gastos)
 
     @Delete
-    suspend fun deleteIngreso(ingreso: Ingresos)
+    suspend fun deleteGasto(gastos: Gastos)
 
-    @Query("DELETE FROM ingresos")
-    suspend fun deleteAllIngresos()
+    @Query("DELETE FROM gastos")
+    suspend fun deleteAllGastos()
 
-    @Query("SELECT * FROM ingresos ORDER BY id ASC")
-    fun readAllData(): LiveData<List<Ingresos>>
+    @Query("SELECT * FROM gastos ORDER BY id ASC")
+    fun readAllData(): LiveData<List<Gastos>>
 }

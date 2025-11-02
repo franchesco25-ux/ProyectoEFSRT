@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/idGasto_txt"
+        android:text="ID"
+        android:textStyle="bold"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <TextView
+        android:id="@+id/descripcionGasto_txt"
+        android:text="Descripción"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <TextView
+        android:id="@+id/montoGasto_txt"
+        android:text="Monto"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <TextView
+        android:id="@+id/categoriaGasto_txt"
+        android:text="Categoría"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <TextView
+        android:id="@+id/fechaGasto_txt"
+        android:text="Fecha"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+</LinearLayout>
