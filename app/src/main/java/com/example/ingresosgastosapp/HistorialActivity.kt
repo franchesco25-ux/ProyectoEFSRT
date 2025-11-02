@@ -4,10 +4,6 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 class HistorialActivity : AppCompatActivity() {
-
-    /*
-    * Reemplazo por ViewBinding
-    * */
     private lateinit var spinnerFiltroCategoria: Spinner
     private lateinit var tvHistorial: TextView
 

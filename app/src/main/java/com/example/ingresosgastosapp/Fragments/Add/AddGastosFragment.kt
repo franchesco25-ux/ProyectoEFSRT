@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 
-// Archivo: addGastos.kt (Para Gastos)
 class addGastos : Fragment() {
 
     private lateinit var mGastosViewModel: GastosViewModel
@@ -32,13 +31,10 @@ class addGastos : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Asegúrate de usar el layout correcto para gastos
         val view = inflater.inflate(R.layout.fragment_add_gastos, container, false)
 
-        // Inicialización de ViewModel (Asegúrate de tener un GastosViewModel)
         mGastosViewModel = ViewModelProvider(this).get(GastosViewModel::class.java)
 
-        // 1. Identificación de Vistas
         val descripcionEt = view.findViewById<EditText>(R.id.addDescripcionGasto_et)
         val montoEt = view.findViewById<EditText>(R.id.addMontoGasto_et)
         val categoriaEt = view.findViewById<EditText>(R.id.addCategoriaGasto_et)
@@ -51,7 +47,6 @@ class addGastos : Fragment() {
 
             if (!TextUtils.isEmpty(descripcion) && !TextUtils.isEmpty(montoStr) && !TextUtils.isEmpty(categoria)) {
 
-                // Conversión segura del monto
                 val monto = montoStr.toDoubleOrNull()
 
                 if (monto != null && monto > 0) {
@@ -60,28 +55,21 @@ class addGastos : Fragment() {
 
                     viewLifecycleOwner.lifecycleScope.launch {
 
-                        // 2. OBTENER el balance actual forzando la lectura de la DB
                         val currentBalance = balanceViewModel.getCurrentBalance()
 
-                        // 3. Calcular el nuevo balance: RESTA
                         val newBalance = currentBalance - monto
 
-                        // 4. Validación de saldo
                         if (newBalance >= 0) {
-                            // Guardar el gasto
                             mGastosViewModel.addGasto(gasto)
 
-                            // Actualizar el balance
                             balanceViewModel.updateBalance(newBalance)
 
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(requireContext(), "Gasto agregado correctamente", Toast.LENGTH_SHORT).show()
-                                // Asegúrate de que esta acción de navegación sea correcta
                                 findNavController().navigate(R.id.action_addFragment_to_listFragment)
                             }
                         } else {
                             withContext(Dispatchers.Main) {
-                                // Muestra el saldo actual para dar contexto
                                 Toast.makeText(requireContext(), "No tienes suficiente balance (Actual: $currentBalance)", Toast.LENGTH_SHORT).show()
                             }
                         }

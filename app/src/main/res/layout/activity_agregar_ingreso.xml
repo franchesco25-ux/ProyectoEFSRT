@@ -3,25 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="#F8F9FA">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar Ingreso"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#2C3E50"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/etMontoIngreso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Monto del ingreso"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
 
     <EditText
         android:id="@+id/etDescripcionIngreso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descripción" />
+        android:hint="Descripción"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/btnGuardarIngreso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Ingreso"
-        android:layout_marginTop="16dp" />
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#27AE60"
+        android:padding="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 </LinearLayout>

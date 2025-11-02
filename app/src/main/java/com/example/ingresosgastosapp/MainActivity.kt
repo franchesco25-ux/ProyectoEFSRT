@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         btnHistorial = findViewById(R.id.btnHistorial)
         btnExportarReportes = findViewById(R.id.btnExportarReportes)
 
-        // 👀 Observa el balance en tiempo real
         balanceViewModel.balance.observe(this, Observer { balance ->
             val total = balance?.total ?: 0.0
             tvBalance.text = "Balance: S/ %.2f".format(total)

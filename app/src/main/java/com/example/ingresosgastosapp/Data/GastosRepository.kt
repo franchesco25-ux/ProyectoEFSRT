@@ -21,4 +21,8 @@ class GastosRepository(private val gastosDAO: GastosDAO) {
     suspend fun deleteAll() {
         gastosDAO.deleteAllGastos()
     }
+
+    suspend fun getGastoById(id: Int): Gastos? {
+        return gastosDAO.getGastoById(id)
+    }
 }

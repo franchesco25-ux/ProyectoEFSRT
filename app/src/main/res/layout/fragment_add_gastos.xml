@@ -1,33 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="#F8F9FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTituloGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Gasto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#C62828"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/addDescripcionGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descripción del gasto" />
+        android:hint="Descripción del gasto"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="textCapSentences"/>
 
     <EditText
         android:id="@+id/addMontoGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Monto" />
+        android:hint="Monto"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/addCategoriaGasto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Categoría" />
+        android:hint="Categoría"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="20dp"
+        android:inputType="textCapWords"/>
 
     <Button
         android:id="@+id/addGasto_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Gasto" />
+        android:text="Agregar Gasto"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#C62828"
+        android:padding="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

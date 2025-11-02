@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="@color/white">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:background="#F5F7FA">
 
     <TextView
         android:id="@+id/tvBalance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Balance: $0.00"
-        android:textSize="30sp"
-        android:textColor="@color/black"
+        android:text="Balance Actual: $0.00"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#37474F"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAgregarIngreso"
@@ -35,7 +35,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvBalance"
         app:layout_constraintStart_toStartOf="parent"
         app:cornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAgregarGasto"

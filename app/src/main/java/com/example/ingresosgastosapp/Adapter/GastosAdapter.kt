@@ -1,19 +1,18 @@
 package com.example.ingresosgastosapp.Adapter
 
-import android.content.Context
-import android.widget.ArrayAdapter;
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.R
+import com.google.android.material.button.MaterialButton
 
-class ListGastosAdapter : RecyclerView.Adapter<ListGastosAdapter.MyViewHolder>() {
+class ListGastosAdapter(
+    private val onEditClick: (Gastos) -> Unit,
+    private val onDeleteClick: (Gastos) -> Unit
+) : RecyclerView.Adapter<ListGastosAdapter.MyViewHolder>() {
 
     private var gastosList = emptyList<Gastos>()
 
@@ -23,6 +22,8 @@ class ListGastosAdapter : RecyclerView.Adapter<ListGastosAdapter.MyViewHolder>()
         val monto_txt: TextView = itemView.findViewById(R.id.montoGasto_txt)
         val categoria_txt: TextView = itemView.findViewById(R.id.categoriaGasto_txt)
         val fecha_txt: TextView = itemView.findViewById(R.id.fechaGasto_txt)
+        val btnEditar: MaterialButton = itemView.findViewById(R.id.btnEditarGasto)
+        val btnEliminar: MaterialButton = itemView.findViewById(R.id.btnEliminarGasto)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,9 +38,17 @@ class ListGastosAdapter : RecyclerView.Adapter<ListGastosAdapter.MyViewHolder>()
         val currentGasto = gastosList[position]
         holder.id_txt.text = currentGasto.id.toString()
         holder.descripcion_txt.text = currentGasto.descripcion
-        holder.monto_txt.text = "S/. ${currentGasto.monto}"
+        holder.monto_txt.text = "S/. ${String.format("%.2f", currentGasto.monto)}"
         holder.categoria_txt.text = currentGasto.categoria
         holder.fecha_txt.text = currentGasto.fecha
+
+        holder.btnEditar.setOnClickListener {
+            onEditClick(currentGasto)
+        }
+
+        holder.btnEliminar.setOnClickListener {
+            onDeleteClick(currentGasto)
+        }
     }
 
     fun setData(gastos: List<Gastos>) {

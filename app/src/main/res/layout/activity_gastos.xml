@@ -6,7 +6,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/edittext_background"
     tools:context=".GastosActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarGastos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#C62828"
+        android:elevation="6dp"
+        android:title="Gestión de Gastos"
+        android:titleTextColor="@android:color/white"
+        android:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -15,9 +31,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigate"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarGastos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navGraph="@navigation/navigate" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

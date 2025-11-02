@@ -7,6 +7,7 @@
     <color name="teal_500">#4CAF50</color>
     <color name="green_dark">#006400</color>  <!-- verde oscuro -->
     <color name="orange">#FFA500</color>
+    <color name="fondo_claro">#FFF8F9FA</color>
 
 
 </resources>

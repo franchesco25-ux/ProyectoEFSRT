@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:orientation="vertical"
+    android:background="@color/fondo_claro"
     tools:context=".Fragments.Add.AddFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTituloIngreso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Ingreso"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/addDescripcion_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripción del ingreso"
-        tools:ignore="MissingConstraints" />
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="textCapSentences"/>
 
     <EditText
         android:id="@+id/addMonto_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:hint="Monto" />
+        android:hint="Monto"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/addCategoria_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Categoría"
-        tools:ignore="MissingConstraints" />
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginBottom="20dp"
+        android:inputType="textCapWords"/>
 
     <Button
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:text="Agregar Ingreso" />
+        android:text="Agregar Ingreso"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2E7D32"
+        android:padding="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

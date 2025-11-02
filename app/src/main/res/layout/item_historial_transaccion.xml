@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,27 +25,27 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/idGasto_txt"
+                android:id="@+id/tvTipoTransaccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ID"
+                android:text="INGRESO"
+                android:textSize="10sp"
                 android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="#FF6C757D"/>
+                android:textColor="#28A745"/>
 
             <TextView
-                android:id="@+id/fechaGasto_txt"
+                android:id="@+id/tvFechaHistorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha"
+                android:text="01/01/2024"
                 android:textSize="12sp"
                 android:textColor="#FF6C757D"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/descripcionGasto_txt"
+            android:id="@+id/tvDescripcionHistorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -54,7 +55,7 @@
             android:textColor="#FF212529"/>
 
         <TextView
-            android:id="@+id/categoriaGasto_txt"
+            android:id="@+id/tvCategoriaHistorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -70,17 +71,17 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/montoGasto_txt"
+                android:id="@+id/tvMontoHistorial"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Monto"
-                android:textStyle="bold"
+                android:text="+ S/. 1000.00"
                 android:textSize="18sp"
-                android:textColor="#FFDC3545"/>
+                android:textStyle="bold"
+                android:textColor="#28A745"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditarGasto"
+                android:id="@+id/btnEditarTransaccion"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:insetTop="0dp"
@@ -94,7 +95,7 @@
                 style="@style/Widget.MaterialComponents.Button"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEliminarGasto"
+                android:id="@+id/btnEliminarTransaccion"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:insetTop="0dp"
@@ -109,4 +110,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

@@ -1,5 +1,6 @@
 package com.example.ingresosgastosapp.Fragments.Add
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -30,6 +31,7 @@ class AddFragment : Fragment() {
     private lateinit var mIngresosViewModel: IngresosViewModel
     private val balanceViewModel: BalanceViewModel by activityViewModels()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,22 +51,18 @@ class AddFragment : Fragment() {
 
             if (!TextUtils.isEmpty(descripcion) && !TextUtils.isEmpty(montoStr) && !TextUtils.isEmpty(categoria)) {
 
-                // Conversión segura del monto
                 val monto = montoStr.toDoubleOrNull()
 
-                if (monto != null && monto > 0) { // Validar que sea un número válido y positivo
+                if (monto != null && monto > 0) {
                     val fecha = LocalDateTime.now().toString()
-                    val ingreso = Ingresos(0, descripcion, monto, categoria, fecha) // Usamos el Double
+                    val ingreso = Ingresos(0, descripcion, monto, categoria, fecha)
 
                     viewLifecycleOwner.lifecycleScope.launch {
-                        // 1. OBTENER el balance actual forzando la lectura de la DB
-                        // Usamos la función suspendida del ViewModel:
-                        val currentBalance = balanceViewModel.getCurrentBalance() // <--- ¡CAMBIO CLAVE!
 
-                        // 2. Calcular el nuevo balance: SUMA
+                        val currentBalance = balanceViewModel.getCurrentBalance()
+
                         val newBalance = currentBalance + monto
 
-                        // 3. Guardar y actualizar
                         mIngresosViewModel.addIngresos(ingreso)
                         balanceViewModel.updateBalance(newBalance)
 

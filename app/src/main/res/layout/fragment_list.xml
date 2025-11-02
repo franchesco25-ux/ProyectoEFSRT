@@ -4,37 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="6dp"
+    app:strokeWidth="1dp"
+    android:background="@color/fondo_claro"
     tools:context=".Fragments.List.ListFragment">
+
+    <TextView
+        android:id="@+id/tvTituloLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista de Ingresos"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FF212529"
+        android:layout_marginStart="20dp"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#FFDADADA"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloLista"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:background="#FFFFFFFF"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloLista"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolverMain"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnVolverMain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Volver al Inicio"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_arrow_back"
+        android:backgroundTint="#FF212529"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:contentDescription="Agregar nuevo registro"
         android:tint="@android:color/white"
         android:src="@drawable/ic_add"
+        app:backgroundTint="#FF198754"
+        app:fabSize="normal"
+        app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="306dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="24dp"/>
 
-    <Button
-        android:id="@+id/btnVolverMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Volver al inicio"
-        android:layout_marginTop="16dp"
-        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

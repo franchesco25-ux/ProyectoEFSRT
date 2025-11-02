@@ -9,9 +9,9 @@ class BalanceRepository(private val balanceDao: BalanceDAO) {
     val balance: LiveData<Balance?> = balanceDao.getBalance() as LiveData<Balance?>
 
     suspend fun setInitialBalanceIfNeeded() {
-        val current = balanceDao.getBalanceDirect() // ahora suspend
+        val current = balanceDao.getBalanceDirect()
         if (current == null) {
-            balanceDao.insertBalance(Balance(total = 1000.0)) // demo inicial
+            balanceDao.insertBalance(Balance(total = 1000.0))
         }
     }
 

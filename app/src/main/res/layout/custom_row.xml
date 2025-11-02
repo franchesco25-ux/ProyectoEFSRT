@@ -1,38 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="5dp"
+    app:strokeColor="#FFE0E0E0"
+    app:strokeWidth="1dp"
+    android:backgroundTint="@android:color/white">
 
-    <TextView
-        android:id="@+id/id_txt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ID"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/descripcion_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descripción" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/monto_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monto" />
+            <TextView
+                android:id="@+id/id_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ID"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FF6C757D"/>
 
-    <TextView
-        android:id="@+id/categoria_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Categoría" />
+            <TextView
+                android:id="@+id/fecha_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textSize="12sp"
+                android:textColor="#FF6C757D"/>
 
-    <TextView
-        android:id="@+id/fecha_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha" />
-</LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descripcion_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Descripción"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FF212529"/>
+
+        <TextView
+            android:id="@+id/categoria_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Categoría"
+            android:textSize="14sp"
+            android:textColor="#FF6C757D"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/monto_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Monto"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#FF198754"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditarIngreso"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="✏"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:backgroundTint="#FF007BFF"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.MaterialComponents.Button"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminarIngreso"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="🗑"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:backgroundTint="#FFDC3545"
+                style="@style/Widget.MaterialComponents.Button"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -21,4 +21,8 @@ class IngresosRepository (private val ingresosDAO: IngresosDAO) {
     suspend fun deleteAll() {
         ingresosDAO.deleteAllIngresos()
     }
+
+    suspend fun getIngresoById(id: Int): Ingresos? {
+        return ingresosDAO.getIngresoById(id)
+    }
 }

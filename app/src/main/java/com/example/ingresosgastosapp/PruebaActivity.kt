@@ -23,12 +23,19 @@ class PruebaActivity : AppCompatActivity() {
             insets
         }
 
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbarPrueba)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
 
         val navController = navHostFragment.navController
 
-        //Aca es donde genera un error, no se puede encontrar el controlador de la navegacion
-        //setupActionBarWithNavController(findNavController(R.id.fragment))
     }
 
 
@@ -37,11 +44,6 @@ class PruebaActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val navController = navHostFragment.navController
-
-        //Recuperar el NavController directamente del NavHostFragment
-
-
-        //val  = findNavController(R.id.fragment)
 
         return navController.navigateUp()||super.onSupportNavigateUp()
     }

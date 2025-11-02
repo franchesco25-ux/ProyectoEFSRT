@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IngresosGastosApp">
         <activity
+            android:name=".EditarIngresoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarGastoActivity"
+            android:exported="false" />
+        <activity
             android:name=".GastosActivity"
             android:exported="false" />
         <activity

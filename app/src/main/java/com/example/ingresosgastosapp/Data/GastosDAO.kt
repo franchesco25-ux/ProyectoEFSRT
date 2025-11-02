@@ -25,4 +25,7 @@ interface GastosDAO {
 
     @Query("SELECT * FROM gastos ORDER BY id ASC")
     fun readAllData(): LiveData<List<Gastos>>
+
+    @Query("SELECT * FROM gastos WHERE id = :id LIMIT 1")
+    suspend fun getGastoById(id: Int): Gastos?
 }

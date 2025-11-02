@@ -20,7 +20,6 @@ class BalanceViewModel(application: Application) : AndroidViewModel(application)
         repository = BalanceRepository(balanceDao)
         balance = repository.balance
 
-        // Crear balance inicial si no existe
         viewModelScope.launch(Dispatchers.IO) {
             repository.setInitialBalanceIfNeeded()
         }
