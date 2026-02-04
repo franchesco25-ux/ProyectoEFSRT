@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IngresosGastosApp">
         <activity
+            android:name=".GastosRecientesAdapter"
+            android:exported="false" />
+        <activity
             android:name=".EditarIngresoActivity"
             android:exported="false" />
         <activity
@@ -34,6 +37,12 @@
             android:exported="false" />
         <activity
             android:name=".AgregarGastoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResumenPresupuestoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AhorrosActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

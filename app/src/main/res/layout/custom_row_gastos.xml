@@ -1,112 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
+    android:layout_marginHorizontal="0dp"
     android:layout_marginVertical="6dp"
     app:cardCornerRadius="14dp"
-    app:cardElevation="5dp"
-    app:strokeColor="#FFE0E0E0"
+    app:cardElevation="0dp"
     app:strokeWidth="1dp"
-    android:backgroundTint="@android:color/white">
+    app:strokeColor="#2A3D29"
+    app:cardBackgroundColor="@color/bg_dark_card">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/danger_red"
+            android:layout_marginEnd="12dp"/>
+
+        <FrameLayout
+            android:layout_width="44dp"
+            android:layout_height="44dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_circle_avatar" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shopping_cart"
+                app:tint="@color/danger_red" />
+        </FrameLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp"
+            android:minHeight="44dp"
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/idGasto_txt"
-                android:layout_width="0dp"
+                android:id="@+id/descripcionGasto_txt"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ID"
+                android:text="Descripción"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                android:textColor="@color/text_on_dark"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/categoriaGasto_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoría"
                 android:textSize="12sp"
-                android:textColor="#FF6C757D"/>
+                android:textColor="@color/text_on_dark_muted"
+                android:layout_marginTop="2dp"/>
 
             <TextView
                 android:id="@+id/fechaGasto_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha"
-                android:textSize="12sp"
-                android:textColor="#FF6C757D"/>
+                android:textSize="11sp"
+                android:textColor="@color/text_on_dark_muted"
+                android:layout_marginTop="1dp"/>
 
+            <TextView
+                android:id="@+id/idGasto_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textSize="12sp"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/descripcionGasto_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Descripción"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#FF212529"/>
-
-        <TextView
-            android:id="@+id/categoriaGasto_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Categoría"
-            android:textSize="14sp"
-            android:textColor="#FF6C757D"/>
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:gravity="end|center_vertical">
 
             <TextView
                 android:id="@+id/montoGasto_txt"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Monto"
+                android:text="S/ 0.00"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#FFDC3545"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditarGasto"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                android:text="✏"
                 android:textSize="16sp"
-                app:cornerRadius="8dp"
-                app:backgroundTint="#FF007BFF"
-                android:layout_marginEnd="8dp"
-                style="@style/Widget.MaterialComponents.Button"/>
+                android:textColor="@color/danger_red"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEliminarGasto"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                android:text="🗑"
-                android:textSize="16sp"
-                app:cornerRadius="8dp"
-                app:backgroundTint="#FFDC3545"
-                style="@style/Widget.MaterialComponents.Button"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical">
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditarGasto"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    android:text="✏"
+                    android:textSize="12sp"
+                    app:cornerRadius="8dp"
+                    app:backgroundTint="@color/green_accent"
+                    android:layout_marginEnd="4dp"
+                    style="@style/Widget.Material3.Button"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEliminarGasto"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    android:text="🗑"
+                    android:textSize="12sp"
+                    app:cornerRadius="8dp"
+                    app:backgroundTint="@color/danger_red"
+                    style="@style/Widget.Material3.Button"/>
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -42,12 +42,12 @@ class AddFragment : Fragment() {
         val descripcionEt = view.findViewById<EditText>(R.id.addDescripcion_et)
         val montoEt = view.findViewById<EditText>(R.id.addMonto_et)
         val categoriaEt = view.findViewById<EditText>(R.id.addCategoria_et)
-        val button = view.findViewById<Button>(R.id.add_btn)
+        val button = view.findViewById<View>(R.id.add_btn)
 
         button.setOnClickListener {
-            val descripcion = descripcionEt.text.toString()
-            val montoStr = montoEt.text.toString() // Cambié el nombre para mayor claridad
-            val categoria = categoriaEt.text.toString()
+            val descripcion = descripcionEt.text.toString().trim()
+            val montoStr = montoEt.text.toString().replace("S/", "").replace("$", "").replace(",", "").trim()
+            val categoria = categoriaEt.text.toString().trim()
 
             if (!TextUtils.isEmpty(descripcion) && !TextUtils.isEmpty(montoStr) && !TextUtils.isEmpty(categoria)) {
 

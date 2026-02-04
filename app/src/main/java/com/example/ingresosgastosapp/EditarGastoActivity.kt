@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class EditarGastoActivity : AppCompatActivity() {
+class EditarGastoActivity : BaseActivity() {
 
     private lateinit var gastosViewModel: GastosViewModel
     private lateinit var balanceViewModel: BalanceViewModel
@@ -141,7 +141,7 @@ class EditarGastoActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         this@EditarGastoActivity,
-                        "No tienes suficiente balance para este monto (Balance actual: $currentBalance)",
+                        "No tienes suficiente balance para este monto (Balance actual: S/ %.2f)".format(currentBalance),
                         Toast.LENGTH_LONG
                     ).show()
                 }

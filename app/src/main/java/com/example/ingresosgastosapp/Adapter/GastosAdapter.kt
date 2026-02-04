@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.Locale
 import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.R
 import com.google.android.material.button.MaterialButton
@@ -38,9 +40,9 @@ class ListGastosAdapter(
         val currentGasto = gastosList[position]
         holder.id_txt.text = currentGasto.id.toString()
         holder.descripcion_txt.text = currentGasto.descripcion
-        holder.monto_txt.text = "S/. ${String.format("%.2f", currentGasto.monto)}"
+        holder.monto_txt.text = "-S/ ${String.format("%.2f", currentGasto.monto)}"
         holder.categoria_txt.text = currentGasto.categoria
-        holder.fecha_txt.text = currentGasto.fecha
+        holder.fecha_txt.text = formatFecha(currentGasto.fecha)
 
         holder.btnEditar.setOnClickListener {
             onEditClick(currentGasto)
@@ -54,5 +56,16 @@ class ListGastosAdapter(
     fun setData(gastos: List<Gastos>) {
         this.gastosList = gastos
         notifyDataSetChanged()
+    }
+
+    private fun formatFecha(fecha: String): String {
+        return try {
+            val parte = fecha.split("T")[0]
+            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val output = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            output.format(input.parse(parte)!!)
+        } catch (e: Exception) {
+            fecha
+        }
     }
 }
