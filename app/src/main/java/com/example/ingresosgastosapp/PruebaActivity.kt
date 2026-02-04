@@ -3,14 +3,14 @@ package com.example.ingresosgastosapp
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 
-class PruebaActivity : AppCompatActivity() {
+class PruebaActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

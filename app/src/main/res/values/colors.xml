@@ -5,9 +5,28 @@
     <color name="teal_200">#388E3C</color>
     <color name="teal_700">#2E7D32</color>
     <color name="teal_500">#4CAF50</color>
-    <color name="green_dark">#006400</color>  <!-- verde oscuro -->
+    <color name="green_dark">#006400</color>
     <color name="orange">#FFA500</color>
     <color name="fondo_claro">#FFF8F9FA</color>
 
+    <!-- Paleta verde unificada -->
+    <color name="green_primary">#166534</color>
+    <color name="green_light">#22C55E</color>
+    <color name="green_soft">#DCFCE7</color>
+    <color name="green_darker">#14532D</color>
+    <color name="green_card_bg">#F0FDF4</color>
+    <color name="green_toolbar">#15803D</color>
+    <color name="green_drawer_bg">#ECFDF5</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_primary">#0F172A</color>
 
+    <!-- Tema oscuro (como en las imágenes) -->
+    <color name="bg_dark">#0D1F0C</color>
+    <color name="bg_dark_card">#1A2E19</color>
+    <color name="green_accent">#22C55E</color>
+    <color name="green_accent_soft">#16A34A</color>
+    <color name="text_on_dark">#FFFFFF</color>
+    <color name="text_on_dark_muted">#94A3B8</color>
+    <color name="green_highlight">#4ADE80</color>
+    <color name="danger_red">#EF4444</color>
 </resources>

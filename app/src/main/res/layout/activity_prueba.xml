@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_dark"
     tools:context=".PruebaActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarPrueba"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#007BFF"
-        android:elevation="6dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/bg_dark"
+        android:elevation="0dp"
         android:title="Agregar Ingreso"
-        android:titleTextColor="@android:color/white"
+        android:titleTextColor="@color/text_on_dark"
         app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

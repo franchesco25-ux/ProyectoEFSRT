@@ -2,14 +2,13 @@ package com.example.ingresosgastosapp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.appbar.MaterialToolbar
 
-class GastosActivity : AppCompatActivity() {
+class GastosActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,20 +21,9 @@ class GastosActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbarGastos)
-        setSupportActionBar(toolbar)
+        findViewById<android.view.View>(R.id.btn_close).setOnClickListener { finish() }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        toolbar.setNavigationOnClickListener {
-            finish()
-        }
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentGastos) as NavHostFragment
-
-        val navController = navHostFragment.navController
+        supportFragmentManager.findFragmentById(R.id.fragmentGastos) as? NavHostFragment
     }
 
     override fun onSupportNavigateUp(): Boolean {

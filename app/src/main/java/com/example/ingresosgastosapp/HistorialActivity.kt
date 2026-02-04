@@ -2,8 +2,8 @@ package com.example.ingresosgastosapp
 
 import android.os.Bundle
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-class HistorialActivity : AppCompatActivity() {
+import com.example.ingresosgastosapp.BaseActivity
+class HistorialActivity : BaseActivity() {
     private lateinit var spinnerFiltroCategoria: Spinner
     private lateinit var tvHistorial: TextView
 
@@ -38,6 +38,11 @@ class HistorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
 
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbarHistorial)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
+
         spinnerFiltroCategoria = findViewById(R.id.spinnerFiltroCategoria)
         tvHistorial = findViewById(R.id.tvHistorial)
 
@@ -47,44 +52,3 @@ class HistorialActivity : AppCompatActivity() {
         spinnerFiltroCategoria.adapter = adapter
     }
 }
-
-        // Mostrar historial completo al inicio
-        //mostrarHistorial("Todos")
-
-        // Listener para filtrar al cambiar selección
-        /*spinnerFiltroCategoria.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: android.view.View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val categoriaSeleccionada = categorias[position]
-                    mostrarHistorial(categoriaSeleccionada)
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // No hacer nada
-                }
-            }
-    }   */
-
-    /*
-    private fun mostrarHistorial(categoria: String) {
-        val historialFiltrado = if (categoria == "Todos") {
-            listaGastos
-        } else {
-            listaGastos.filter { it.categoria == categoria }
-        }
-
-        if (historialFiltrado.isEmpty()) {
-            tvHistorial.text = "No hay movimientos en esta categoría."
-        } else {
-            val texto = historialFiltrado.joinToString("\n") { gasto ->
-                "- $${gasto.monto} | ${gasto.descripcion} | ${gasto.categoria}"
-            }
-            tvHistorial.text = texto
-        }
-    }*/
-

@@ -1,70 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="@color/bg_dark"
+    android:padding="24dp"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
+        <!-- Título estilo Registro de Gastos -->
         <TextView
             android:id="@+id/tvTituloGasto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrar Gasto"
+            android:text="Registro de Gastos"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#C62828"
+            android:textColor="@color/text_on_dark"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Gasto"
+            android:textSize="14sp"
+            android:textColor="@color/text_on_dark_muted"
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/addDescripcionGasto_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descripción del gasto"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
-        android:inputType="textCapSentences"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INGRESE MONTO (S/)"
+            android:textColor="@color/green_accent"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/addMontoGasto_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Monto"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
-        android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/addMontoGasto_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="S/ 0.00"
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="20dp"/>
 
-    <EditText
-        android:id="@+id/addCategoriaGasto_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Categoría"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="20dp"
-        android:inputType="textCapWords"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textColor="@color/text_on_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/addGasto_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Agregar Gasto"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#C62828"
-        android:padding="14dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-medium"/>
+        <EditText
+            android:id="@+id/addCategoriaGasto_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Comida y Bebidas, Transporte, etc."
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nota (Opcional)"
+            android:textColor="@color/text_on_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
 
+        <EditText
+            android:id="@+id/addDescripcionGasto_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="¿Para qué fue este gasto?"
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:inputType="textCapSentences"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha"
+            android:textColor="@color/text_on_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvFechaGasto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark_muted"
+            android:textSize="14sp"
+            android:text="Hoy"
+            android:layout_marginBottom="24dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addGasto_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="✓ Guardar Gasto"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/green_accent"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_add"
+            app:iconTint="@color/white"
+            app:iconSize="24dp"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVerListaGastos"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver lista de gastos"
+            android:textColor="@color/green_accent"
+            android:layout_marginTop="12dp"/>
     </LinearLayout>
 </ScrollView>

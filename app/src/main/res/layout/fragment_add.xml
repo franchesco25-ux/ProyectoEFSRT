@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondo_claro"
-    tools:context=".Fragments.Add.AddFragment">
+    android:background="@color/bg_dark"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTituloIngreso"
@@ -20,53 +18,83 @@
             android:text="Registrar Ingreso"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#2E7D32"
+            android:textColor="@color/green_accent"
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/addDescripcion_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descripción del ingreso"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
-        android:inputType="textCapSentences"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INGRESE MONTO (S/)"
+            android:textColor="@color/green_accent"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/addMonto_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Monto"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
-        android:inputType="numberDecimal"/>
+        <EditText
+            android:id="@+id/addMonto_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="S/ 0.00"
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="20dp"/>
 
-    <EditText
-        android:id="@+id/addCategoria_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Categoría"
-        android:background="@drawable/edittext_background"
-        android:padding="12dp"
-        android:layout_marginBottom="20dp"
-        android:inputType="textCapWords"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textColor="@color/text_on_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/add_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Agregar Ingreso"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#2E7D32"
-        android:padding="14dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-medium"/>
+        <EditText
+            android:id="@+id/addDescripcion_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción del ingreso"
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:layout_marginBottom="20dp"
+            android:inputType="textCapSentences"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textColor="@color/text_on_dark"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/addCategoria_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: Salario, Venta, etc."
+            android:background="@drawable/edittext_dark"
+            android:padding="16dp"
+            android:textColor="@color/text_on_dark"
+            android:textColorHint="@color/text_on_dark_muted"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="24dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Guardar Ingreso"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/green_accent"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
 </ScrollView>

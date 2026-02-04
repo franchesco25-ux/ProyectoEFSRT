@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +25,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class HistorialGastosActivity : AppCompatActivity() {
+class HistorialGastosActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHistorialGastosBinding
     private lateinit var gastosViewModel: GastosViewModel
