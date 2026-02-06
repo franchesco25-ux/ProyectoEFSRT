@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Tema oscuro verde (como en las imágenes) -->
     <style name="Base.Theme.IngresosGastosApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/green_accent</item>
         <item name="colorPrimaryContainer">@color/bg_dark_card</item>
