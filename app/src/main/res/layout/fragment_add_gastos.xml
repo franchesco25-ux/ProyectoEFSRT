@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Título estilo Registro de Gastos -->
         <TextView
             android:id="@+id/tvTituloGasto"
             android:layout_width="match_parent"

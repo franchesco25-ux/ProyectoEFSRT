@@ -9,7 +9,6 @@
     <color name="orange">#FFA500</color>
     <color name="fondo_claro">#FFF8F9FA</color>
 
-    <!-- Paleta verde unificada -->
     <color name="green_primary">#166534</color>
     <color name="green_light">#22C55E</color>
     <color name="green_soft">#DCFCE7</color>
@@ -20,7 +19,6 @@
     <color name="text_secondary">#475569</color>
     <color name="text_primary">#0F172A</color>
 
-    <!-- Tema oscuro (como en las imágenes) -->
     <color name="bg_dark">#0D1F0C</color>
     <color name="bg_dark_card">#1A2E19</color>
     <color name="green_accent">#22C55E</color>

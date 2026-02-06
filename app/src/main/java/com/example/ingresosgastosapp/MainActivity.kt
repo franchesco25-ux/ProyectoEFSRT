@@ -44,7 +44,11 @@ class MainActivity : BaseActivity() {
         btnAgregar = findViewById(R.id.btnAgregar)
         btnEnviar = findViewById(R.id.btnEnviar)
 
-        // Menú lateral
+        val nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO")
+        if (nombreUsuario != null) {
+            findViewById<TextView>(R.id.tvSaludo).text = "Hola, $nombreUsuario"
+        }
+
         findViewById<View>(R.id.btn_menu).setOnClickListener {
             drawerLayout.openDrawer(navDrawer)
         }
@@ -53,22 +57,18 @@ class MainActivity : BaseActivity() {
             Toast.makeText(this, "Notificaciones próximamente", Toast.LENGTH_SHORT).show()
         }
 
-        // Balance
         balanceViewModel.balance.observe(this, Observer { balance ->
             val total = balance?.total ?: 0.0
             tvBalance.text = "S/ %.2f".format(total)
             tvBalanceVariacion.text = "+0%"
         })
 
-        // Agregar = Ingreso, Enviar = Gasto (o compartir)
         btnAgregar.setOnClickListener {
             startActivity(Intent(this, PruebaActivity::class.java))
         }
         btnEnviar.setOnClickListener {
             startActivity(Intent(this, GastosActivity::class.java))
         }
-
-        // Quick access
 
         findViewById<View>(R.id.quick_metas).setOnClickListener {
             startActivity(Intent(this, AhorrosActivity::class.java))
