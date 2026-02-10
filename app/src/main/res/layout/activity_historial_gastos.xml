@@ -16,7 +16,7 @@
         android:background="@color/bg_dark"
         android:elevation="0dp"
         android:title="Historial de Transacciones"
-        android:titleTextColor="@color/text_on_dark"
+        android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:navigationIconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"

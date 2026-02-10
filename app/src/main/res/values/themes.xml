@@ -7,7 +7,11 @@
         <item name="android:navigationBarColor">@color/bg_dark</item>
         <item name="android:windowBackground">@color/bg_dark</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="shapeAppearanceOverlay">@style/CircleImage</item>
     </style>
 
     <style name="Theme.IngresosGastosApp" parent="Base.Theme.IngresosGastosApp" />
+    <style name="CircleImage">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

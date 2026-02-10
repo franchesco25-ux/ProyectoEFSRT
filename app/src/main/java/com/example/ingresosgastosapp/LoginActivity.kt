@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
                     val usuario = db.userDao().getUser(correo, clave)
                     if (usuario != null) {
                         Toast.makeText(this@LoginActivity, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        val intent = Intent(this@LoginActivity, MainMenuActivity::class.java)
                         intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
                         startActivity(intent)
                         finish()

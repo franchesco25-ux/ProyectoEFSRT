@@ -11,7 +11,7 @@ class BalanceRepository(private val balanceDao: BalanceDAO) {
     suspend fun setInitialBalanceIfNeeded() {
         val current = balanceDao.getBalanceDirect()
         if (current == null) {
-            balanceDao.insertBalance(Balance(total = 1000.0))
+            balanceDao.insertBalance(Balance(total = 0.0))
         }
     }
 

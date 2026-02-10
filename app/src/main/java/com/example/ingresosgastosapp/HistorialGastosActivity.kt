@@ -69,6 +69,17 @@ class HistorialGastosActivity : BaseActivity() {
         setupSpinners()
         setupDatePickers()
         setupLimpiarFiltros()
+
+        // Recibir el filtro del Intent
+        val filtroRecibido = intent.getStringExtra("FILTRO_TIPO")
+        if (filtroRecibido != null) {
+            tipoSeleccionado = filtroRecibido
+            // Seleccionar automáticamente en el spinner
+            val posicion = if (filtroRecibido == "Ingresos") 1 else 2
+            binding.spinnerTipo.setSelection(posicion)
+            aplicarFiltros()
+        }
+
     }
 
     private fun setupRecyclerView() {
@@ -358,20 +369,19 @@ class HistorialGastosActivity : BaseActivity() {
             .filter { it.tipo == TipoTransaccion.GASTO }
             .sumOf { it.monto }
 
-        binding.tvTotalIngresos.text = "S/. ${String.format("%.2f", totalIngresos)}"
-        binding.tvTotalGastos.text = "S/. ${String.format("%.2f", totalGastos)}"
+        val balanceCalculado = totalIngresos - totalGastos
 
-        lifecycleScope.launch {
-            val balanceActual = balanceViewModel.getCurrentBalance()
+        binding.tvTotalIngresos.text = "S/. %.2f".format(totalIngresos)
+        binding.tvTotalGastos.text = "S/. %.2f".format(totalGastos)
 
-            withContext(Dispatchers.Main) {
-                binding.tvBalance.text = "S/. ${String.format("%.2f", balanceActual)}"
+        binding.tvBalance.text = "S/. %.2f".format(balanceCalculado)
 
-                binding.tvBalance.setTextColor(
-                    if (balanceActual >= 0) android.graphics.Color.parseColor("#28A745")
-                    else android.graphics.Color.parseColor("#DC3545")
-                )
-            }
+        binding.tvBalance.setTextColor(
+            if (balanceCalculado >= 0) android.graphics.Color.parseColor("#28A745")
+            else android.graphics.Color.parseColor("#DC3545")
+        )
+        lifecycleScope.launch(Dispatchers.IO) {
+            balanceViewModel.updateBalance(balanceCalculado)
         }
     }
 }
