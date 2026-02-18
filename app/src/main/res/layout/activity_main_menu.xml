@@ -6,7 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark"
+    android:background="@color/stitch_background"
     tools:openDrawer="start">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -23,8 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp">
 
+                <!-- Header Section -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -35,10 +36,10 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:src="@drawable/ic_person"
-                        android:padding="8dp"
-                        android:background="#1AFFFFFF"
+                        android:background="@color/stitch_card_bg"
+                        android:padding="2dp"
                         app:shapeAppearanceOverlay="@style/CircleImage"
-                        app:strokeColor="@color/green_accent"
+                        app:strokeColor="@color/stitch_primary"
                         app:strokeWidth="1dp"/>
 
                     <LinearLayout
@@ -51,7 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="BIENVENIDO"
-                            android:textColor="@color/green_accent"
+                            android:textColor="@color/stitch_primary"
                             android:textSize="10sp"
                             android:textStyle="bold"
                             android:letterSpacing="0.1"/>
@@ -66,19 +67,21 @@
                     </LinearLayout>
 
                     <ImageButton
+                        android:id="@+id/btnNotifications"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_alignParentEnd="true"
-                        android:background="@drawable/bg_circle_avatar"
+                        android:background="@drawable/bg_stitch_card"
                         android:backgroundTint="#1AFFFFFF"
                         android:src="@drawable/ic_notifications"
                         app:tint="@color/white" />
                 </RelativeLayout>
 
+                <!-- Balance Card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_card_dark_glass"
+                    android:background="@drawable/bg_stitch_card"
                     android:orientation="vertical"
                     android:padding="24dp">
 
@@ -86,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="BALANCE TOTAL"
-                        android:textColor="#94A3B8"
+                        android:textColor="@color/stitch_text_muted"
                         android:textSize="12sp"
                         android:textStyle="bold"/>
 
@@ -108,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+2.4%"
-                            android:textColor="@color/green_accent"
+                            android:textColor="@color/stitch_primary"
                             android:layout_marginStart="8dp"
                             android:layout_marginBottom="6dp"
                             android:textStyle="bold"/>
@@ -119,46 +122,99 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:orientation="horizontal">
-                        <Button
-                            android:id="@+id/btnMainIngresos"
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnMainAgregar"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            android:text="Analisis"
+                            android:text="Agregar"
                             android:textAllCaps="false"
-                            android:backgroundTint="@color/green_accent"
-                            android:textColor="@color/bg_dark"
-                            app:cornerRadius="12dp"/>
-                        <Button
-                            android:id="@+id/btnMainGastos"
+                            android:backgroundTint="@color/stitch_primary"
+                            android:textColor="@color/stitch_background"
+                            android:textStyle="bold"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_add"
+                            app:iconTint="@color/stitch_background"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnMainEnviar"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:text="Gastos"
+                            android:text="Enviar"
                             android:textAllCaps="false"
                             android:backgroundTint="#2AFFFFFF"
                             android:textColor="@color/white"
+                            android:textStyle="bold"
                             app:cornerRadius="12dp"/>
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Quick Actions Grid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="Presupuesto Mensual"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
+                            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_wallet" android:layout_gravity="center" app:tint="@color/stitch_primary" />
+                        </FrameLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Presupuesto" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
+                            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_goal" android:layout_gravity="center" app:tint="@color/stitch_primary" />
+                        </FrameLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Metas" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
+                            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_analysis" android:layout_gravity="center" app:tint="@color/stitch_primary" />
+                        </FrameLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Análisis" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
+                            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_more" android:layout_gravity="center" app:tint="@color/stitch_primary" />
+                        </FrameLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Más" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Monthly Budget Section -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Presupuesto Mensual"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Detalles"
+                        android:textColor="@color/stitch_primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_card_dark_glass"
-                    android:backgroundTint="#0AFFFFFF"
+                    android:background="@drawable/bg_stitch_card"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -189,6 +245,7 @@
                         android:progressDrawable="@drawable/progress_bar_green"/>
                 </LinearLayout>
 
+                <!-- Savings Progress -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -201,29 +258,28 @@
                         android:textSize="18sp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/tv_ver_todo_ahorro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="Ver Todo"
-                        android:textColor="@color/green_accent"
+                        android:textColor="@color/stitch_primary"
                         android:textStyle="bold"
                         android:textSize="14sp"/>
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/card_ahorro_tesla"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_card_dark_glass"
-                    android:backgroundTint="#0AFFFFFF"
+                    android:background="@drawable/bg_stitch_card"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="16dp">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_circle_avatar"
-                        android:backgroundTint="#1A0DF259" />
+                    <FrameLayout android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_stitch_card" android:backgroundTint="#1A0DF259">
+                         <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_history" android:layout_gravity="center" app:tint="@color/stitch_primary" />
+                    </FrameLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -243,7 +299,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="65%"
-                                android:textColor="@color/green_accent"
+                                android:textColor="@color/stitch_primary"
                                 android:textStyle="bold"/>
                         </RelativeLayout>
                         <ProgressBar
@@ -256,89 +312,43 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gastos Recientes"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="Ver Más"
-                        android:textColor="@color/green_accent"
-                        android:textStyle="bold"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_card_dark_glass"
-                    android:backgroundTint="#0AFFFFFF"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:gravity="center_vertical">
-                        <View
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/bg_circle_avatar"
-                            android:backgroundTint="#1AFFB74D" />
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Blue Bottle Coffee"
-                                android:textColor="@color/white"
-                                android:textStyle="bold"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hoy, 10:45 AM"
-                                android:textColor="@color/text_on_dark_muted"
-                                android:textSize="12sp"/>
-                        </LinearLayout>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-$12.50"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                </LinearLayout>
-
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+        <!-- Bottom Navigation with Central FAB -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:background="@drawable/bg_card_dark_glass"
-            app:backgroundTint="#E6102216"
-            app:itemIconTint="@color/green_accent"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/bottom_nav_menu"
-            app:labelVisibilityMode="labeled"
-            app:elevation="8dp"/>
+            android:layout_height="100dp"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_stitch_card"
+                app:backgroundTint="#E6102216"
+                app:itemIconTint="@color/stitch_primary"
+                app:itemTextColor="@color/white"
+                app:menu="@menu/bottom_nav_menu"
+                app:labelVisibilityMode="labeled"
+                app:elevation="8dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/ic_add"
+                app:backgroundTint="@color/stitch_primary"
+                app:tint="@color/stitch_background"
+                app:fabSize="normal"
+                app:elevation="12dp"
+                app:borderWidth="0dp"/>
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

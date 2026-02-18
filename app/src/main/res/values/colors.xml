@@ -27,4 +27,11 @@
     <color name="text_on_dark_muted">#94A3B8</color>
     <color name="green_highlight">#4ADE80</color>
     <color name="danger_red">#EF4444</color>
+
+    <!-- Stitch Design Colors -->
+    <color name="stitch_primary">#0df259</color>
+    <color name="stitch_background">#102216</color>
+    <color name="stitch_card_bg">#1A3A24</color>
+    <color name="stitch_card_border">#1AFFFFFF</color>
+    <color name="stitch_text_muted">#94A3B8</color>
 </resources>
