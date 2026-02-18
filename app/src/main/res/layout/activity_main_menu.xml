@@ -159,28 +159,60 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/btn_quick_presupuesto"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true">
                         <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
                             <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_wallet" android:layout_gravity="center" app:tint="@color/stitch_primary" />
                         </FrameLayout>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Presupuesto" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
                     </LinearLayout>
 
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/btn_quick_metas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true">
                         <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
                             <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_goal" android:layout_gravity="center" app:tint="@color/stitch_primary" />
                         </FrameLayout>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Metas" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
                     </LinearLayout>
 
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/btn_quick_analisis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true">
                         <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
                             <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_analysis" android:layout_gravity="center" app:tint="@color/stitch_primary" />
                         </FrameLayout>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Análisis" android:textColor="@color/stitch_text_muted" android:textSize="10sp" android:layout_marginTop="4dp" android:textStyle="bold"/>
                     </LinearLayout>
 
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/btn_quick_mas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true">
                         <FrameLayout android:layout_width="56dp" android:layout_height="56dp" android:background="@drawable/bg_stitch_card">
                             <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_more" android:layout_gravity="center" app:tint="@color/stitch_primary" />
                         </FrameLayout>
@@ -276,7 +308,9 @@
                     android:background="@drawable/bg_stitch_card"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
                     <FrameLayout android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_stitch_card" android:backgroundTint="#1A0DF259">
                          <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_history" android:layout_gravity="center" app:tint="@color/stitch_primary" />
                     </FrameLayout>

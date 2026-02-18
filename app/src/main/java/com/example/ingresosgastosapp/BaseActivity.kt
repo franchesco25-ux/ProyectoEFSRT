@@ -7,29 +7,26 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 /**
- * Actividad base:
- * - Mantiene visible la status bar y navigation bar
- * - Evita que el contenido se coloque debajo de ellas
- * - Aplica a toda la aplicación
+ * Actividad base: Configuración pura de pantalla completa para el diseño Stitch.
  */
 abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Manejo moderno de bordes del sistema
+        // 1. Activamos pantalla completa (Edge-to-Edge)
         enableEdgeToEdge()
 
-        // Ajusta el contenido para no quedar debajo del status bar
-        ViewCompat.setOnApplyWindowInsetsListener(
-            findViewById(android.R.id.content)
-        ) { view, insets ->
+        // 2. Aplicamos ajuste inteligente: 
+        // Solo arriba (status bar) para no tapar la hora/batería.
+        // Abajo dejamos 0 para que nuestro menú flote perfectamente.
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
-                systemBars.bottom
+                0 // Sin espacio extra abajo para evitar el "doble menú"
             )
             insets
         }

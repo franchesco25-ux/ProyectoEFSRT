@@ -34,6 +34,11 @@ class MainMenuActivity : BaseActivity() {
         val btnAgregar = findViewById<View>(R.id.btnMainAgregar)
         val btnEnviar = findViewById<View>(R.id.btnMainEnviar)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
+        
+        // Botones de acceso rápido
+        val btnMetas = findViewById<View>(R.id.btn_quick_metas)
+        val btnPresupuesto = findViewById<View>(R.id.btn_quick_presupuesto)
+        val btnAnalisis = findViewById<View>(R.id.btn_quick_analisis)
 
         // 2. Configuración de saludo
         val nombre = intent.getStringExtra("NOMBRE_USUARIO") ?: "Alex"
@@ -51,7 +56,7 @@ class MainMenuActivity : BaseActivity() {
             }
         }
 
-        // 4. Configuración de botones de acceso rápido (Dashboard)
+        // 4. Configuración de clics
         btnAgregar.setOnClickListener {
             startActivity(Intent(this, PruebaActivity::class.java))
         }
@@ -62,6 +67,19 @@ class MainMenuActivity : BaseActivity() {
 
         fabAdd.setOnClickListener {
             startActivity(Intent(this, PruebaActivity::class.java))
+        }
+
+        // REDIRECCIONES DE ACCESO RÁPIDO
+        btnMetas.setOnClickListener {
+            startActivity(Intent(this, AhorrosActivity::class.java))
+        }
+
+        btnPresupuesto.setOnClickListener {
+            startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+        }
+
+        btnAnalisis.setOnClickListener {
+            startActivity(Intent(this, HistorialGastosActivity::class.java))
         }
 
         // 5. Listener de la barra de navegación inferior

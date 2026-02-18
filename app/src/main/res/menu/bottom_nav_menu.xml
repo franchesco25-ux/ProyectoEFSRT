@@ -8,10 +8,13 @@
         android:id="@+id/nav_presupuesto"
         android:icon="@drawable/ic_wallet"
         android:title="Presupuesto" />
+
+    <!-- Dejamos este espacio vacío para el botón verde circular (FAB) -->
     <item
         android:id="@+id/nav_agregar"
-        android:icon="@drawable/ic_add"
-        android:title="Agregar" />
+        android:icon="@android:color/transparent"
+        android:title="" />
+
     <item
         android:id="@+id/nav_ahorros"
         android:icon="@drawable/ic_goal"
