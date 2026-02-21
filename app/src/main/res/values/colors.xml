@@ -31,7 +31,9 @@
     <!-- Stitch Design Colors -->
     <color name="stitch_primary">#0df259</color>
     <color name="stitch_background">#102216</color>
-    <color name="stitch_card_bg">#1A3A24</color>
-    <color name="stitch_card_border">#1AFFFFFF</color>
-    <color name="stitch_text_muted">#94A3B8</color>
+    <color name="stitch_card_bg">#183422</color>
+    <color name="stitch_card_border">#316843</color>
+    <color name="stitch_text_muted">#90cba4</color>
+    <color name="stitch_tab_inactive">#183422</color>
+    <color name="stitch_tab_active">#102216</color>
 </resources>
