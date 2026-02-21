@@ -377,8 +377,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
                 android:src="@drawable/ic_add"
-                app:backgroundTint="@color/stitch_primary"
-                app:tint="@color/stitch_background"
+                app:backgroundTint="@color/danger_red"
+                app:tint="@color/white"
                 app:fabSize="normal"
                 app:elevation="12dp"
                 app:borderWidth="0dp"/>

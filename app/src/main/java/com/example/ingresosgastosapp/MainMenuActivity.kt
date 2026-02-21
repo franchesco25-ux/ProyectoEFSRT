@@ -66,7 +66,7 @@ class MainMenuActivity : BaseActivity() {
         }
 
         fabAdd.setOnClickListener {
-            startActivity(Intent(this, PruebaActivity::class.java))
+            startActivity(Intent(this, GastosActivity::class.java))
         }
 
         // REDIRECCIONES DE ACCESO RÁPIDO
