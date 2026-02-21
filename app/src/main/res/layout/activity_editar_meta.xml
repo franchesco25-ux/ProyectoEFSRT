@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/stitch_background">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header_edit"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_close_edit_meta"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/white"
+            android:padding="8dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Meta"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/header_edit"
+        app:layout_constraintBottom_toTopOf="@id/bottom_save_area_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Avatar & Colors -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="16dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:shapeAppearanceOverlay="@style/CircleImage"
+                        android:background="#1A0DF259"
+                        android:src="@drawable/ic_goal"
+                        android:padding="24dp"
+                        app:tint="@color/stitch_primary"
+                        app:strokeColor="@color/stitch_primary"
+                        app:strokeWidth="2dp"/>
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:background="@drawable/bg_circle_avatar"
+                        android:backgroundTint="@color/white"
+                        app:tint="@color/stitch_background"
+                        android:padding="6dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:elevation="4dp"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="24dp">
+                    <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_circle_avatar" android:backgroundTint="@color/stitch_primary" android:layout_marginEnd="12dp" />
+                    <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_circle_avatar" android:backgroundTint="#3B82F6" android:layout_marginEnd="12dp" />
+                    <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_circle_avatar" android:backgroundTint="#A855F7" android:layout_marginEnd="12dp" />
+                    <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_circle_avatar" android:backgroundTint="#F97316" android:layout_marginEnd="12dp" />
+                    <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_circle_avatar" android:backgroundTint="#E11D48" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Form -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOMBRE DE LA META"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_stitch_input"
+                    android:paddingHorizontal="16dp">
+                    <ImageView
+                        android:id="@+id/icon_edit_note"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_history"
+                        app:tint="#4DFFFFFF"
+                        android:layout_centerVertical="true"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/icon_edit_note"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:text="Fondo de Emergencia"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MONTO OBJETIVO"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_stitch_input"
+                    android:paddingHorizontal="16dp">
+                    <TextView
+                        android:id="@+id/icon_dollar_sym"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textColor="#4DFFFFFF"
+                        android:textSize="18sp"
+                        android:layout_centerVertical="true"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/icon_dollar_sym"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:text="20000"
+                        android:inputType="number"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FECHA LÍMITE"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_stitch_input"
+                    android:paddingHorizontal="16dp">
+                    <ImageView
+                        android:id="@+id/icon_calendar_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_history"
+                        app:tint="#4DFFFFFF"
+                        android:layout_centerVertical="true"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/icon_calendar_view"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:text="12/31/2024"
+                        android:focusable="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_stitch_input"
+                    android:padding="16dp">
+                    <ImageView
+                        android:id="@+id/icon_bell_remind"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_notifications"
+                        app:tint="#4DFFFFFF"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/icon_bell_remind"
+                        android:layout_marginStart="16dp"
+                        android:text="Recordatorios"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true"/>
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:checked="true"
+                        app:trackTint="@color/stitch_primary" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!-- Delete -->
+            <LinearLayout
+                android:id="@+id/btn_delete_meta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="40dp"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@android:drawable/ic_menu_delete"
+                    app:tint="@color/danger_red"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar Meta"
+                    android:textColor="@color/danger_red"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Footer -->
+    <FrameLayout
+        android:id="@+id/bottom_save_area_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/stitch_background"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save_meta_changes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Guardar Cambios"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/stitch_primary"
+            android:textColor="@color/stitch_background"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:cornerRadius="16dp"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

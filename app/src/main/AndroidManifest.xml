@@ -12,6 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IngresosGastosApp">
         <activity
+            android:name=".EditarMetaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".GestionarAhorrosActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".GastosRecientesAdapter"
             android:exported="false" />
         <activity

@@ -125,10 +125,9 @@
                     android:layout_marginTop="12dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_total_ahorrado"
                     app:layout_constraintStart_toStartOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Goals Header -->
+            <!-- Section Header -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,11 +159,15 @@
 
                 <!-- Meta 1 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_meta_emergencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_stitch_card"
                     android:padding="20dp"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <View
                         android:id="@+id/icon_bg_1"
@@ -186,7 +189,6 @@
                         app:layout_constraintEnd_toEndOf="@id/icon_bg_1" />
 
                     <TextView
-                        android:id="@+id/goal_title_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fondo de Emergencia"
@@ -203,8 +205,9 @@
                         android:text="Meta: $10,000.00"
                         android:textColor="#66FFFFFF"
                         android:textSize="12sp"
-                        app:layout_constraintTop_toBottomOf="@id/goal_title_1"
-                        app:layout_constraintStart_toStartOf="@id/goal_title_1" />
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/icon_bg_1"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -219,55 +222,27 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
-                    <TextView
-                        android:id="@+id/progress_val_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$6,500.00"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintTop_toBottomOf="@id/icon_bg_1"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="65%"
-                        android:textColor="@color/stitch_primary"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/progress_val_1"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
                     <ProgressBar
-                        android:id="@+id/pb_1"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="40dp"
                         android:progress="65"
                         android:progressDrawable="@drawable/progress_bar_green"
-                        app:layout_constraintTop_toBottomOf="@id/progress_val_1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Faltan $3,500.00 para completar"
-                        android:textColor="#33FFFFFF"
-                        android:textSize="10sp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/pb_1"
-                        app:layout_constraintStart_toStartOf="parent" />
-
+                        app:layout_constraintTop_toBottomOf="@id/icon_bg_1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Goal 2 -->
+                <!-- Meta 2 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_meta_viaje"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_stitch_card"
                     android:padding="20dp"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <View
                         android:id="@+id/icon_bg_2"
@@ -289,7 +264,6 @@
                         app:layout_constraintEnd_toEndOf="@id/icon_bg_2" />
 
                     <TextView
-                        android:id="@+id/goal_title_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Viaje a Europa"
@@ -306,202 +280,28 @@
                         android:text="Meta: $4,500.00"
                         android:textColor="#66FFFFFF"
                         android:textSize="12sp"
-                        app:layout_constraintTop_toBottomOf="@id/goal_title_2"
-                        app:layout_constraintStart_toStartOf="@id/goal_title_2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PROGRESO"
-                        android:textColor="#66FFFFFF"
-                        android:textSize="9sp"
-                        android:textStyle="bold"
-                        android:background="#0DFFFFFF"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                    <TextView
-                        android:id="@+id/progress_val_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$1,350.00"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
                         android:layout_marginTop="20dp"
                         app:layout_constraintTop_toBottomOf="@id/icon_bg_2"
                         app:layout_constraintStart_toStartOf="parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30%"
-                        android:textColor="#2196F3"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/progress_val_2"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
                     <ProgressBar
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="40dp"
                         android:progress="30"
                         android:progressDrawable="@drawable/progress_bar_green"
                         android:progressTint="#2196F3"
-                        app:layout_constraintTop_toBottomOf="@id/progress_val_2" />
-
+                        app:layout_constraintTop_toBottomOf="@id/icon_bg_2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Goal 3 (Completado) -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_stitch_card"
-                    android:padding="20dp"
-                    android:layout_marginBottom="16dp"
-                    android:clipChildren="false">
-
-                    <View
-                        android:id="@+id/icon_bg_3"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1A0DF259"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_history"
-                        app:tint="@color/stitch_primary"
-                        app:layout_constraintTop_toTopOf="@id/icon_bg_3"
-                        app:layout_constraintBottom_toBottomOf="@id/icon_bg_3"
-                        app:layout_constraintStart_toStartOf="@id/icon_bg_3"
-                        app:layout_constraintEnd_toEndOf="@id/icon_bg_3" />
-
-                    <TextView
-                        android:id="@+id/goal_title_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nuevo Auto"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginStart="16dp"
-                        app:layout_constraintTop_toTopOf="@id/icon_bg_3"
-                        app:layout_constraintStart_toEndOf="@id/icon_bg_3" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Meta Alcanzada: $15,000.00"
-                        android:textColor="#66FFFFFF"
-                        android:textSize="12sp"
-                        app:layout_constraintTop_toBottomOf="@id/goal_title_3"
-                        app:layout_constraintStart_toStartOf="@id/goal_title_3" />
-
-                    <!-- Badge rotado estilo Stitch -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="COMPLETADO"
-                        android:textColor="@color/stitch_background"
-                        android:textSize="8sp"
-                        android:textStyle="bold"
-                        android:background="@color/stitch_primary"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="2dp"
-                        android:rotation="45"
-                        android:translationX="15dp"
-                        android:translationY="-10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                    <TextView
-                        android:id="@+id/progress_val_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$15,000.00"
-                        android:textColor="@color/stitch_primary"
-                        android:textStyle="bold"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintTop_toBottomOf="@id/icon_bg_3"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="100%"
-                        android:textColor="@color/stitch_primary"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/progress_val_3"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                    <ProgressBar
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
-                        android:progress="100"
-                        android:progressDrawable="@drawable/progress_bar_green"
-                        app:layout_constraintTop_toBottomOf="@id/progress_val_3" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <!-- Empty State / CTA -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_stitch_dashed_card"
-                android:orientation="vertical"
-                android:padding="32dp"
-                android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="40dp">
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_goal"
-                    app:tint="#26FFFFFF" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="¿Tienes otro plan?"
-                    android:textColor="#80FFFFFF"
-                    android:textStyle="bold"
-                    android:layout_marginTop="12dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comienza a ahorrar para tu próxima gran compra hoy mismo."
-                    android:textColor="#33FFFFFF"
-                    android:textSize="11sp"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Añadir Nueva Meta"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:backgroundTint="#1AFFFFFF"
-                    android:textColor="@color/white"
-                    app:cornerRadius="24dp" />
             </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Navigation Area -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Barra de Navegación Fija -->
+    <RelativeLayout
         android:id="@+id/bottom_nav_area"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -512,8 +312,9 @@
             android:id="@+id/bottom_navigation_ahorros"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginBottom="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bg_stitch_card"
             app:itemIconTint="@color/nav_item_selector"
             app:itemTextColor="@color/nav_item_selector"
@@ -521,25 +322,21 @@
             app:itemActiveIndicatorStyle="@null"
             app:menu="@menu/bottom_nav_menu"
             app:labelVisibilityMode="labeled"
-            app:elevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:elevation="8dp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_ahorros"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/ic_add"
             app:backgroundTint="@color/stitch_primary"
             app:tint="@color/stitch_background"
             app:fabSize="normal"
             app:elevation="12dp"
             app:borderWidth="0dp"
-            app:maxImageSize="30dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_navigation_ahorros"
-            app:layout_constraintTop_toTopOf="@id/bottom_navigation_ahorros"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:maxImageSize="32dp"/>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
