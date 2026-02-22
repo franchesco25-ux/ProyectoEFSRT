@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IngresosGastosApp">
         <activity
+            android:name=".PerfilActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
             android:name=".EditarMetaActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
@@ -35,7 +39,7 @@
             android:name=".PruebaActivity"
             android:exported="false" />
         <activity
-            android:name=".HistorialGastosActivity"
+            android:name="com.example.ingresosgastosapp.HistorialGastosActivity"
             android:exported="false" />
         <activity
             android:name=".HistorialActivity"

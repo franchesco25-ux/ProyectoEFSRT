@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AhorrosActivity : BaseActivity() {
-//hola
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ahorros)
@@ -55,8 +55,9 @@ class AhorrosActivity : BaseActivity() {
                     true
                 }
                 R.id.nav_ahorros -> true
-                R.id.nav_ajustes -> {
-                    Toast.makeText(this, "Ajustes", Toast.LENGTH_SHORT).show()
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, PerfilActivity::class.java))
+                    finish()
                     true
                 }
                 else -> false

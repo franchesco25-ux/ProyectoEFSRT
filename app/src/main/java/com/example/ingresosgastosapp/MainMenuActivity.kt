@@ -39,6 +39,7 @@ class MainMenuActivity : BaseActivity() {
         val btnMetas = findViewById<View>(R.id.btn_quick_metas)
         val btnPresupuesto = findViewById<View>(R.id.btn_quick_presupuesto)
         val btnAnalisis = findViewById<View>(R.id.btn_quick_analisis)
+        val btnMas = findViewById<View>(R.id.btn_quick_mas)
 
         // 2. Configuración de saludo
         val nombre = intent.getStringExtra("NOMBRE_USUARIO") ?: "Alex"
@@ -69,6 +70,11 @@ class MainMenuActivity : BaseActivity() {
             startActivity(Intent(this, GastosActivity::class.java))
         }
 
+        // El botón "MÁS" del grid ahora abre el menú lateral
+        btnMas.setOnClickListener {
+            drawerLayout.openDrawer(navDrawer)
+        }
+
         // REDIRECCIONES DE ACCESO RÁPIDO
         btnMetas.setOnClickListener {
             startActivity(Intent(this, AhorrosActivity::class.java))
@@ -94,8 +100,8 @@ class MainMenuActivity : BaseActivity() {
                     startActivity(Intent(this, AhorrosActivity::class.java))
                     true
                 }
-                R.id.nav_ajustes -> {
-                    drawerLayout.openDrawer(navDrawer)
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, PerfilActivity::class.java))
                     true
                 }
                 else -> false
