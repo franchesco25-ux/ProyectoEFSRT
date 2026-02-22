@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+// import com.google.android.material.bottomnavigation.BottomNavigationView
+// import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AhorrosActivity : BaseActivity() {
 
@@ -16,17 +16,17 @@ class AhorrosActivity : BaseActivity() {
 
         // 1. Inicializar Vistas
         val btnCrearMeta = findViewById<TextView>(R.id.btn_crear_meta)
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_ahorros)
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_ahorros)
+        val imgProfile = findViewById<View>(R.id.img_profile_ahorros)
         
-        // Tarjetas de metas corregidas con los IDs del XML
+        // Tarjetas de metas
         val cardEmergencia = findViewById<View>(R.id.card_meta_emergencia)
         val cardViaje = findViewById<View>(R.id.card_meta_viaje)
 
         // 2. Configurar Clics de Redirección
+        imgProfile?.setOnClickListener { abrirPerfil() }
+
         val abrirEdicion = View.OnClickListener {
-            val intent = Intent(this, EditarMetaActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, EditarMetaActivity::class.java))
         }
 
         cardEmergencia?.setOnClickListener(abrirEdicion)
@@ -36,32 +36,45 @@ class AhorrosActivity : BaseActivity() {
             Toast.makeText(this, "Función para crear meta próximamente", Toast.LENGTH_SHORT).show()
         }
 
+        /*
+        // Lógica de navegación comentada para evitar errores
+        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_ahorros)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_ahorros)
+
         fabAdd.setOnClickListener {
-            startActivity(Intent(this, PruebaActivity::class.java))
+            startActivity(Intent(this, GastosActivity::class.java))
         }
 
-        // 3. Configurar Navegación Inferior
         bottomNav.selectedItemId = R.id.nav_ahorros
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_inicio -> {
-                    startActivity(Intent(this, MainMenuActivity::class.java))
                     finish()
                     true
                 }
                 R.id.nav_presupuesto -> {
-                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                    val intent = Intent(this, ResumenPresupuestoActivity::class.java)
+                    intent.putExtras(this.intent)
+                    startActivity(intent)
                     finish()
                     true
                 }
                 R.id.nav_ahorros -> true
                 R.id.nav_perfil -> {
-                    startActivity(Intent(this, PerfilActivity::class.java))
+                    abrirPerfil()
                     finish()
                     true
                 }
                 else -> false
             }
         }
+        */
+    }
+
+    private fun abrirPerfil() {
+        val intentProfile = Intent(this, PerfilActivity::class.java)
+        intentProfile.putExtra("NOMBRE_USUARIO", intent.getStringExtra("NOMBRE_USUARIO"))
+        intentProfile.putExtra("EMAIL_USUARIO", intent.getStringExtra("EMAIL_USUARIO"))
+        startActivity(intentProfile)
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,354 +7,280 @@
     android:background="@color/bg_dark"
     tools:context=".PerfilActivity">
 
-    <!-- Header Toolbar -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbarPerfil"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/bg_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Perfil"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnSettings"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_settings"
-            app:tint="@color/white" />
-    </com.google.android.material.appbar.MaterialToolbar>
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarPerfil">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
-            <!-- Avatar Section -->
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+            <!-- Header Toolbar Mockup -->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbarPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/bg_dark"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/white">
 
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/bg_profile_avatar" />
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_person"
-                    app:tint="@color/text_on_dark_muted" />
-
-                <FrameLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp">
+                    android:layout_gravity="center"
+                    android:text="Perfil"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/bg_badge_camera" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="center"
-                        android:src="@android:drawable/ic_menu_camera"
-                        app:tint="@color/bg_dark" />
-                </FrameLayout>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tvNombreUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Alejandro García"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvEmailUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="alejandro.garcia@email.com"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="14sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPlan"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:minHeight="32dp"
-                android:text="PLAN PREMIUM"
-                android:textColor="@color/green_accent"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                app:cornerRadius="20dp"
-                app:strokeColor="@color/green_accent"
-                app:strokeWidth="1dp" />
-
-            <!-- Support Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="12dp"
-                android:letterSpacing="0.1"
-                android:text="AYUDA Y SOPORTE"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_settings"
+                    app:tint="@color/white" />
+            </com.google.android.material.appbar.MaterialToolbar>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_menu"
-                android:orientation="vertical">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <!-- Centro de Ayuda -->
-                <LinearLayout
-                    android:id="@+id/btnAyuda"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp">
+                <!-- Avatar Section -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_help"
-                        app:tint="@color/green_accent" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_weight="1"
-                        android:text="Centro de Ayuda"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/bg_profile_avatar" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_more"
-                        android:rotation="270"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_person"
                         app:tint="@color/text_on_dark_muted" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="2dp"
+                        android:layout_marginBottom="2dp">
+
+                        <View
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/bg_badge_camera" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="@color/bg_dark" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvNombreUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Alejandro García"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvEmailUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="alejandro.garcia@email.com"
+                    android:textColor="@color/text_on_dark_muted"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPlan"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:minHeight="32dp"
+                    android:text="PLAN PREMIUM"
+                    android:textColor="@color/green_accent"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="20dp"
+                    app:strokeColor="@color/green_accent"
+                    app:strokeWidth="1dp" />
+
+                <!-- Support Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="12dp"
+                    android:letterSpacing="0.1"
+                    android:text="AYUDA Y SOPORTE"
+                    android:textColor="@color/text_on_dark_muted"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card_menu"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/btnAyuda"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_help"
+                            app:tint="@color/green_accent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Centro de Ayuda"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_more"
+                            android:rotation="270"
+                            app:tint="@color/text_on_dark_muted" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#0DFFFFFF" />
+
+                    <LinearLayout
+                        android:id="@+id/btnTerminos"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_info_details"
+                            app:tint="@color/green_accent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Términos y Privacidad"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_more"
+                            android:rotation="270"
+                            app:tint="@color/text_on_dark_muted" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#0DFFFFFF" />
-
-                <!-- Términos -->
-                <LinearLayout
-                    android:id="@+id/btnTerminos"
+                <!-- Logout Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp">
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/bg_dark_card"
+                    android:text="Cerrar Sesión"
+                    android:textColor="@color/danger_red"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp"
+                    app:icon="@android:drawable/ic_lock_power_off"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/danger_red"
+                    app:strokeColor="#0DFFFFFF"
+                    app:strokeWidth="1dp" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_info_details"
-                        app:tint="@color/green_accent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Versión 2.4.0 (Build 892)"
+                    android:textColor="@color/text_on_dark_muted"
+                    android:textSize="10sp" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_weight="1"
-                        android:text="Términos y Privacidad"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_more"
-                        android:rotation="270"
-                        app:tint="@color/text_on_dark_muted" />
-                </LinearLayout>
             </LinearLayout>
-
-            <!-- Logout Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/bg_dark_card"
-                android:text="Cerrar Sesión"
-                android:textColor="@color/danger_red"
-                android:textStyle="bold"
-                app:cornerRadius="16dp"
-                app:icon="@android:drawable/ic_lock_power_off"
-                app:iconGravity="textStart"
-                app:iconTint="@color/danger_red"
-                app:strokeColor="#0DFFFFFF"
-                app:strokeWidth="1dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Versión 2.4.0 (Build 892)"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="10sp" />
-
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation Mockup -->
-    <LinearLayout
-        android:id="@+id/bottomNavigation"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="@color/bg_dark"
-        android:elevation="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <!-- Bottom Navigation with Central FAB (Copiado de MainMenu) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_stitch_card"
+            app:backgroundTint="#E6102216"
+            app:itemIconTint="@color/stitch_primary"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_nav_menu"
+            app:labelVisibilityMode="labeled"
+            app:elevation="8dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_perfil"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_home"
-                app:tint="@color/text_on_dark_muted" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Resumen"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="10sp" />
-        </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/danger_red"
+            app:tint="@color/white"
+            app:fabSize="normal"
+            app:elevation="12dp"
+            app:borderWidth="0dp"/>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_history"
-                app:tint="@color/text_on_dark_muted" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gastos"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/green_accent"
-                android:src="@drawable/ic_add"
-                app:borderWidth="0dp"
-                app:elevation="4dp"
-                app:fabSize="normal"
-                app:tint="@color/bg_dark" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_goal"
-                app:tint="@color/text_on_dark_muted" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Metas"
-                android:textColor="@color/text_on_dark_muted"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_person"
-                app:tint="@color/green_accent" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:textColor="@color/green_accent"
-                android:textSize="10sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

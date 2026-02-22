@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@LoginActivity, MainMenuActivity::class.java)
                         intent.putExtra("NOMBRE_USUARIO", usuario.nombre)
+                        intent.putExtra("EMAIL_USUARIO", usuario.email) // <-- LÍNEA AÑADIDA
                         startActivity(intent)
                         finish()
                     } else {
