@@ -129,18 +129,26 @@
             android:textColor="@color/white"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtClave"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilClave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Ingresa tu contraseña"
-            android:inputType="textPassword"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
-            android:textColorHint="#64748B" 
-            android:drawableEnd="@android:drawable/ic_menu_view"
-            android:drawableTint="#64748B"/>
+            app:endIconMode="password_toggle"
+            app:endIconTint="#64748B"
+            app:hintEnabled="false"
+            app:boxBackgroundMode="none">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Ingresa tu contraseña"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="#64748B" />
+        </com.google.android.material.textfield.TextInputLayout>
         
         <TextView
             android:layout_width="wrap_content"

@@ -24,24 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
         val db = AppDatabase.getDatabase(this)
 
-        var isPasswordVisible = false
-        edtClave.setOnTouchListener { _, event ->
-            val DRAWABLE_RIGHT = 2
-            if (event.action == android.view.MotionEvent.ACTION_UP) {
-                val drawable = edtClave.compoundDrawables[DRAWABLE_RIGHT]
-                if (drawable != null && event.rawX >= (edtClave.right - drawable.bounds.width() - edtClave.paddingRight)) {
-                    isPasswordVisible = !isPasswordVisible
-                    if (isPasswordVisible) {
-                        edtClave.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
-                    } else {
-                        edtClave.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
-                    }
-                    edtClave.setSelection(edtClave.text.length)
-                    return@setOnTouchListener true
-                }
-            }
-            false
-        }
+        // TextInputLayout handles password toggle animation automatically
 
         btnIngresar.setOnClickListener {
             val correo = edtCorreo.text.toString().trim()

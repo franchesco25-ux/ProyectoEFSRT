@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
 
@@ -17,8 +15,6 @@ class PerfilActivity : BaseActivity() {
     private lateinit var tvEmailUsuario: TextView
     private lateinit var btnBack: ImageView
     private lateinit var btnLogout: View
-    private lateinit var bottomNav: BottomNavigationView
-    private lateinit var fabAdd: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +25,9 @@ class PerfilActivity : BaseActivity() {
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario)
         btnBack = findViewById(R.id.btnBackPerfil)
         btnLogout = findViewById(R.id.btnLogout)
-        bottomNav = findViewById(R.id.bottom_navigation)
-        fabAdd = findViewById(R.id.fab_add)
+
+        // Bottom Nav personalizado
+        setupCustomBottomNav("ajustes")
 
         // 5. Cargar datos del usuario
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
@@ -88,22 +85,6 @@ class PerfilActivity : BaseActivity() {
             finish()
         }
 
-        // Navegación
-        bottomNav.selectedItemId = R.id.nav_perfil
-        bottomNav.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.nav_inicio -> { finish(); true }
-                R.id.nav_presupuesto -> { startActivity(Intent(this, ResumenPresupuestoActivity::class.java)); finish(); true }
-                R.id.nav_ahorros -> { startActivity(Intent(this, AhorrosActivity::class.java)); finish(); true }
-                R.id.nav_perfil -> true
-                else -> false
-            }
-        }
-
-        fabAdd.setOnClickListener {
-            val bottomSheet = QuickActionsBottomSheet()
-            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
-        }
     }
 
     private fun setupOption(viewId: Int, iconId: Int, text: String, onClick: () -> Unit = {}) {

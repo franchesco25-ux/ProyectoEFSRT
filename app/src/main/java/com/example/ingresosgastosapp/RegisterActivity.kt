@@ -29,24 +29,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val db = AppDatabase.getDatabase(this)
 
-        var isPasswordVisible = false
-        edtClaveReg.setOnTouchListener { _, event ->
-            val DRAWABLE_RIGHT = 2
-            if (event.action == android.view.MotionEvent.ACTION_UP) {
-                val drawable = edtClaveReg.compoundDrawables[DRAWABLE_RIGHT]
-                if (drawable != null && event.rawX >= (edtClaveReg.right - drawable.bounds.width() - edtClaveReg.paddingRight)) {
-                    isPasswordVisible = !isPasswordVisible
-                    if (isPasswordVisible) {
-                        edtClaveReg.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
-                    } else {
-                        edtClaveReg.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
-                    }
-                    edtClaveReg.setSelection(edtClaveReg.text.length)
-                    return@setOnTouchListener true
-                }
-            }
-            false
-        }
+        // TextInputLayout handles password toggle animation automatically
 
         btnRegistrar.setOnClickListener {
              val nombre = edtNombre.text.toString().trim()

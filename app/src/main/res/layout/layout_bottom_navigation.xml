@@ -6,21 +6,148 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <!-- Barra de navegación -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/bg_stitch_card"
-        app:backgroundTint="#E6102216"
-        app:elevation="8dp"
-        app:itemIconTint="@color/nav_item_selector"
-        app:itemTextColor="@color/nav_item_selector"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+        android:backgroundTint="#E6102216"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <!-- Inicio -->
+        <LinearLayout
+            android:id="@+id/nav_item_inicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_inicio"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Inicio"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Presupuesto -->
+        <LinearLayout
+            android:id="@+id/nav_item_presupuesto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_presupuesto"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_wallet"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_presupuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Presupuesto"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Espacio para el FAB -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <!-- Ahorros -->
+        <LinearLayout
+            android:id="@+id/nav_item_ahorros"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_ahorros"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_goal"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_ahorros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Ahorros"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Ajustes -->
+        <LinearLayout
+            android:id="@+id/nav_item_ajustes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_ajustes"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_person"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_ajustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Ajustes"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- FAB central -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"

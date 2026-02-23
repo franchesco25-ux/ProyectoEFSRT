@@ -14,13 +14,11 @@ import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class MainMenuActivity : BaseActivity() {
 
     private lateinit var tvBalance: TextView
-    private lateinit var bottomNav: BottomNavigationView
 
     private var nombreUsuario: String = "Usuario"
     private var emailUsuario: String = ""
@@ -42,18 +40,12 @@ class MainMenuActivity : BaseActivity() {
 
         // 1. Inicialización de vistas
         tvBalance = findViewById(R.id.tvMainBalance)
-        bottomNav = findViewById(R.id.bottom_navigation)
-        bottomNav.selectedItemId = R.id.nav_inicio
         val tvSaludo = findViewById<TextView>(R.id.tvSaludoDashboard)
         val imgProfile = findViewById<View>(R.id.imgProfile)
-
-        // Botones y FAB
         val btnAgregar = findViewById<View>(R.id.btnMainAgregar)
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
-        fabAdd.setOnClickListener {
-            val bottomSheet = QuickActionsBottomSheet()
-            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
-        }
+
+        // Bottom Nav personalizado
+        setupCustomBottomNav("inicio")
 
         // Botones de acceso rápido
         val btnMetas = findViewById<View>(R.id.btn_quick_metas)
@@ -95,25 +87,7 @@ class MainMenuActivity : BaseActivity() {
         btnPresupuesto.setOnClickListener { startActivity(Intent(this, ResumenPresupuestoActivity::class.java)) }
         btnAnalisis.setOnClickListener { startActivity(Intent(this, AnalisisActivity::class.java)) }
 
-        // 5. Listener de la barra de navegación inferior
-        bottomNav.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.nav_inicio -> true
-                R.id.nav_presupuesto -> {
-                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
-                    true
-                }
-                R.id.nav_ahorros -> {
-                    startActivity(Intent(this, AhorrosActivity::class.java))
-                    true
-                }
-                R.id.nav_perfil -> {
-                    abrirPerfil()
-                    true
-                }
-                else -> false
-            }
-        }
+
 
         // 6. Últimas Transacciones
         rvTransacciones = findViewById(R.id.rvTransaccionesRecientes)

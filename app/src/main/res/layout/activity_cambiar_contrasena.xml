@@ -53,6 +53,39 @@
             android:src="@android:drawable/ic_lock_lock"
             app:tint="@color/green_accent" />
 
+        <!-- Contraseña Actual -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTRASEÑA ACTUAL"
+            android:textColor="@color/text_on_dark_muted"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilOldPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_on_dark_muted"
+            app:hintEnabled="false"
+            app:boxBackgroundMode="none">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_old_password"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_stitch_input"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/white"
+                android:inputType="textPassword"
+                android:hint="Ingresa tu contraseña actual"
+                android:textColorHint="@color/text_on_dark_muted" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Nueva Contraseña -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,18 +95,29 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/et_new_password"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNewPassword"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_stitch_input"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/white"
-            android:inputType="textPassword"
-            android:hint="********"
-            android:textColorHint="@color/text_on_dark_muted"
-            android:layout_marginBottom="24dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_on_dark_muted"
+            app:hintEnabled="false"
+            app:boxBackgroundMode="none">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_stitch_input"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/white"
+                android:inputType="textPassword"
+                android:hint="********"
+                android:textColorHint="@color/text_on_dark_muted" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirmar Contraseña -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,17 +127,27 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/et_confirm_password"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirmPassword"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_stitch_input"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/white"
-            android:inputType="textPassword"
-            android:hint="********"
-            android:textColorHint="@color/text_on_dark_muted"
-            android:layout_marginBottom="40dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_on_dark_muted"
+            app:hintEnabled="false"
+            app:boxBackgroundMode="none">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_stitch_input"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/white"
+                android:inputType="textPassword"
+                android:hint="********"
+                android:textColorHint="@color/text_on_dark_muted" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_update_pass"
