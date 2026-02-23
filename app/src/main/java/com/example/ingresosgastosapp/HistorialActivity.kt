@@ -70,20 +70,40 @@ class HistorialActivity : BaseActivity() {
         btnBack.setOnClickListener { finish() }
         
         fabAdd.setOnClickListener {
-            // Aquí puedes abrir la pantalla para agregar ingreso
+            val bottomSheet = QuickActionsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
 
         // 5. Configuración de Bottom Navigation
-        bottomNav.selectedItemId = R.id.nav_ahorros
+        // Para este activity desenmarcamos la navegación porque Historial no está predeterminado en el BottomNav
+        val navMenu = bottomNav.menu
+        navMenu.setGroupCheckable(0, false, true)
+
         bottomNav.setOnItemSelectedListener { item ->
+            navMenu.setGroupCheckable(0, true, true)
             when(item.itemId) {
                 R.id.nav_inicio -> {
                     startActivity(Intent(this, MainMenuActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true
+                }
+                R.id.nav_presupuesto -> {
+                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true
+                }
+                R.id.nav_ahorros -> {
+                    startActivity(Intent(this, AhorrosActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 R.id.nav_perfil -> {
                     startActivity(Intent(this, PerfilActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
                     true
                 }
                 else -> false
