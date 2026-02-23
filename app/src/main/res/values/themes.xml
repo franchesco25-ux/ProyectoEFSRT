@@ -11,6 +11,18 @@
     </style>
 
     <style name="Theme.IngresosGastosApp" parent="Base.Theme.IngresosGastosApp" />
+
+    <!-- Tema para el CropImageActivity con ActionBar visible -->
+    <style name="Theme.IngresosGastosApp.Crop" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/green_accent</item>
+        <item name="colorPrimaryVariant">@color/stitch_background</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/stitch_background</item>
+        <item name="android:navigationBarColor">@color/stitch_background</item>
+        <item name="android:windowBackground">@color/stitch_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
     <style name="CircleImage">
         <item name="cornerSize">50%</item>
     </style>

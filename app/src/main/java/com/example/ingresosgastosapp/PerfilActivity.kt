@@ -10,6 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
+import com.canhub.cropper.CropImageView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
@@ -22,29 +26,75 @@ class PerfilActivity : BaseActivity() {
     private lateinit var btnLogout: View
     private lateinit var imgPerfil: ShapeableImageView
 
-    // Launcher para seleccionar imagen de la galería
+    // Crop launcher
+    private val cropImageLauncher = registerForActivityResult(
+        CropImageContract()
+    ) { result ->
+
+        if (result.isSuccessful) {
+            val uri = result.uriContent
+            if (uri != null) {
+                saveCroppedImage(uri)
+            }
+        } else {
+            Toast.makeText(this, "Error al recortar imagen", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Gallery launcher
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        uri?.let { selectedUri ->
-            // Copiar la imagen al almacenamiento interno para persistirla
-            val file = File(filesDir, "profile_photo.jpg")
-            try {
-                contentResolver.openInputStream(selectedUri)?.use { input ->
-                    file.outputStream().use { output ->
-                        input.copyTo(output)
-                    }
+        uri?.let { launchCrop(it) }
+    }
+
+    private fun launchCrop(sourceUri: Uri) {
+
+        val options = CropImageOptions().apply {
+            guidelines = CropImageView.Guidelines.ON
+            cropShape = CropImageView.CropShape.OVAL
+            fixAspectRatio = true
+            aspectRatioX = 1
+            aspectRatioY = 1
+            outputCompressQuality = 90
+            minCropResultWidth = 200
+            minCropResultHeight = 200
+            activityTitle = "Ajustar foto de perfil"
+            activityBackgroundColor = android.graphics.Color.parseColor("#102216")
+            toolbarColor = android.graphics.Color.parseColor("#102216")
+            toolbarTitleColor = android.graphics.Color.WHITE
+            toolbarBackButtonColor = android.graphics.Color.WHITE
+            activityMenuIconColor = android.graphics.Color.WHITE
+            cropMenuCropButtonTitle = "Aceptar"
+        }
+
+        val cropOptions = CropImageContractOptions(sourceUri, options)
+
+        cropImageLauncher.launch(cropOptions)
+    }
+
+    private fun saveCroppedImage(uri: Uri) {
+
+        val file = File(filesDir, "profile_photo.jpg")
+
+        try {
+            contentResolver.openInputStream(uri)?.use { input ->
+                file.outputStream().use { output ->
+                    input.copyTo(output)
                 }
-                loadProfilePhoto(file.absolutePath)
-                // Guardar la ruta en SharedPreferences
-                getSharedPreferences("user_prefs", MODE_PRIVATE)
-                    .edit()
-                    .putString("PROFILE_PHOTO_PATH", file.absolutePath)
-                    .apply()
-                Toast.makeText(this, "Foto de perfil actualizada", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
-                Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show()
             }
+
+            loadProfilePhoto(file.absolutePath)
+
+            getSharedPreferences("user_prefs", MODE_PRIVATE)
+                .edit()
+                .putString("PROFILE_PHOTO_PATH", file.absolutePath)
+                .apply()
+
+            Toast.makeText(this, "Foto actualizada", Toast.LENGTH_SHORT).show()
+
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al guardar imagen", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -65,8 +115,7 @@ class PerfilActivity : BaseActivity() {
         imgPerfil = findViewById(R.id.imgPerfil)
 
         // Botón para cambiar foto de perfil
-        val btnCambiarFoto = findViewById<ImageButton>(R.id.btnCambiarFoto)
-        btnCambiarFoto.setOnClickListener {
+        findViewById<ImageButton>(R.id.btnCambiarFoto).setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
 
@@ -90,10 +139,11 @@ class PerfilActivity : BaseActivity() {
         setupOption(R.id.rowChangePass, R.drawable.ic_settings, "Cambiar Contraseña") {
             startActivity(Intent(this, CambiarContrasenaActivity::class.java))
         }
-        setupSwitch(R.id.rowFaceId, R.drawable.ic_person, "Touch ID", touchIdPref) { isChecked ->
+        setupSwitch(R.id.rowFaceId, R.drawable.ic_person, "Face ID / Touch ID", touchIdPref) { isChecked ->
             prefs.edit().putBoolean("TOUCH_ID_ENABLED", isChecked).apply()
             Toast.makeText(this, if (isChecked) "Touch ID Activado" else "Touch ID Desactivado", Toast.LENGTH_SHORT).show()
         }
+        setupStatus(R.id.rowVerificacion, R.drawable.ic_check_circle, "Verificación en dos pasos", "Activado")
 
         // 3. Configurar Secciones (PREFERENCIAS)
         setupValue(R.id.rowCurrency, R.drawable.ic_attach_money, "Moneda Principal", monedaPref!!)
@@ -106,6 +156,7 @@ class PerfilActivity : BaseActivity() {
         }
 
         // 4. Configurar Secciones (AYUDA Y SOPORTE)
+        setupOption(R.id.rowHelp, R.drawable.ic_help, "Centro de Ayuda") {}
         setupOption(R.id.rowPrivacy, R.drawable.ic_history, "Términos y Privacidad") {
             startActivity(Intent(this, TerminosPrivacidadActivity::class.java))
         }
@@ -113,7 +164,6 @@ class PerfilActivity : BaseActivity() {
         tvNombreUsuario.text = prefs.getString("NOMBRE_USUARIO", "Usuario")
         tvEmailUsuario.text = prefs.getString("EMAIL_USUARIO", "usuario@correo.com")
 
-        
         btnLogout.setOnClickListener {
             val p = getSharedPreferences("user_prefs", MODE_PRIVATE)
             val touchIdEnabled = p.getBoolean("TOUCH_ID_ENABLED", false)
@@ -127,14 +177,13 @@ class PerfilActivity : BaseActivity() {
                 .putString("IDIOMA_APP", lang)
                 .putString("PROFILE_PHOTO_PATH", savedPhotoPath)
                 .apply()
-                
+
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }
-
     }
 
     private fun loadProfilePhoto(path: String) {
@@ -145,7 +194,7 @@ class PerfilActivity : BaseActivity() {
                 imgPerfil.setImageBitmap(bitmap)
                 imgPerfil.imageTintList = null
                 imgPerfil.setPadding(0, 0, 0, 0)
-                imgPerfil.contentPadding = 0
+                imgPerfil.setContentPadding(0, 0, 0, 0)
             }
         }
     }
@@ -171,13 +220,14 @@ class PerfilActivity : BaseActivity() {
         view.findViewById<ImageView>(R.id.itemIcon)?.setImageResource(iconId)
         view.findViewById<TextView>(R.id.itemText)?.text = text
         view.findViewById<TextView>(R.id.itemValue)?.text = value
-        view.setOnClickListener { 
-            if (onClick != {}) {
-                onClick()
-            } else {
-                Toast.makeText(this, "$text: $value", Toast.LENGTH_SHORT).show() 
-            }
-        }
+        view.setOnClickListener { onClick() }
+    }
+
+    private fun setupStatus(viewId: Int, iconId: Int, text: String, status: String) {
+        val view = findViewById<View>(viewId) ?: return
+        view.findViewById<ImageView>(R.id.itemIcon)?.setImageResource(iconId)
+        view.findViewById<TextView>(R.id.itemText)?.text = text
+        view.findViewById<TextView>(R.id.itemStatus)?.text = status
     }
 
     private fun showLanguageDialog() {
@@ -192,12 +242,5 @@ class PerfilActivity : BaseActivity() {
             }
             .setNegativeButton("Cancelar", null)
             .show()
-    }
-
-    private fun setupStatus(viewId: Int, iconId: Int, text: String, status: String) {
-        val view = findViewById<View>(viewId) ?: return
-        view.findViewById<ImageView>(R.id.itemIcon)?.setImageResource(iconId)
-        view.findViewById<TextView>(R.id.itemText)?.text = text
-        view.findViewById<TextView>(R.id.itemStatus)?.text = status
     }
 }

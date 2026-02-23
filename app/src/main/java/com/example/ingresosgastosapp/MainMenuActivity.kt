@@ -1,6 +1,7 @@
 package com.example.ingresosgastosapp
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -14,6 +15,8 @@ import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
+import com.google.android.material.imageview.ShapeableImageView
+import java.io.File
 
 
 class MainMenuActivity : BaseActivity() {
@@ -41,8 +44,24 @@ class MainMenuActivity : BaseActivity() {
         // 1. Inicialización de vistas
         tvBalance = findViewById(R.id.tvMainBalance)
         val tvSaludo = findViewById<TextView>(R.id.tvSaludoDashboard)
-        val imgProfile = findViewById<View>(R.id.imgProfile)
+        val imgProfile = findViewById<ShapeableImageView>(R.id.imgProfile)
         val btnAgregar = findViewById<View>(R.id.btnMainAgregar)
+
+        // Cargar foto de perfil guardada
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val photoPath = prefs.getString("PROFILE_PHOTO_PATH", null)
+        if (photoPath != null) {
+            val file = File(photoPath)
+            if (file.exists()) {
+                val bitmap = BitmapFactory.decodeFile(photoPath)
+                if (bitmap != null) {
+                    imgProfile.setImageBitmap(bitmap)
+                    imgProfile.imageTintList = null
+                    imgProfile.setPadding(0, 0, 0, 0)
+                    imgProfile.setContentPadding(0, 0, 0, 0)
+                }
+            }
+        }
 
         // Bottom Nav personalizado
         setupCustomBottomNav("inicio")
@@ -54,7 +73,6 @@ class MainMenuActivity : BaseActivity() {
         val btnHistorial = findViewById<View>(R.id.btn_quick_historial)
 
         // 2. Configuración de datos del usuario (Desde SharedPreferences)
-        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         nombreUsuario = prefs.getString("NOMBRE_USUARIO", "Usuario") ?: "Usuario"
         emailUsuario = prefs.getString("EMAIL_USUARIO", "") ?: ""
         tvSaludo.text = "Hola, $nombreUsuario"

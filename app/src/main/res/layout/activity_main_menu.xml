@@ -40,6 +40,7 @@
                             android:layout_height="60dp"
                             android:background="@color/stitch_card_bg"
                             android:padding="2dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_person"
                             app:shapeAppearanceOverlay="@style/CircleImage"
                             app:strokeColor="@color/stitch_primary"

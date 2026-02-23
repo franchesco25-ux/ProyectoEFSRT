@@ -126,8 +126,22 @@
                     android:text="usuario@correo.com"
                     android:textColor="@color/text_on_dark_muted"
                     android:textSize="14sp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginTop="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="PLAN PREMIUM"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/stitch_background"
+                    app:backgroundTint="@color/green_accent"
+                    app:cornerRadius="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
             </LinearLayout>
 
             <!-- Sections Container -->
@@ -171,6 +185,18 @@
                         android:id="@+id/rowFaceId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="1dp"
+                          android:background="#0DFFFFFF" />
+
+                    <include 
+                        layout="@layout/item_profile_status" 
+                        android:id="@+id/rowVerificacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
 
                 </LinearLayout>
 
@@ -237,6 +263,16 @@
                     android:background="@drawable/bg_card_menu"
                     android:paddingVertical="8dp"
                     android:orientation="vertical">
+
+                    <include 
+                        layout="@layout/item_profile_option" 
+                        android:id="@+id/rowHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
 
                     <include 
                         layout="@layout/item_profile_option" 
