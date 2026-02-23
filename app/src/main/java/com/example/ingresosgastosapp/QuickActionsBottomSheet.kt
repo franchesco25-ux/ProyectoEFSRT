@@ -15,9 +15,7 @@ class QuickActionsBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // We set the background of the bottom sheet to transparent to allow our card and floating close button to render properly
-        val view = inflater.inflate(R.layout.fragment_quick_actions, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_quick_actions, container, false)
     }
 
     override fun onStart() {
@@ -38,8 +36,9 @@ class QuickActionsBottomSheet : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        // CORRECCIÓN: Ahora redirige a AgregarMetaActivity
         btnNuevaMeta.setOnClickListener {
-            startActivity(Intent(requireContext(), AhorrosActivity::class.java))
+            startActivity(Intent(requireContext(), AgregarMetaActivity::class.java))
             dismiss()
         }
 
