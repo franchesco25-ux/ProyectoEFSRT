@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">""</string>
+    <string name="app_name">"Ingresos/Gastos"</string>
     <string name="menu">Menú</string>
     <string name="notifications">Notificaciones</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

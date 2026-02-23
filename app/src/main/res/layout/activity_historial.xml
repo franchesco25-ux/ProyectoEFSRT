@@ -41,7 +41,7 @@
                 android:layout_centerInParent="true"
                 android:text="Historial"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

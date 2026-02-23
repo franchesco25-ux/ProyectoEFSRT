@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/stitch_background">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAhorro"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/stitch_background"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingEnd="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_stitch_card"
+                android:backgroundTint="#1AFFFFFF"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Ahorros"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <!-- Contenido Scrollable -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_content"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarAhorro">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,57 +60,6 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:paddingBottom="120dp">
-
-            <!-- Header -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/img_profile_ahorros"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:src="@drawable/ic_person"
-                    android:background="#1A0DF259"
-                    android:padding="2dp"
-                    app:shapeAppearanceOverlay="@style/CircleImage"
-                    app:strokeColor="@color/stitch_primary"
-                    app:strokeWidth="1dp"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/img_profile_ahorros"
-                    android:layout_marginStart="12dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MI CARTERA"
-                        android:textColor="#800DF259"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ahorros"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <ImageButton
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/bg_stitch_card"
-                    android:backgroundTint="#0DFFFFFF"
-                    android:src="@drawable/ic_notifications"
-                    app:tint="@color/white" />
-            </RelativeLayout>
 
             <!-- Summary Card -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,7 +85,7 @@
                     android:id="@+id/tv_total_ahorrado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$0.00"
+                    android:text="S/.0.00"
                     android:textColor="@color/white"
                     android:textSize="38sp"
                     android:textStyle="bold"
@@ -289,7 +276,7 @@
     <!-- Bottom Navigation -->
     <include
         layout="@layout/layout_bottom_navigation"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

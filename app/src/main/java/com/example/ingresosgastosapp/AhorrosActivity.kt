@@ -3,6 +3,7 @@ package com.example.ingresosgastosapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 
@@ -12,9 +13,14 @@ class AhorrosActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ahorros)
 
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+        }
+
         // 1. Inicializar Vistas
         val btnCrearMeta = findViewById<TextView>(R.id.btn_crear_meta)
-        val imgProfile = findViewById<View>(R.id.img_profile_ahorros)
         
         // Tarjetas de metas
         val cardEmergencia = findViewById<View>(R.id.card_meta_emergencia)
@@ -23,8 +29,6 @@ class AhorrosActivity : BaseActivity() {
         // Bottom Nav personalizado
         setupCustomBottomNav("ahorros")
 
-        // 2. Configurar Clics de Redirección
-        imgProfile?.setOnClickListener { abrirPerfil() }
 
         val abrirEdicion = View.OnClickListener {
             startActivity(Intent(this, EditarMetaActivity::class.java))

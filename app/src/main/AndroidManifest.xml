@@ -44,7 +44,7 @@
             android:name=".GastosActivity"
             android:exported="false" />
         <activity
-            android:name=".PruebaActivity"
+            android:name=".IngresosActivity"
             android:exported="false" />
         <activity
             android:name="com.example.ingresosgastosapp.HistorialGastosActivity"

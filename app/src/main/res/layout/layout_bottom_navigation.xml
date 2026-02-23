@@ -4,6 +4,8 @@
     android:id="@+id/bottom_nav_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:layout_gravity="bottom">
 
     <!-- Barra de navegación -->
@@ -78,12 +80,19 @@
                 android:textColor="#4A5A5A"
                 android:textSize="10sp" />
         </LinearLayout>
-
-        <!-- Espacio para el FAB -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="100dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/stitch_primary"
+            app:borderWidth="0dp"
+            app:elevation="12dp"
+            app:fabCustomSize="64dp"
+            app:maxImageSize="28dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.FloatingActionButton"
+            app:tint="@color/stitch_background" />
 
         <!-- Ahorros -->
         <LinearLayout
@@ -140,24 +149,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Ajustes"
+                android:text="Perfil"
                 android:textColor="#4A5A5A"
                 android:textSize="10sp" />
         </LinearLayout>
 
+
+
     </LinearLayout>
 
-    <!-- FAB central -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/stitch_primary"
-        app:borderWidth="0dp"
-        app:elevation="12dp"
-        app:fabSize="normal"
-        app:tint="@color/stitch_background" />
+    <!-- FAB central - circular y grande -->
+
 
 </FrameLayout>

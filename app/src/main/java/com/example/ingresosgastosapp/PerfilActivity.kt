@@ -3,6 +3,7 @@ package com.example.ingresosgastosapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -13,17 +14,21 @@ class PerfilActivity : BaseActivity() {
 
     private lateinit var tvNombreUsuario: TextView
     private lateinit var tvEmailUsuario: TextView
-    private lateinit var btnBack: ImageView
     private lateinit var btnLogout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+        }
+
         // 1. Inicializar vistas principales
         tvNombreUsuario = findViewById(R.id.tvNombreUsuario)
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario)
-        btnBack = findViewById(R.id.btnBackPerfil)
         btnLogout = findViewById(R.id.btnLogout)
 
         // Bottom Nav personalizado
@@ -63,8 +68,6 @@ class PerfilActivity : BaseActivity() {
         tvNombreUsuario.text = prefs.getString("NOMBRE_USUARIO", "Usuario")
         tvEmailUsuario.text = prefs.getString("EMAIL_USUARIO", "usuario@correo.com")
 
-        // 6. Configurar clics
-        btnBack.setOnClickListener { finish() }
         
         btnLogout.setOnClickListener {
             val p = getSharedPreferences("user_prefs", MODE_PRIVATE)

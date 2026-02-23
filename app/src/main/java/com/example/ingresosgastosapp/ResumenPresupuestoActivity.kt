@@ -1,19 +1,21 @@
 package com.example.ingresosgastosapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 
 class ResumenPresupuestoActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_resumen_presupuesto)
+        setContentView(R.layout.activity_presupuesto)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+        }
 
         // Bottom Nav personalizado
         setupCustomBottomNav("presupuesto")

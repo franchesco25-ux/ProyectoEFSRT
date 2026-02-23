@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.ingresosgastosapp.DataBase.AppDatabase
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
