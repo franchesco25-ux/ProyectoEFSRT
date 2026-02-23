@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
-        val imgAtras = findViewById<ImageView>(R.id.imgAtras)
+        val imgAtras = findViewById<ImageButton>(R.id.imgAtras)
         val txtLogin = findViewById<TextView>(R.id.txtLogin)
         
         val edtNombre = findViewById<EditText>(R.id.edtNombre)

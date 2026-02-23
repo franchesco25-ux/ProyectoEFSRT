@@ -2,11 +2,12 @@ package com.example.ingresosgastosapp
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -27,9 +28,12 @@ class EditarIngresoActivity : BaseActivity() {
 
     private lateinit var etDescripcion: EditText
     private lateinit var etMonto: EditText
-    private lateinit var etCategoria: EditText
-    private lateinit var btnActualizar: Button
-    private lateinit var btnCancelar: Button
+    private lateinit var spinnerCategoria: Spinner
+
+    private val categorias = listOf(
+        "Salario", "Freelance", "Venta", "Inversión",
+        "Regalo", "Reembolso", "Otros"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,20 +45,26 @@ class EditarIngresoActivity : BaseActivity() {
             insets
         }
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbarEditarIngreso)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        toolbar.setNavigationOnClickListener {
+        // Toolbar back button
+        findViewById<ImageButton>(R.id.btnBackEditarIngreso).setOnClickListener {
             finish()
         }
 
         etDescripcion = findViewById(R.id.etDescripcion)
         etMonto = findViewById(R.id.etMonto)
-        etCategoria = findViewById(R.id.etCategoria)
-        btnActualizar = findViewById(R.id.btnActualizar)
-        btnCancelar = findViewById(R.id.btnCancelar)
+        spinnerCategoria = findViewById(R.id.spinnerCategoriaIngreso)
+
+        // Configurar spinner de categorías
+        val adapter = ArrayAdapter(this, R.layout.item_dropdown_dark, categorias)
+        adapter.setDropDownViewResource(R.layout.item_dropdown_dark)
+        spinnerCategoria.adapter = adapter
+
+        // Botones
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnActualizar)
+            .setOnClickListener { actualizarIngreso() }
+
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancelar)
+            .setOnClickListener { finish() }
 
         ingresosViewModel = ViewModelProvider(this)[IngresosViewModel::class.java]
         balanceViewModel = ViewModelProvider(this)[BalanceViewModel::class.java]
@@ -68,14 +78,6 @@ class EditarIngresoActivity : BaseActivity() {
         }
 
         cargarDatosIngreso()
-
-        btnActualizar.setOnClickListener {
-            actualizarIngreso()
-        }
-
-        btnCancelar.setOnClickListener {
-            finish()
-        }
     }
 
     private fun cargarDatosIngreso() {
@@ -86,7 +88,12 @@ class EditarIngresoActivity : BaseActivity() {
                 ingresoActual = ingreso
                 etDescripcion.setText(ingreso.descripcion)
                 etMonto.setText(ingreso.monto.toString())
-                etCategoria.setText(ingreso.categoria)
+
+                // Pre-seleccionar la categoría en el spinner
+                val index = categorias.indexOfFirst { it.equals(ingreso.categoria, ignoreCase = true) }
+                if (index >= 0) {
+                    spinnerCategoria.setSelection(index)
+                }
             } else {
                 Toast.makeText(this@EditarIngresoActivity, "No se pudo cargar el ingreso", Toast.LENGTH_SHORT).show()
                 finish()
@@ -97,7 +104,7 @@ class EditarIngresoActivity : BaseActivity() {
     private fun actualizarIngreso() {
         val descripcion = etDescripcion.text.toString()
         val montoStr = etMonto.text.toString()
-        val categoria = etCategoria.text.toString()
+        val categoria = spinnerCategoria.selectedItem?.toString() ?: ""
 
         if (TextUtils.isEmpty(descripcion) || TextUtils.isEmpty(montoStr) || TextUtils.isEmpty(categoria)) {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
@@ -115,7 +122,6 @@ class EditarIngresoActivity : BaseActivity() {
             return
         }
 
-        // Crear el ingreso actualizado manteniendo el ID y la fecha originales
         val ingresoActualizado = Ingresos(
             id = ingresoActual!!.id,
             descripcion = descripcion,
@@ -124,16 +130,12 @@ class EditarIngresoActivity : BaseActivity() {
             fecha = ingresoActual!!.fecha
         )
 
-        // Actualizar en la base de datos con ajuste de balance
         lifecycleScope.launch(Dispatchers.IO) {
-            // Calcular la diferencia de monto
             val diferenciaMonto = nuevoMonto - ingresoActual!!.monto
 
-            // Obtener balance actual
             val currentBalance = balanceViewModel.getCurrentBalance()
             val newBalance = currentBalance + diferenciaMonto
 
-            // Actualizar ingreso y balance
             ingresosViewModel.updateIngresos(ingresoActualizado)
             balanceViewModel.updateBalance(newBalance)
 
