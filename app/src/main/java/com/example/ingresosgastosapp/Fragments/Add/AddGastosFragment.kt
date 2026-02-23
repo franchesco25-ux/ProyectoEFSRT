@@ -1,5 +1,6 @@
 package com.example.ingresosgastosapp.Fragments.Add
 
+import android.app.AlertDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,6 +8,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
@@ -40,6 +43,13 @@ class addGastos : Fragment() {
     private lateinit var tvFechaHeader: TextView
     private lateinit var calendarGrid: GridLayout
 
+    // Lista de categorías de gastos
+    private val categorias = mutableListOf(
+        "Comida", "Transporte", "Salud", "Entretenimiento",
+        "Educación", "Servicios", "Ropa", "Otros"
+    )
+    private lateinit var categoriaAdapter: ArrayAdapter<String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +60,8 @@ class addGastos : Fragment() {
 
         val descripcionEt = view.findViewById<EditText>(R.id.addDescripcionGasto_et)
         val montoEt = view.findViewById<EditText>(R.id.addMontoGasto_et)
-        val categoriaEt = view.findViewById<EditText>(R.id.addCategoriaGasto_et)
+        val categoriaEt = view.findViewById<AutoCompleteTextView>(R.id.addCategoriaGasto_et)
+        val btnAddCategoria = view.findViewById<ImageView>(R.id.btnAddCategoriaGasto)
         val button = view.findViewById<View>(R.id.addGasto_btn)
         val btnVerLista = view.findViewById<View>(R.id.btnVerListaGastos)
         
@@ -58,6 +69,9 @@ class addGastos : Fragment() {
         calendarGrid = view.findViewById(R.id.calendar_grid)
         val btnPrev = view.findViewById<ImageView>(R.id.btn_prev_month)
         val btnNext = view.findViewById<ImageView>(R.id.btn_next_month)
+
+        // Configurar combo de categorías
+        setupCategoriaCombo(categoriaEt, btnAddCategoria)
 
         updateCalendar()
 
@@ -120,6 +134,58 @@ class addGastos : Fragment() {
         }
 
         return view
+    }
+
+    private fun setupCategoriaCombo(categoriaEt: AutoCompleteTextView, btnAddCategoria: ImageView) {
+        categoriaAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.item_dropdown_dark,
+            categorias
+        )
+        categoriaEt.setAdapter(categoriaAdapter)
+
+        // Al hacer click, mostrar todas las opciones
+        categoriaEt.setOnClickListener {
+            categoriaEt.showDropDown()
+        }
+
+        // Botón para agregar nueva categoría
+        btnAddCategoria.setOnClickListener {
+            mostrarDialogoNuevaCategoria(categoriaEt)
+        }
+    }
+
+    private fun mostrarDialogoNuevaCategoria(categoriaEt: AutoCompleteTextView) {
+        val input = EditText(requireContext()).apply {
+            hint = "Nombre de la categoría"
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setHintTextColor(ContextCompat.getColor(requireContext(), R.color.stitch_text_muted))
+            setBackgroundResource(R.drawable.bg_stitch_input)
+            setPadding(40, 30, 40, 30)
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Nueva Categoría")
+            .setMessage("Ingresa el nombre de la nueva categoría:")
+            .setView(input)
+            .setPositiveButton("Agregar") { _, _ ->
+                val nuevaCategoria = input.text.toString().trim()
+                if (nuevaCategoria.isNotEmpty()) {
+                    if (!categorias.contains(nuevaCategoria)) {
+                        categorias.add(categorias.size, nuevaCategoria)
+                        categoriaAdapter.notifyDataSetChanged()
+                        categoriaEt.setText(nuevaCategoria, false)
+                        Toast.makeText(requireContext(), "Categoría '$nuevaCategoria' agregada", Toast.LENGTH_SHORT).show()
+                    } else {
+                        categoriaEt.setText(nuevaCategoria, false)
+                        Toast.makeText(requireContext(), "La categoría ya existe", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        dialog.show()
     }
 
     private fun updateCalendar() {

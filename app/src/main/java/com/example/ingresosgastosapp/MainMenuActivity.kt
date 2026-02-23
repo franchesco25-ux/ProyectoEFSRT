@@ -5,8 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ingresosgastosapp.Adapter.TransaccionReciente
+import com.example.ingresosgastosapp.Adapter.TransaccionRecienteAdapter
 import com.example.ingresosgastosapp.Data.BalanceViewModel
+import com.example.ingresosgastosapp.Data.Gastos
+import com.example.ingresosgastosapp.Data.GastosViewModel
+import com.example.ingresosgastosapp.Data.Ingresos
+import com.example.ingresosgastosapp.Data.IngresosViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -19,22 +26,35 @@ class MainMenuActivity : BaseActivity() {
     private var emailUsuario: String = ""
 
     private val balanceViewModel: BalanceViewModel by viewModels()
+    private val gastosViewModel: GastosViewModel by viewModels()
+    private val ingresosViewModel: IngresosViewModel by viewModels()
+
+    // Transacciones recientes
+    private lateinit var rvTransacciones: RecyclerView
+    private lateinit var tvSinTransacciones: TextView
+    private val transaccionesAdapter = TransaccionRecienteAdapter()
+    private var listaGastos = listOf<Gastos>()
+    private var listaIngresos = listOf<Ingresos>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
         // 1. Inicialización de vistas
-
         tvBalance = findViewById(R.id.tvMainBalance)
         bottomNav = findViewById(R.id.bottom_navigation)
+        bottomNav.selectedItemId = R.id.nav_inicio
         val tvSaludo = findViewById<TextView>(R.id.tvSaludoDashboard)
         val imgProfile = findViewById<View>(R.id.imgProfile)
-        
+
         // Botones y FAB
         val btnAgregar = findViewById<View>(R.id.btnMainAgregar)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
-        
+        fabAdd.setOnClickListener {
+            val bottomSheet = QuickActionsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
+        }
+
         // Botones de acceso rápido
         val btnMetas = findViewById<View>(R.id.btn_quick_metas)
         val btnPresupuesto = findViewById<View>(R.id.btn_quick_presupuesto)
@@ -67,16 +87,13 @@ class MainMenuActivity : BaseActivity() {
             val bottomSheet = QuickActionsBottomSheet()
             bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
-        fabAdd.setOnClickListener { 
-            val bottomSheet = QuickActionsBottomSheet()
-            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
-        }
-        btnHistorial.setOnClickListener { startActivity(Intent(this, HistorialGastosActivity::class.java)) }
+
+        btnHistorial.setOnClickListener { startActivity(Intent(this, HistorialActivity::class.java)) }
 
         // REDIRECCIONES DE ACCESO RÁPIDO
         btnMetas.setOnClickListener { startActivity(Intent(this, AhorrosActivity::class.java)) }
         btnPresupuesto.setOnClickListener { startActivity(Intent(this, ResumenPresupuestoActivity::class.java)) }
-        btnAnalisis.setOnClickListener { startActivity(Intent(this, HistorialGastosActivity::class.java)) }
+        btnAnalisis.setOnClickListener { startActivity(Intent(this, AnalisisActivity::class.java)) }
 
         // 5. Listener de la barra de navegación inferior
         bottomNav.setOnItemSelectedListener { item ->
@@ -98,7 +115,63 @@ class MainMenuActivity : BaseActivity() {
             }
         }
 
+        // 6. Últimas Transacciones
+        rvTransacciones = findViewById(R.id.rvTransaccionesRecientes)
+        tvSinTransacciones = findViewById(R.id.tvSinTransacciones)
+        rvTransacciones.layoutManager = LinearLayoutManager(this)
+        rvTransacciones.adapter = transaccionesAdapter
 
+        val btnVerHistorial = findViewById<TextView>(R.id.btnVerHistorial)
+        btnVerHistorial.setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
+        }
+
+        gastosViewModel.readAllData.observe(this) { gastos ->
+            listaGastos = gastos
+            actualizarTransaccionesRecientes()
+        }
+
+        ingresosViewModel.readAllData.observe(this) { ingresos ->
+            listaIngresos = ingresos
+            actualizarTransaccionesRecientes()
+        }
+    }
+
+    private fun actualizarTransaccionesRecientes() {
+        val transacciones = mutableListOf<TransaccionReciente>()
+
+        for (g in listaGastos) {
+            transacciones.add(
+                TransaccionReciente(
+                    id = g.id,
+                    descripcion = g.descripcion.ifBlank { g.categoria },
+                    monto = g.monto,
+                    categoria = g.categoria,
+                    fecha = g.fecha,
+                    esIngreso = false
+                )
+            )
+        }
+
+        for (i in listaIngresos) {
+            transacciones.add(
+                TransaccionReciente(
+                    id = i.id,
+                    descripcion = i.descripcion.ifBlank { i.categoria },
+                    monto = i.monto,
+                    categoria = i.categoria,
+                    fecha = i.fecha,
+                    esIngreso = true
+                )
+            )
+        }
+
+        // Orden por fecha descendente y tomar solo 5
+        val ultimas5 = transacciones.sortedByDescending { it.fecha }.take(5)
+
+        transaccionesAdapter.submitList(ultimas5)
+        tvSinTransacciones.visibility = if (ultimas5.isEmpty()) View.VISIBLE else View.GONE
+        rvTransacciones.visibility = if (ultimas5.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun abrirPerfil() {
@@ -107,6 +180,4 @@ class MainMenuActivity : BaseActivity() {
         intent.putExtra("EMAIL_USUARIO", emailUsuario)
         startActivity(intent)
     }
-
-
 }

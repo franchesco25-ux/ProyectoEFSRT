@@ -29,8 +29,8 @@ class PerfilActivity : BaseActivity() {
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario)
         btnBack = findViewById(R.id.btnBackPerfil)
         btnLogout = findViewById(R.id.btnLogout)
-        bottomNav = findViewById(R.id.bottom_navigation_perfil)
-        fabAdd = findViewById(R.id.fab_add_perfil)
+        bottomNav = findViewById(R.id.bottom_navigation)
+        fabAdd = findViewById(R.id.fab_add)
 
         // 5. Cargar datos del usuario
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)

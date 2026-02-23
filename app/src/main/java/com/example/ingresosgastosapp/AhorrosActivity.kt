@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-// import com.google.android.material.bottomnavigation.BottomNavigationView
-// import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AhorrosActivity : BaseActivity() {
 
@@ -22,6 +22,10 @@ class AhorrosActivity : BaseActivity() {
         val cardEmergencia = findViewById<View>(R.id.card_meta_emergencia)
         val cardViaje = findViewById<View>(R.id.card_meta_viaje)
 
+        // Bottom Navigation (IDs estandarizados del include)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
+
         // 2. Configurar Clics de Redirección
         imgProfile?.setOnClickListener { abrirPerfil() }
 
@@ -36,26 +40,17 @@ class AhorrosActivity : BaseActivity() {
             Toast.makeText(this, "Función para crear meta próximamente", Toast.LENGTH_SHORT).show()
         }
 
-        /*
-        // Lógica de navegación comentada para evitar errores
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_ahorros)
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_ahorros)
-
-        fabAdd.setOnClickListener {
-            startActivity(Intent(this, GastosActivity::class.java))
-        }
-
+        // Bottom Navigation Logic
         bottomNav.selectedItemId = R.id.nav_ahorros
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_inicio -> {
+                    startActivity(Intent(this, MainMenuActivity::class.java))
                     finish()
                     true
                 }
                 R.id.nav_presupuesto -> {
-                    val intent = Intent(this, ResumenPresupuestoActivity::class.java)
-                    intent.putExtras(this.intent)
-                    startActivity(intent)
+                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
                     finish()
                     true
                 }
@@ -68,7 +63,11 @@ class AhorrosActivity : BaseActivity() {
                 else -> false
             }
         }
-        */
+
+        fabAdd.setOnClickListener {
+            val bottomSheet = QuickActionsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
+        }
     }
 
     private fun abrirPerfil() {

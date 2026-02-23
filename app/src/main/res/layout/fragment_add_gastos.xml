@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$"
+                    android:text="S/."
                     android:textColor="@color/stitch_text_muted"
                     android:textSize="28sp"
                     android:layout_marginEnd="12dp"
@@ -78,7 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:text="120.00"
+                    android:hint="0.00"
+                    android:textColorHint="@color/stitch_text_muted"
                     android:textColor="@color/white"
                     android:textSize="48sp"
                     android:textStyle="bold"
@@ -95,19 +96,50 @@
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"/>
 
-            <EditText
-                android:id="@+id/addCategoriaGasto_et"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
+                android:orientation="horizontal"
                 android:background="@drawable/bg_stitch_card"
-                android:paddingHorizontal="16dp"
-                android:drawableStart="@drawable/ic_wallet"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/stitch_primary"
-                android:text="Comida"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="24dp" />
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_wallet"
+                    app:tint="@color/stitch_primary"
+                    android:layout_marginEnd="12dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/addCategoriaGasto_et"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Seleccionar categoría"
+                    android:textColorHint="@color/stitch_text_muted"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:completionThreshold="1"
+                    android:dropDownVerticalOffset="8dp"
+                    android:popupBackground="@drawable/bg_dropdown_dark"
+                    android:inputType="none"
+                    android:focusable="false" />
+
+                <ImageView
+                    android:id="@+id/btnAddCategoriaGasto"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/stitch_primary"
+                    android:padding="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Agregar categoría" />
+            </LinearLayout>
 
             <!-- Nota/Descripción -->
             <TextView

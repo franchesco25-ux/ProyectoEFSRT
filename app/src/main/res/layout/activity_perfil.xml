@@ -101,20 +101,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_menu"
-                    android:paddingVertical="8dp"
                     android:orientation="vertical">
 
                     <include 
                         layout="@layout/item_profile_option" 
                         android:id="@+id/rowChangePass"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="1dp"
+                          android:background="#0DFFFFFF" />
+
                     <include 
                         layout="@layout/item_profile_switch" 
                         android:id="@+id/rowFaceId"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
@@ -140,19 +145,27 @@
                         layout="@layout/item_profile_value" 
                         android:id="@+id/rowCurrency"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
+
                     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
-                    <include 
+
+                    <include
                         layout="@layout/item_profile_switch" 
                         android:id="@+id/rowNotifications"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        />
+
                     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
                     <include 
                         layout="@layout/item_profile_value" 
                         android:id="@+id/rowLanguage"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
 
                 </LinearLayout>
 
@@ -178,7 +191,9 @@
                         layout="@layout/item_profile_option" 
                         android:id="@+id/rowPrivacy"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"/>
 
                 </LinearLayout>
 
@@ -214,38 +229,6 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- Bottom Navigation -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_perfil"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="12dp"
-            android:background="@drawable/bg_stitch_card"
-            app:backgroundTint="#FA102216"
-            app:itemIconTint="@color/stitch_primary"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/bottom_nav_menu"
-            app:labelVisibilityMode="labeled"
-            app:elevation="8dp"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_perfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/ic_add"
-            app:backgroundTint="@color/green_accent"
-            app:tint="@color/bg_dark"
-            app:fabSize="normal"
-            app:elevation="12dp"
-            app:borderWidth="0dp"/>
-    </RelativeLayout>
+    <include layout="@layout/layout_bottom_navigation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

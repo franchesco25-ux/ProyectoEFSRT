@@ -53,6 +53,9 @@
             android:name=".HistorialActivity"
             android:exported="false" />
         <activity
+            android:name=".AnalisisActivity"
+            android:exported="false" />
+        <activity
             android:name=".AgregarIngresoActivity"
             android:exported="false" />
         <activity

@@ -30,7 +30,7 @@ class ListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.custom_row_ingresos, parent, false)
         )
     }
 

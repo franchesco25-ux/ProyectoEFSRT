@@ -28,7 +28,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_list_ingresos, container, false)
 
         val verView = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
