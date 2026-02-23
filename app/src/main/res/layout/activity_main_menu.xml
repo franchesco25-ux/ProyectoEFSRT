@@ -458,13 +458,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <!-- Botón Flotante Central (FAB) -->
+    <!-- Botón Flotante Central (FAB) con color Verde Stitch -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/danger_red"
+        app:backgroundTint="@color/stitch_primary"
         app:borderWidth="0dp"
         app:elevation="12dp"
         app:fabSize="normal"
@@ -472,6 +472,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bottom_navigation"
-        app:tint="@color/white" />
+        app:tint="@color/stitch_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
