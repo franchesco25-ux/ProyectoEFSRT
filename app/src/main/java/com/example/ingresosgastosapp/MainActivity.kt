@@ -51,9 +51,13 @@ class MainActivity : BaseActivity() {
             Toast.makeText(this, "Notificaciones próximamente", Toast.LENGTH_SHORT).show()
         }
 
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
         balanceViewModel.balance.observe(this, Observer { balance ->
             val total = balance?.total ?: 0.0
-            tvBalance.text = "S/ %.2f".format(total)
+            tvBalance.text = "$currencySymbol %.2f".format(total)
             tvBalanceVariacion.text = "+0%"
         })
 

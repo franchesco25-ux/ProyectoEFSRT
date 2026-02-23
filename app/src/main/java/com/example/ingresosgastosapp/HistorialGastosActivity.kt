@@ -371,10 +371,14 @@ class HistorialGastosActivity : BaseActivity() {
 
         val balanceCalculado = totalIngresos - totalGastos
 
-        binding.tvTotalIngresos.text = "S/. %.2f".format(totalIngresos)
-        binding.tvTotalGastos.text = "S/. %.2f".format(totalGastos)
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
 
-        binding.tvBalance.text = "S/. %.2f".format(balanceCalculado)
+        binding.tvTotalIngresos.text = "$currencySymbol %.2f".format(totalIngresos)
+        binding.tvTotalGastos.text = "$currencySymbol %.2f".format(totalGastos)
+
+        binding.tvBalance.text = "$currencySymbol %.2f".format(balanceCalculado)
 
         binding.tvBalance.setTextColor(
             if (balanceCalculado >= 0) android.graphics.Color.parseColor("#28A745")

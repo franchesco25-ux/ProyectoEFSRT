@@ -88,18 +88,28 @@ class addGastos : Fragment() {
 
                     viewLifecycleOwner.lifecycleScope.launch {
                         val currentBalance = balanceViewModel.getCurrentBalance()
-                        val newBalance = currentBalance - monto
-
-                        if (newBalance >= 0) {
-                            mGastosViewModel.addGasto(gasto)
-                            balanceViewModel.updateBalance(newBalance)
+                        
+                        if (currentBalance <= 0) {
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "Gasto agregado correctamente", Toast.LENGTH_SHORT).show()
-                                findNavController().navigate(R.id.action_addFragment_to_listFragment)
+                                Toast.makeText(requireContext(), "Ingreso insuficiente. No tienes fondos para este gasto.", Toast.LENGTH_LONG).show()
                             }
                         } else {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "No tienes suficiente balance", Toast.LENGTH_SHORT).show()
+                            val newBalance = currentBalance - monto
+
+                            if (newBalance >= 0) {
+                                mGastosViewModel.addGasto(gasto)
+                                balanceViewModel.updateBalance(newBalance)
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(requireContext(), "Gasto agregado correctamente", Toast.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.action_addFragment_to_listFragment)
+                                }
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    val prefs = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+                                    val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+                                    val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+                                    Toast.makeText(requireContext(), "Ingreso insuficiente. Balance actual: $currencySymbol %.2f".format(currentBalance), Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }

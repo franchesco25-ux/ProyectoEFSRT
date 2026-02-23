@@ -34,7 +34,12 @@ class GastosRecientesAdapter(
 
         fun bind(gasto: Gastos, onItemClick: ((Gastos) -> Unit)?) {
             tvDescripcion.text = gasto.descripcion.ifBlank { gasto.categoria }
-            tvMonto.text = "-S/ %.2f".format(gasto.monto)
+
+            val prefs = itemView.context.getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+            val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+            val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
+            tvMonto.text = "-$currencySymbol %.2f".format(gasto.monto)
             tvFecha.text = formatFecha(gasto.fecha)
             itemView.setOnClickListener { onItemClick?.invoke(gasto) }
         }

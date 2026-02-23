@@ -40,7 +40,12 @@ class ListAdapter(
         val currentIngreso = ingresosList[position]
         holder.id_txt.text = currentIngreso.id.toString()
         holder.descripcion_txt.text = currentIngreso.descripcion
-        holder.monto_txt.text = "S/ ${String.format("%.2f", currentIngreso.monto)}"
+
+        val prefs = holder.itemView.context.getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
+        holder.monto_txt.text = "$currencySymbol ${String.format("%.2f", currentIngreso.monto)}"
         holder.categoria_txt.text = currentIngreso.categoria
         holder.fecha_txt.text = formatFecha(currentIngreso.fecha)
 

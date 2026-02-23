@@ -48,9 +48,12 @@ class MainMenuActivity : BaseActivity() {
         tvSaludo.text = "Hola, $nombreUsuario"
 
         // 3. Configuración del Balance Real
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
         balanceViewModel.balance.observe(this) { balanceEntity ->
             val totalReal = balanceEntity?.total ?: 0.0
-            tvBalance.text = "$ %.2f".format(totalReal)
+            tvBalance.text = "$currencySymbol %.2f".format(totalReal)
             if (totalReal < 0) {
                 tvBalance.setTextColor(android.graphics.Color.parseColor("#EF4444"))
             } else {

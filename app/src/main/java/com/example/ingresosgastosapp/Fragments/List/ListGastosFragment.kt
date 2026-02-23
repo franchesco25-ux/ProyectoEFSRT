@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ingresosgastosapp.Adapter.ListGastosAdapter
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.EditarGastoActivity
-import com.example.ingresosgastosapp.MainActivity
+import com.example.ingresosgastosapp.MainMenuActivity
 import com.example.ingresosgastosapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -68,7 +68,7 @@ class ListGastosFragment : Fragment() {
         }
 
         btnVolver.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
+            val intent = Intent(requireContext(), MainMenuActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }

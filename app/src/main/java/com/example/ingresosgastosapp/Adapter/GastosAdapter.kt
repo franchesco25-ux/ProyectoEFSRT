@@ -40,7 +40,12 @@ class ListGastosAdapter(
         val currentGasto = gastosList[position]
         holder.id_txt.text = currentGasto.id.toString()
         holder.descripcion_txt.text = currentGasto.descripcion
-        holder.monto_txt.text = "-S/ ${String.format("%.2f", currentGasto.monto)}"
+
+        val prefs = holder.itemView.context.getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
+        holder.monto_txt.text = "-$currencySymbol ${String.format("%.2f", currentGasto.monto)}"
         holder.categoria_txt.text = currentGasto.categoria
         holder.fecha_txt.text = formatFecha(currentGasto.fecha)
 

@@ -139,9 +139,13 @@ class EditarGastoActivity : BaseActivity() {
                 }
             } else {
                 withContext(Dispatchers.Main) {
+                    val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+                    val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
                     Toast.makeText(
                         this@EditarGastoActivity,
-                        "No tienes suficiente balance para este monto (Balance actual: S/ %.2f)".format(currentBalance),
+                        "No tienes suficiente balance para este monto (Balance actual: $currencySymbol %.2f)".format(currentBalance),
                         Toast.LENGTH_LONG
                     ).show()
                 }

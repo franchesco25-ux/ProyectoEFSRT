@@ -45,18 +45,23 @@ class HistorialAdapter(
         holder.tvCategoria.text = transaccion.categoria
         holder.tvFecha.text = formatFecha(transaccion.fecha)
 
+        val context = holder.itemView.context
+        val prefs = context.getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+        val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
+        val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
+
         // Configurar colores según el tipo
         when (transaccion.tipo) {
             TipoTransaccion.INGRESO -> {
                 holder.tvTipo.text = "INGRESO"
                 holder.tvTipo.setTextColor(Color.parseColor("#28A745"))
-                holder.tvMonto.text = "+ S/. ${String.format("%.2f", transaccion.monto)}"
+                holder.tvMonto.text = "+ $currencySymbol ${String.format("%.2f", transaccion.monto)}"
                 holder.tvMonto.setTextColor(Color.parseColor("#28A745"))
             }
             TipoTransaccion.GASTO -> {
                 holder.tvTipo.text = "GASTO"
                 holder.tvTipo.setTextColor(Color.parseColor("#DC3545"))
-                holder.tvMonto.text = "- S/. ${String.format("%.2f", transaccion.monto)}"
+                holder.tvMonto.text = "- $currencySymbol ${String.format("%.2f", transaccion.monto)}"
                 holder.tvMonto.setTextColor(Color.parseColor("#DC3545"))
             }
         }
