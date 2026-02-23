@@ -1,273 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/stitch_background">
+    android:background="@color/stitch_background"
+    tools:context=".HistorialActivity">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!-- Header Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarHistorial"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/stitch_background"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="100dp"
-            android:clipToPadding="false">
+            android:paddingEnd="16dp">
 
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_stitch_card"
+                android:backgroundTint="#1AFFFFFF"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Historial"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarHistorial">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Filter Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_stitch_card"
                 android:orientation="vertical"
-                android:padding="24dp">
-
-                <!-- Header Section -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="32dp">
-
-                    <ImageButton
-                        android:id="@+id/btnVolverHistoriales"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1AFFFFFF"
-                        android:src="@drawable/ic_arrow_back"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/btnVolverHistoriales"
-                        android:layout_marginStart="16dp"
-                        android:layout_centerVertical="true"
-                        android:text="Historiales"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <ImageButton
-                        android:id="@+id/btnSearchHistoriales"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1AFFFFFF"
-                        android:src="@drawable/ic_search"
-                        app:tint="@color/white" />
-                </RelativeLayout>
+                android:padding="16dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seleccionar Categoría"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-                
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Explora tus registros financieros pasados"
+                    android:layout_marginBottom="12dp"
+                    android:letterSpacing="0.1"
+                    android:text="FILTROS"
                     android:textColor="@color/stitch_primary"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="24dp" />
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
-                <!-- Card Historial Gastos -->
+                <!-- Category Combo -->
                 <LinearLayout
-                    android:id="@+id/cardHistorialGastos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_stitch_card"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_stitch_input"
                     android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <FrameLayout
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1A0DF259">
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_wallet"
-                            app:tint="@color/stitch_primary"/>
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Historial de Gastos"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="17sp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Salidas y consumos"
-                            android:textColor="@color/stitch_text_muted"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="@color/stitch_primary"/>
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wallet"
+                        app:tint="@color/stitch_text_muted" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actvCategoria"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:background="@android:color/transparent"
+                        android:completionThreshold="1"
+                        android:dropDownAnchor="@id/actvCategoria"
+                        android:hint="Todas las categorías"
+                        android:inputType="none"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/stitch_text_muted"
+                        android:textSize="14sp"
+                        android:popupBackground="@drawable/bg_dropdown_dark" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@android:drawable/arrow_down_float"
+                        app:tint="@color/stitch_text_muted" />
                 </LinearLayout>
 
-                <!-- Card Historial Ingresos -->
-                <LinearLayout
-                    android:id="@+id/cardHistorialIngresos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_stitch_card"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <FrameLayout
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1A0DF259">
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_wallet"
-                            app:tint="@color/stitch_primary"/>
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Historial de Ingresos"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="17sp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Depósitos y salarios"
-                            android:textColor="@color/stitch_text_muted"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="@color/stitch_primary"/>
-                </LinearLayout>
-
-                <!-- Card Historial Metas -->
-                <LinearLayout
-                    android:id="@+id/cardHistorialMetas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_stitch_card"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <FrameLayout
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_stitch_card"
-                        android:backgroundTint="#1A0DF259">
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_goal"
-                            app:tint="@color/stitch_primary"/>
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Historial de Metas"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="17sp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Logros y ahorros"
-                            android:textColor="@color/stitch_text_muted"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="@color/stitch_primary"/>
-                </LinearLayout>
-
-                <!-- Information Card -->
+                <!-- Date Range Buttons -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_outline_green"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_info"
-                        app:tint="@color/stitch_primary"/>
-
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFechaInicio"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Puedes filtrar por fecha y categoría dentro de cada historial para una búsqueda más precisa."
-                        android:textColor="@color/stitch_text_muted"
+                        android:text="Fecha Inicio"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
                         android:textSize="12sp"
-                        android:layout_marginStart="16dp" />
+                        app:backgroundTint="@color/stitch_card_bg"
+                        app:cornerRadius="12dp"
+                        app:icon="@android:drawable/ic_menu_my_calendar"
+                        app:iconTint="@color/stitch_primary"
+                        app:strokeColor="@color/stitch_card_border"
+                        app:strokeWidth="1dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFechaFin"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:text="Fecha Fin"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:backgroundTint="@color/stitch_card_bg"
+                        app:cornerRadius="12dp"
+                        app:icon="@android:drawable/ic_menu_my_calendar"
+                        app:iconTint="@color/stitch_primary"
+                        app:strokeColor="@color/stitch_card_border"
+                        app:strokeWidth="1dp" />
                 </LinearLayout>
+
+                <!-- Clear Filters Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLimpiarFiltros"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Limpiar Filtros"
+                    android:textAllCaps="false"
+                    android:textColor="@color/stitch_primary"
+                    android:textSize="13sp"
+                    app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/stitch_primary"
+                    app:rippleColor="#1A0df259" />
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
 
-        <include layout="@layout/layout_bottom_navigation"/>
+            <!-- Totals Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_stitch_card"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total Ingresos"
+                        android:textColor="@color/stitch_text_muted"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTotalIngresos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S/. 0.00"
+                        android:textColor="@color/stitch_primary"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total Gastos"
+                        android:textColor="@color/stitch_text_muted"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTotalGastos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S/. 0.00"
+                        android:textColor="#EF4444"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/stitch_card_border" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Balance"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S/. 0.00"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Registros Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:letterSpacing="0.1"
+                android:text="REGISTROS"
+                android:textColor="@color/stitch_text_muted"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <!-- Empty State -->
+            <TextView
+                android:id="@+id/tvSinTransacciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="40dp"
+                android:text="No hay transacciones que mostrar"
+                android:textColor="@color/stitch_text_muted"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+            <!-- RecyclerView for transactions -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHistorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_historial_transaccion" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

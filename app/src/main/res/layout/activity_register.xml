@@ -13,33 +13,41 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Back Button & Header -->
-        <LinearLayout
+        <!-- Toolbar estilo Presupuesto -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="24dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/bg_dark"
+            android:elevation="0dp">
 
-            <ImageView
-                android:id="@+id/imgAtras"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_back_24"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription"
-                android:clickable="true"
-                android:focusable="true"/>
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Crear Cuenta"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:paddingEnd="16dp">
+
+                <ImageButton
+                    android:id="@+id/imgAtras"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_stitch_card"
+                    android:backgroundTint="#1AFFFFFF"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/white"
+                    android:contentDescription="Volver" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Crear Cuenta"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,18 +132,26 @@
             android:textColor="@color/white"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtClaveReg"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilClaveReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Crea una contraseña"
-            android:inputType="textPassword"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/white"
-            android:textColorHint="#64748B"
-            android:drawableEnd="@android:drawable/ic_menu_view"
-            android:drawableTint="#64748B" />
+            app:endIconMode="password_toggle"
+            app:endIconTint="#64748B"
+            app:hintEnabled="false"
+            app:boxBackgroundMode="none">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtClaveReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Crea una contraseña"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="#64748B" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnRegistrar"

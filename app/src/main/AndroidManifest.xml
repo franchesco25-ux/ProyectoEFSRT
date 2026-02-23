@@ -48,7 +48,7 @@
             android:name=".GastosActivity"
             android:exported="false" />
         <activity
-            android:name=".PruebaActivity"
+            android:name=".IngresosActivity"
             android:exported="false" />
         <activity
             android:name="com.example.ingresosgastosapp.HistorialGastosActivity"
@@ -61,6 +61,9 @@
             android:name=".HistorialIngresosActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".AnalisisActivity"
+            android:exported="false" />
         <activity
             android:name=".AgregarIngresoActivity"
             android:exported="false" />
@@ -78,7 +81,8 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -91,7 +95,22 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IngresosGastosApp.Crop"
+            tools:replace="android:exported,android:theme" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

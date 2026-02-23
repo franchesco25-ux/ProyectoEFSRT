@@ -2,11 +2,12 @@ package com.example.ingresosgastosapp
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import com.example.ingresosgastosapp.BaseActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -27,9 +28,12 @@ class EditarGastoActivity : BaseActivity() {
 
     private lateinit var etDescripcion: EditText
     private lateinit var etMonto: EditText
-    private lateinit var etCategoria: EditText
-    private lateinit var btnActualizar: Button
-    private lateinit var btnCancelar: Button
+    private lateinit var spinnerCategoria: Spinner
+
+    private val categorias = listOf(
+        "Comida", "Transporte", "Salud", "Entretenimiento",
+        "Educación", "Servicios", "Ropa", "Otros"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,20 +45,26 @@ class EditarGastoActivity : BaseActivity() {
             insets
         }
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbarEditarGasto)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        toolbar.setNavigationOnClickListener {
+        // Toolbar back button
+        findViewById<ImageButton>(R.id.btnBackEditarGasto).setOnClickListener {
             finish()
         }
 
         etDescripcion = findViewById(R.id.etDescripcionGasto)
         etMonto = findViewById(R.id.etMontoGasto)
-        etCategoria = findViewById(R.id.etCategoriaGasto)
-        btnActualizar = findViewById(R.id.btnActualizarGasto)
-        btnCancelar = findViewById(R.id.btnCancelarGasto)
+        spinnerCategoria = findViewById(R.id.spinnerCategoriaGasto)
+
+        // Configurar spinner de categorías
+        val adapter = ArrayAdapter(this, R.layout.item_dropdown_dark, categorias)
+        adapter.setDropDownViewResource(R.layout.item_dropdown_dark)
+        spinnerCategoria.adapter = adapter
+
+        // Botones
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnActualizarGasto)
+            .setOnClickListener { actualizarGasto() }
+
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancelarGasto)
+            .setOnClickListener { finish() }
 
         gastosViewModel = ViewModelProvider(this)[GastosViewModel::class.java]
         balanceViewModel = ViewModelProvider(this)[BalanceViewModel::class.java]
@@ -68,14 +78,6 @@ class EditarGastoActivity : BaseActivity() {
         }
 
         cargarDatosGasto()
-
-        btnActualizar.setOnClickListener {
-            actualizarGasto()
-        }
-
-        btnCancelar.setOnClickListener {
-            finish()
-        }
     }
 
     private fun cargarDatosGasto() {
@@ -86,7 +88,12 @@ class EditarGastoActivity : BaseActivity() {
                 gastoActual = gasto
                 etDescripcion.setText(gasto.descripcion)
                 etMonto.setText(gasto.monto.toString())
-                etCategoria.setText(gasto.categoria)
+
+                // Pre-seleccionar la categoría en el spinner
+                val index = categorias.indexOfFirst { it.equals(gasto.categoria, ignoreCase = true) }
+                if (index >= 0) {
+                    spinnerCategoria.setSelection(index)
+                }
             } else {
                 Toast.makeText(this@EditarGastoActivity, "No se pudo cargar el gasto", Toast.LENGTH_SHORT).show()
                 finish()
@@ -97,7 +104,7 @@ class EditarGastoActivity : BaseActivity() {
     private fun actualizarGasto() {
         val descripcion = etDescripcion.text.toString()
         val montoStr = etMonto.text.toString()
-        val categoria = etCategoria.text.toString()
+        val categoria = spinnerCategoria.selectedItem?.toString() ?: ""
 
         if (TextUtils.isEmpty(descripcion) || TextUtils.isEmpty(montoStr) || TextUtils.isEmpty(categoria)) {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()

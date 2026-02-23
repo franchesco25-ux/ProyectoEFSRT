@@ -4,7 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.ImageButton
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +19,17 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        // Scroll al campo enfocado cuando el teclado aparece
+        val contentFrame = findViewById<android.view.ViewGroup>(android.R.id.content)
+        val scrollView = contentFrame.getChildAt(0) as? ScrollView
+        fun scrollToFocused(view: android.view.View) {
+            scrollView?.postDelayed({
+                scrollView.smoothScrollTo(0, view.bottom + 200)
+            }, 300)
+        }
+
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
-        val imgAtras = findViewById<ImageView>(R.id.imgAtras)
+        val imgAtras = findViewById<ImageButton>(R.id.imgAtras)
         val txtLogin = findViewById<TextView>(R.id.txtLogin)
         
         val edtNombre = findViewById<EditText>(R.id.edtNombre)
@@ -27,26 +37,15 @@ class RegisterActivity : AppCompatActivity() {
         val edtPais = findViewById<EditText>(R.id.edtPais)
         val edtClaveReg = findViewById<EditText>(R.id.edtClaveReg)
 
+        // Scroll al campo enfocado
+        edtNombre.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtPais.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtCorreoReg.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtClaveReg.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+
         val db = AppDatabase.getDatabase(this)
 
-        var isPasswordVisible = false
-        edtClaveReg.setOnTouchListener { _, event ->
-            val DRAWABLE_RIGHT = 2
-            if (event.action == android.view.MotionEvent.ACTION_UP) {
-                val drawable = edtClaveReg.compoundDrawables[DRAWABLE_RIGHT]
-                if (drawable != null && event.rawX >= (edtClaveReg.right - drawable.bounds.width() - edtClaveReg.paddingRight)) {
-                    isPasswordVisible = !isPasswordVisible
-                    if (isPasswordVisible) {
-                        edtClaveReg.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
-                    } else {
-                        edtClaveReg.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
-                    }
-                    edtClaveReg.setSelection(edtClaveReg.text.length)
-                    return@setOnTouchListener true
-                }
-            }
-            false
-        }
+        // TextInputLayout handles password toggle animation automatically
 
         btnRegistrar.setOnClickListener {
              val nombre = edtNombre.text.toString().trim()

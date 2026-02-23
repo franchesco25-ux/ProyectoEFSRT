@@ -18,16 +18,18 @@ class CambiarContrasenaActivity : BaseActivity() {
 
         val btnClose = findViewById<ImageView>(R.id.btn_close_pass)
         val btnUpdate = findViewById<MaterialButton>(R.id.btn_update_pass)
+        val etOld = findViewById<EditText>(R.id.et_old_password)
         val etNew = findViewById<EditText>(R.id.et_new_password)
         val etConfirm = findViewById<EditText>(R.id.et_confirm_password)
 
         btnClose.setOnClickListener { finish() }
 
         btnUpdate.setOnClickListener {
+            val oldPass = etOld.text.toString().trim()
             val pass1 = etNew.text.toString().trim()
             val pass2 = etConfirm.text.toString().trim()
 
-            if (pass1.isEmpty() || pass2.isEmpty()) {
+            if (oldPass.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -42,14 +44,36 @@ class CambiarContrasenaActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            if (oldPass == pass1) {
+                Toast.makeText(this, "La nueva contraseña no puede ser igual a la actual", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val emailUsuario = prefs.getString("EMAIL_USUARIO", null)
 
             if (emailUsuario != null) {
                 lifecycleScope.launch {
                     val db = AppDatabase.getDatabase(this@CambiarContrasenaActivity)
+
+                    // Validar contraseña antigua
+                    val usuario = db.userDao().getUser(emailUsuario, oldPass)
+                    if (usuario == null) {
+                        Toast.makeText(
+                            this@CambiarContrasenaActivity,
+                            "La contraseña actual es incorrecta",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@launch
+                    }
+
+                    // Actualizar contraseña
                     db.userDao().updatePassword(emailUsuario, pass1)
-                    Toast.makeText(this@CambiarContrasenaActivity, "Contraseña actualizada con éxito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@CambiarContrasenaActivity,
+                        "Contraseña actualizada con éxito",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     finish()
                 }
             } else {

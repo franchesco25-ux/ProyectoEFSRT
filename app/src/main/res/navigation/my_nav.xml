@@ -9,7 +9,7 @@
         android:id="@+id/listFragment"
         android:name="com.example.ingresosgastosapp.Fragments.List.ListFragment"
         android:label="List"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list_ingresos" >
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/addFragment"
         android:name="com.example.ingresosgastosapp.Fragments.Add.AddFragment"
         android:label="Add"
-        tools:layout="@layout/fragment_add" >
+        tools:layout="@layout/fragment_add_ingreso" >
         <action
             android:id="@+id/action_addFragment_to_listFragment"
             app:destination="@id/listFragment" />

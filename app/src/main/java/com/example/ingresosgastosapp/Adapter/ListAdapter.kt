@@ -30,7 +30,7 @@ class ListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.custom_row_ingresos, parent, false)
         )
     }
 
@@ -65,10 +65,14 @@ class ListAdapter(
 
     private fun formatFecha(fecha: String): String {
         return try {
-            val parte = fecha.split("T")[0]
-            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val output = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            output.format(input.parse(parte)!!)
+            val inputFormat = if (fecha.contains("T")) {
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+            } else {
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            }
+            val date = inputFormat.parse(fecha)
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            outputFormat.format(date!!)
         } catch (e: Exception) {
             fecha
         }

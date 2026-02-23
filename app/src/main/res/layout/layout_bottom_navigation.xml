@@ -1,42 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_nav_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="100dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:layout_gravity="bottom">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <!-- Barra de navegación -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_stitch_card"
-        app:backgroundTint="#E6102216"
-        app:elevation="8dp"
-        app:itemIconTint="@color/stitch_primary"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:backgroundTint="#E6102216"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/stitch_primary"
-        app:borderWidth="0dp"
-        app:elevation="12dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/bottom_navigation"
-        app:tint="@color/stitch_background" />
+        <!-- Inicio -->
+        <LinearLayout
+            android:id="@+id/nav_item_inicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/nav_icon_inicio"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Inicio"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Presupuesto -->
+        <LinearLayout
+            android:id="@+id/nav_item_presupuesto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_presupuesto"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_wallet"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_presupuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Presupuesto"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="100dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/stitch_primary"
+            app:borderWidth="0dp"
+            app:elevation="12dp"
+            app:fabCustomSize="64dp"
+            app:maxImageSize="28dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.FloatingActionButton"
+            app:tint="@color/stitch_background" />
+
+        <!-- Ahorros -->
+        <LinearLayout
+            android:id="@+id/nav_item_ahorros"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_ahorros"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_goal"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_ahorros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Ahorros"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Ajustes -->
+        <LinearLayout
+            android:id="@+id/nav_item_ajustes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/nav_icon_ajustes"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_person"
+                app:tint="#4A5A5A" />
+
+            <TextView
+                android:id="@+id/nav_text_ajustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Perfil"
+                android:textColor="#4A5A5A"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <!-- FAB central - circular y grande -->
+
+
+</FrameLayout>

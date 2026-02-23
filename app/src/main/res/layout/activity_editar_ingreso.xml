@@ -5,99 +5,243 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark">
+    android:background="@color/stitch_background">
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarEditarIngreso"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/bg_dark"
+        android:background="@color/stitch_background"
         android:elevation="0dp"
-        android:title="Editar Ingreso"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:titleTextColor="@color/text_on_dark"
-        app:navigationIconTint="@color/white" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ScrollView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingEnd="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBackEditarIngreso"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_stitch_card"
+                android:backgroundTint="#1AFFFFFF"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white"
+                android:contentDescription="Volver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Editar Ingreso"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="24dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/toolbarEditarIngreso"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarEditarIngreso">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <EditText
-                android:id="@+id/etDescripcion"
+            <!-- Form Card -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Descripción del ingreso"
-                android:background="@drawable/edittext_dark"
-                android:padding="16dp"
-                android:textColor="@color/text_on_dark"
-                android:textColorHint="@color/text_on_dark_muted"
-                android:layout_marginBottom="12dp"
-                android:inputType="textCapSentences"/>
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_menu"
+                android:padding="20dp">
 
-            <EditText
-                android:id="@+id/etMonto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Monto"
-                android:background="@drawable/edittext_dark"
-                android:padding="16dp"
-                android:textColor="@color/text_on_dark"
-                android:textColorHint="@color/text_on_dark_muted"
-                android:layout_marginBottom="12dp"
-                android:inputType="numberDecimal"/>
+                <!-- Header Icon -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp">
 
-            <EditText
-                android:id="@+id/etCategoria"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Categoría"
-                android:background="@drawable/edittext_dark"
-                android:padding="16dp"
-                android:textColor="@color/text_on_dark"
-                android:textColorHint="@color/text_on_dark_muted"
-                android:layout_marginBottom="20dp"
-                android:inputType="textCapWords"/>
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_edit"
+                        app:tint="@color/green_accent"
+                        android:contentDescription="Editar" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Modifica los datos de tu ingreso"
+                        android:textColor="@color/text_on_dark_muted"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0DFFFFFF"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Descripción -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_description"
+                        app:tint="@color/green_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Descripción"
+                        android:textColor="@color/stitch_text_muted"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="16dp"
+                    android:hint="Ej: Pago de freelance"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/text_on_dark_muted"
+                    android:textSize="15sp"
+                    android:inputType="textCapSentences"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Monto -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_attach_money"
+                        app:tint="@color/green_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Monto"
+                        android:textColor="@color/stitch_text_muted"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="16dp"
+                    android:hint="0.00"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/text_on_dark_muted"
+                    android:textSize="15sp"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Categoría -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_settings"
+                        app:tint="@color/green_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Categoría"
+                        android:textColor="@color/stitch_text_muted"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/spinnerCategoriaIngreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_spinner_dark"
+                    android:popupBackground="@color/stitch_card_bg"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+
+            <!-- Buttons -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnActualizar"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginTop="24dp"
                 android:text="Actualizar Ingreso"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/stitch_background"
                 app:backgroundTint="@color/green_accent"
-                app:cornerRadius="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"/>
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_check_circle"
+                app:iconGravity="textStart"
+                app:iconTint="@color/stitch_background"
+                app:iconSize="20dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancelar"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
                 android:text="Cancelar"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:textColor="@color/text_on_dark"
-                app:strokeColor="@color/green_accent"
+                android:textColor="@color/text_on_dark_muted"
+                app:strokeColor="@color/stitch_card_border"
                 app:strokeWidth="1dp"
-                app:backgroundTint="@color/bg_dark_card"
-                app:cornerRadius="12dp"/>
+                app:cornerRadius="16dp" />
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

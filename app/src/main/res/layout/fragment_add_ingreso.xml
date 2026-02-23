@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/stitch_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Selector de Tipo (Toggle) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_stitch_toggle_container"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:layout_marginBottom="24dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Fijar Presupuesto"
+                    android:textColor="@color/stitch_text_muted"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_stitch_card"
+                    android:backgroundTint="@color/stitch_background"
+                    android:gravity="center"
+                    android:text="Agregar Ingreso"
+                    android:textColor="@color/stitch_primary"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Monto Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MONTO"
+                android:textColor="@color/stitch_primary"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:letterSpacing="0.2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S/."
+                    android:textColor="@color/stitch_text_muted"
+                    android:textSize="28sp"
+                    android:layout_marginEnd="12dp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/addMonto_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="0.00"
+                    android:textColorHint="@color/stitch_text_muted"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
+                    android:textStyle="bold"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <!-- Categoría -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoría"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_stitch_card"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_wallet"
+                    app:tint="@color/stitch_primary"
+                    android:layout_marginEnd="12dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/addCategoria_et"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Seleccionar categoría"
+                    android:textColorHint="@color/stitch_text_muted"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:completionThreshold="1"
+                    android:dropDownVerticalOffset="8dp"
+                    android:popupBackground="@drawable/bg_dropdown_dark"
+                    android:inputType="none"
+                    android:focusable="false" />
+
+                <ImageView
+                    android:id="@+id/btnAddCategoriaIngreso"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/stitch_primary"
+                    android:padding="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Agregar categoría" />
+            </LinearLayout>
+
+            <!-- Nota/Descripción -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nota (Opcional)"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/addDescripcion_et"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_stitch_card"
+                android:hint="¿De dónde proviene este ingreso?"
+                android:textColorHint="@color/stitch_text_muted"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Fecha -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Calendario Estilizado -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stitch_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="32dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/btn_prev_month_ingreso"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_back"
+                        app:tint="@color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                    <TextView
+                        android:id="@+id/tvFechaIngreso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Octubre 2023"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/btn_next_month_ingreso"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_arrow_back"
+                        android:rotation="180"
+                        app:tint="@color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"/>
+                </RelativeLayout>
+
+                <GridLayout
+                    android:id="@+id/calendar_grid_ingreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="7">
+                    <TextView style="@style/CalendarDayLabel" android:text="D" />
+                    <TextView style="@style/CalendarDayLabel" android:text="L" />
+                    <TextView style="@style/CalendarDayLabel" android:text="M" />
+                    <TextView style="@style/CalendarDayLabel" android:text="M" />
+                    <TextView style="@style/CalendarDayLabel" android:text="J" />
+                    <TextView style="@style/CalendarDayLabel" android:text="V" />
+                    <TextView style="@style/CalendarDayLabel" android:text="S" />
+                    <!-- Los días se inflarán dinámicamente -->
+                </GridLayout>
+            </LinearLayout>
+
+            <!-- Boton Guardar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_btn"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Guardar Ingreso"
+                android:textColor="@color/stitch_background"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/stitch_primary"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_save"
+                app:iconGravity="textStart"
+                app:iconTint="@color/stitch_background" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerListaIngresos"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver lista de ingresos"
+                android:textColor="@color/stitch_primary"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

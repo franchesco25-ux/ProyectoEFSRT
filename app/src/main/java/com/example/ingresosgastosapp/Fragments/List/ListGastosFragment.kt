@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -32,7 +32,7 @@ class ListGastosFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list_gastos, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewGastos)
-        val btnVolver = view.findViewById<Button>(R.id.btnVolverMainGastos)
+        val btnVolver = view.findViewById<ImageButton>(R.id.btnVolverMainGastos)
         val fab = view.findViewById<FloatingActionButton>(R.id.floatingActionButtonGasto)
 
         mGastosViewModel = ViewModelProvider(this)[GastosViewModel::class.java]

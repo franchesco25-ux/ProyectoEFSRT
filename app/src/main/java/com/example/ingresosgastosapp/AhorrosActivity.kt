@@ -3,78 +3,85 @@ package com.example.ingresosgastosapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
-// import com.google.android.material.bottomnavigation.BottomNavigationView
-// import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ingresosgastosapp.Adapter.MetaAhorroAdapter
+import com.example.ingresosgastosapp.DataBase.AppDatabase
+import java.text.NumberFormat
+import java.util.Locale
 
 class AhorrosActivity : BaseActivity() {
+
+    private lateinit var adapter: MetaAhorroAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ahorros)
 
-        // 1. Inicializar Vistas
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+        }
+
         val btnCrearMeta = findViewById<TextView>(R.id.btn_crear_meta)
-        val imgProfile = findViewById<View>(R.id.img_profile_ahorros)
-        
-        // Tarjetas de metas
-        val cardEmergencia = findViewById<View>(R.id.card_meta_emergencia)
-        val cardViaje = findViewById<View>(R.id.card_meta_viaje)
+        val btnCrearMetaEmpty = findViewById<TextView>(R.id.btn_crear_meta_empty)
+        val rvMetas = findViewById<RecyclerView>(R.id.rv_metas)
+        val emptyState = findViewById<View>(R.id.empty_state)
+        val tvTotalAhorrado = findViewById<TextView>(R.id.tv_total_ahorrado)
+        val tvMetasCount = findViewById<TextView>(R.id.tv_metas_count)
 
-        // 2. Configurar Clics de Redirección
-        imgProfile?.setOnClickListener { abrirPerfil() }
+        // Bottom Nav
+        setupCustomBottomNav("ahorros")
 
-        val abrirEdicion = View.OnClickListener {
-            startActivity(Intent(this, EditarMetaActivity::class.java))
+        // Adapter
+        adapter = MetaAhorroAdapter { meta ->
+            val intent = Intent(this, EditarMetaActivity::class.java)
+            intent.putExtra("META_ID", meta.id)
+            startActivity(intent)
         }
+        rvMetas.layoutManager = LinearLayoutManager(this)
+        rvMetas.adapter = adapter
+        rvMetas.isNestedScrollingEnabled = false
 
-        cardEmergencia?.setOnClickListener(abrirEdicion)
-        cardViaje?.setOnClickListener(abrirEdicion)
+        // DB
+        val db = AppDatabase.getDatabase(this)
+        val dao = db.metaAhorroDao()
 
-        btnCrearMeta.setOnClickListener {
-            Toast.makeText(this, "Función para crear meta próximamente", Toast.LENGTH_SHORT).show()
-        }
+        // Observe
+        dao.getAllMetas().observe(this) { metas ->
+            adapter.submitList(metas)
 
-        val fabAdd = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab_add)
-        val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
-
-        fabAdd.setOnClickListener {
-            val bottomSheet = QuickActionsBottomSheet()
-            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
-        }
-
-        bottomNav.selectedItemId = R.id.nav_ahorros
-        bottomNav.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.nav_inicio -> {
-                    startActivity(Intent(this, MainMenuActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    finish()
-                    true
-                }
-                R.id.nav_presupuesto -> {
-                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    finish()
-                    true
-                }
-                R.id.nav_ahorros -> true
-                R.id.nav_perfil -> {
-                    abrirPerfil()
-                    overridePendingTransition(0, 0)
-                    finish()
-                    true
-                }
-                else -> false
+            // Update summary
+            val nf = NumberFormat.getNumberInstance(Locale.US).apply {
+                minimumFractionDigits = 2
+                maximumFractionDigits = 2
             }
+            val total = metas.sumOf { it.montoActual }
+            tvTotalAhorrado.text = "S/.${nf.format(total)}"
+
+            val activas = metas.count { !it.completada }
+            tvMetasCount.text = "$activas meta${if (activas != 1) "s" else ""} activa${if (activas != 1) "s" else ""}"
+
+            // Empty state
+            emptyState.visibility = if (metas.isEmpty()) View.VISIBLE else View.GONE
+            rvMetas.visibility = if (metas.isEmpty()) View.GONE else View.VISIBLE
         }
+
+        // Crear Meta
+        val crearMeta = View.OnClickListener {
+            val intent = Intent(this, EditarMetaActivity::class.java)
+            intent.putExtra("MODE", "CREATE")
+            startActivity(intent)
+        }
+        btnCrearMeta.setOnClickListener(crearMeta)
+        btnCrearMetaEmpty.setOnClickListener(crearMeta)
     }
 
-    private fun abrirPerfil() {
-        val intentProfile = Intent(this, PerfilActivity::class.java)
-        intentProfile.putExtra("NOMBRE_USUARIO", intent.getStringExtra("NOMBRE_USUARIO"))
-        intentProfile.putExtra("EMAIL_USUARIO", intent.getStringExtra("EMAIL_USUARIO"))
-        startActivity(intentProfile)
+    override fun onResume() {
+        super.onResume()
+        // RecyclerView auto-updates via LiveData, no manual refresh needed
     }
 }

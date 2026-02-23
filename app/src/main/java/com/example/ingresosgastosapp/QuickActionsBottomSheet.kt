@@ -43,7 +43,7 @@ class QuickActionsBottomSheet : BottomSheetDialogFragment() {
         }
 
         btnIngresoRapido.setOnClickListener {
-            startActivity(Intent(requireContext(), PruebaActivity::class.java))
+            startActivity(Intent(requireContext(), IngresosActivity::class.java))
             dismiss()
         }
 
