@@ -1,20 +1,52 @@
 package com.example.ingresosgastosapp
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
+import java.io.File
 
 class PerfilActivity : BaseActivity() {
 
     private lateinit var tvNombreUsuario: TextView
     private lateinit var tvEmailUsuario: TextView
     private lateinit var btnLogout: View
+    private lateinit var imgPerfil: ShapeableImageView
+
+    // Launcher para seleccionar imagen de la galería
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { selectedUri ->
+            // Copiar la imagen al almacenamiento interno para persistirla
+            val file = File(filesDir, "profile_photo.jpg")
+            try {
+                contentResolver.openInputStream(selectedUri)?.use { input ->
+                    file.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
+                loadProfilePhoto(file.absolutePath)
+                // Guardar la ruta en SharedPreferences
+                getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    .edit()
+                    .putString("PROFILE_PHOTO_PATH", file.absolutePath)
+                    .apply()
+                Toast.makeText(this, "Foto de perfil actualizada", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +62,25 @@ class PerfilActivity : BaseActivity() {
         tvNombreUsuario = findViewById(R.id.tvNombreUsuario)
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario)
         btnLogout = findViewById(R.id.btnLogout)
+        imgPerfil = findViewById(R.id.imgPerfil)
+
+        // Botón para cambiar foto de perfil
+        val btnCambiarFoto = findViewById<ImageButton>(R.id.btnCambiarFoto)
+        btnCambiarFoto.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
+
+        // Cargar foto de perfil guardada
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val photoPath = prefs.getString("PROFILE_PHOTO_PATH", null)
+        if (photoPath != null) {
+            loadProfilePhoto(photoPath)
+        }
 
         // Bottom Nav personalizado
         setupCustomBottomNav("ajustes")
 
         // 5. Cargar datos del usuario
-        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
         val touchIdPref = prefs.getBoolean("TOUCH_ID_ENABLED", false)
         val notifPref = prefs.getBoolean("NOTIFICACIONES_PUSH", true)
@@ -74,11 +119,13 @@ class PerfilActivity : BaseActivity() {
             val touchIdEnabled = p.getBoolean("TOUCH_ID_ENABLED", false)
             val lastEmail = p.getString("LAST_LOGGED_IN_EMAIL", null)
             val lang = p.getString("IDIOMA_APP", "Español")
+            val savedPhotoPath = p.getString("PROFILE_PHOTO_PATH", null)
 
             p.edit().clear()
                 .putBoolean("TOUCH_ID_ENABLED", touchIdEnabled)
                 .putString("LAST_LOGGED_IN_EMAIL", lastEmail)
                 .putString("IDIOMA_APP", lang)
+                .putString("PROFILE_PHOTO_PATH", savedPhotoPath)
                 .apply()
                 
             FirebaseAuth.getInstance().signOut()
@@ -88,6 +135,19 @@ class PerfilActivity : BaseActivity() {
             finish()
         }
 
+    }
+
+    private fun loadProfilePhoto(path: String) {
+        val file = File(path)
+        if (file.exists()) {
+            val bitmap = BitmapFactory.decodeFile(path)
+            if (bitmap != null) {
+                imgPerfil.setImageBitmap(bitmap)
+                imgPerfil.imageTintList = null
+                imgPerfil.setPadding(0, 0, 0, 0)
+                imgPerfil.contentPadding = 0
+            }
+        }
     }
 
     private fun setupOption(viewId: Int, iconId: Int, text: String, onClick: () -> Unit = {}) {
@@ -129,7 +189,6 @@ class PerfilActivity : BaseActivity() {
                 getSharedPreferences("user_prefs", MODE_PRIVATE).edit().putString("IDIOMA_APP", selectedLang).apply()
                 setupValue(R.id.rowLanguage, R.drawable.ic_history, "Idioma", selectedLang) {}
                 Toast.makeText(this, "Idioma cambiado a $selectedLang", Toast.LENGTH_SHORT).show()
-                // In a real app we would recreate() the activity to change the locale context
             }
             .setNegativeButton("Cancelar", null)
             .show()

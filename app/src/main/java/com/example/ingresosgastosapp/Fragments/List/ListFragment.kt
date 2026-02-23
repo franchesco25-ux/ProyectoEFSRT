@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.view.View as AndroidView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -32,7 +32,7 @@ class ListFragment : Fragment() {
 
         val verView = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        val btnVolver = view.findViewById<Button>(R.id.btnVolverMain)
+        val btnVolver = view.findViewById<AndroidView>(R.id.btnVolverMain)
 
         mIngresosViewModel = ViewModelProvider(this)[IngresosViewModel::class.java]
 

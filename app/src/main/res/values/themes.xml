@@ -3,9 +3,9 @@
         <item name="colorPrimary">@color/green_accent</item>
         <item name="colorPrimaryContainer">@color/bg_dark_card</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:statusBarColor">@color/bg_dark</item>
-        <item name="android:navigationBarColor">@color/bg_dark</item>
-        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/stitch_background</item>
+        <item name="android:navigationBarColor">@color/stitch_background</item>
+        <item name="android:windowBackground">@color/stitch_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="shapeAppearanceOverlay">@style/CircleImage</item>
     </style>

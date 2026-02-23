@@ -83,9 +83,11 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgPerfil"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:padding="4dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_person"
                         app:contentPadding="15dp"
                         app:strokeColor="@color/green_accent"
@@ -93,6 +95,18 @@
                         app:shapeAppearanceOverlay="@style/CircleImage"
                         android:background="#20FFFFFF"
                         app:tint="@color/text_on_dark_muted" />
+
+                    <ImageButton
+                        android:id="@+id/btnCambiarFoto"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="bottom|end"
+                        android:background="@drawable/bg_stitch_fab"
+                        android:src="@drawable/ic_camera"
+                        android:scaleType="centerInside"
+                        android:padding="6dp"
+                        app:tint="@color/stitch_background"
+                        android:contentDescription="Cambiar foto de perfil" />
                 </FrameLayout>
 
                 <TextView

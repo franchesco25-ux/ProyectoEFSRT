@@ -2,7 +2,6 @@ package com.example.ingresosgastosapp.Fragments.Add
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.TextUtils
@@ -22,10 +21,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
-import com.example.ingresosgastosapp.HistorialActivity
+
 import com.example.ingresosgastosapp.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,11 +88,9 @@ class AddFragment : Fragment() {
             updateCalendar()
         }
 
-        // Botón "Ver lista de ingresos" (opcional, puede no existir en nav)
+        // Botón "Ver lista de ingresos"
         view.findViewById<View?>(R.id.btnVerListaIngresos)?.setOnClickListener {
-            val intent = Intent(requireContext(), HistorialActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
 
         button.setOnClickListener {
@@ -118,11 +116,7 @@ class AddFragment : Fragment() {
 
                         withContext(Dispatchers.Main) {
                             Toast.makeText(requireContext(), "Ingreso agregado correctamente", Toast.LENGTH_SHORT).show()
-
-                            val intent = Intent(requireContext(), HistorialActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                            requireActivity().finish()
+                            findNavController().navigate(R.id.action_addFragment_to_listFragment)
                         }
                     }
                 } else {
