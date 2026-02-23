@@ -51,7 +51,8 @@
             android:exported="false" />
         <activity
             android:name=".HistorialActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".AgregarIngresoActivity"
             android:exported="false" />
@@ -60,10 +61,12 @@
             android:exported="false" />
         <activity
             android:name=".ResumenPresupuestoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".AhorrosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"

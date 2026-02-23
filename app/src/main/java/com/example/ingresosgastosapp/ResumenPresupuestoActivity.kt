@@ -17,23 +17,22 @@ class ResumenPresupuestoActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
 
-        /* 
-        // Lógica comentada temporalmente para evitar errores de compilación
-        // ya que la barra está comentada en el XML
-        
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_presupuesto)
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_presupuesto)
+        val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
+        val fabAdd = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab_add)
 
         bottomNav.selectedItemId = R.id.nav_presupuesto
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_inicio -> {
+                    startActivity(android.content.Intent(this, MainMenuActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 R.id.nav_presupuesto -> true
                 R.id.nav_ahorros -> {
                     startActivity(android.content.Intent(this, AhorrosActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
@@ -42,6 +41,7 @@ class ResumenPresupuestoActivity : BaseActivity() {
                     intent.putExtra("NOMBRE_USUARIO", getNombreUsuario())
                     intent.putExtra("EMAIL_USUARIO", getEmailUsuario())
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
@@ -50,9 +50,9 @@ class ResumenPresupuestoActivity : BaseActivity() {
         }
 
         fabAdd.setOnClickListener {
-            startActivity(android.content.Intent(this, GastosActivity::class.java))
+            val bottomSheet = QuickActionsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
-        */
 
         findViewById<android.view.View>(R.id.btn_revisar_planes).setOnClickListener {
             android.widget.Toast.makeText(this, "Revisar planes próximamente", android.widget.Toast.LENGTH_SHORT).show()

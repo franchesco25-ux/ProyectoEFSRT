@@ -29,8 +29,8 @@ class PerfilActivity : BaseActivity() {
         tvEmailUsuario = findViewById(R.id.tvEmailUsuario)
         btnBack = findViewById(R.id.btnBackPerfil)
         btnLogout = findViewById(R.id.btnLogout)
-        bottomNav = findViewById(R.id.bottom_navigation_perfil)
-        fabAdd = findViewById(R.id.fab_add_perfil)
+        bottomNav = findViewById(R.id.bottom_navigation)
+        fabAdd = findViewById(R.id.fab_add)
 
         // 5. Cargar datos del usuario
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
@@ -92,9 +92,24 @@ class PerfilActivity : BaseActivity() {
         bottomNav.selectedItemId = R.id.nav_perfil
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.nav_inicio -> { finish(); true }
-                R.id.nav_presupuesto -> { startActivity(Intent(this, ResumenPresupuestoActivity::class.java)); finish(); true }
-                R.id.nav_ahorros -> { startActivity(Intent(this, AhorrosActivity::class.java)); finish(); true }
+                R.id.nav_inicio -> {
+                    startActivity(Intent(this, MainMenuActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true 
+                }
+                R.id.nav_presupuesto -> { 
+                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true 
+                }
+                R.id.nav_ahorros -> { 
+                    startActivity(Intent(this, AhorrosActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true 
+                }
                 R.id.nav_perfil -> true
                 else -> false
             }

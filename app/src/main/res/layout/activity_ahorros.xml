@@ -284,44 +284,12 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Barra de Navegación Comentada
-    <RelativeLayout
-        android:id="@+id/bottom_nav_area"
-        android:layout_width="match_parent"
+    <include 
+        layout="@layout/layout_bottom_navigation"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@color/stitch_background"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_ahorros"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_stitch_card"
-            app:itemIconTint="@color/nav_item_selector"
-            app:itemTextColor="@color/nav_item_selector"
-            app:itemRippleColor="@android:color/transparent"
-            app:itemActiveIndicatorStyle="@null"
-            app:menu="@menu/bottom_nav_menu"
-            app:labelVisibilityMode="labeled"
-            app:elevation="8dp"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_ahorros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_add"
-            app:backgroundTint="@color/stitch_primary"
-            app:tint="@color/stitch_background"
-            app:fabSize="normal"
-            app:elevation="12dp"
-            app:borderWidth="0dp"
-            app:maxImageSize="32dp"/>
-    </RelativeLayout>
-    -->
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

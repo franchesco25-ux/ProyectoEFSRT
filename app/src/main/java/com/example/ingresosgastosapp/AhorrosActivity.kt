@@ -36,39 +36,39 @@ class AhorrosActivity : BaseActivity() {
             Toast.makeText(this, "Función para crear meta próximamente", Toast.LENGTH_SHORT).show()
         }
 
-        /*
-        // Lógica de navegación comentada para evitar errores
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_ahorros)
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_ahorros)
+        val fabAdd = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab_add)
+        val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
 
         fabAdd.setOnClickListener {
-            startActivity(Intent(this, GastosActivity::class.java))
+            val bottomSheet = QuickActionsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
 
         bottomNav.selectedItemId = R.id.nav_ahorros
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_inicio -> {
+                    startActivity(Intent(this, MainMenuActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 R.id.nav_presupuesto -> {
-                    val intent = Intent(this, ResumenPresupuestoActivity::class.java)
-                    intent.putExtras(this.intent)
-                    startActivity(intent)
+                    startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 R.id.nav_ahorros -> true
                 R.id.nav_perfil -> {
                     abrirPerfil()
+                    overridePendingTransition(0, 0)
                     finish()
                     true
                 }
                 else -> false
             }
         }
-        */
     }
 
     private fun abrirPerfil() {

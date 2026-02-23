@@ -71,7 +71,7 @@ class MainMenuActivity : BaseActivity() {
             val bottomSheet = QuickActionsBottomSheet()
             bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
-        btnHistorial.setOnClickListener { startActivity(Intent(this, HistorialGastosActivity::class.java)) }
+        btnHistorial.setOnClickListener { startActivity(Intent(this, HistorialActivity::class.java)) }
 
         // REDIRECCIONES DE ACCESO RÁPIDO
         btnMetas.setOnClickListener { startActivity(Intent(this, AhorrosActivity::class.java)) }
@@ -79,19 +79,23 @@ class MainMenuActivity : BaseActivity() {
         btnAnalisis.setOnClickListener { startActivity(Intent(this, HistorialGastosActivity::class.java)) }
 
         // 5. Listener de la barra de navegación inferior
+        bottomNav.selectedItemId = R.id.nav_inicio
         bottomNav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_inicio -> true
                 R.id.nav_presupuesto -> {
                     startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.nav_ahorros -> {
                     startActivity(Intent(this, AhorrosActivity::class.java))
+                    overridePendingTransition(0, 0)
                     true
                 }
                 R.id.nav_perfil -> {
                     abrirPerfil()
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

@@ -333,40 +333,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Bottom Navigation with Central FAB -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="bottom">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="16dp"
-                android:background="@drawable/bg_stitch_card"
-                app:backgroundTint="#E6102216"
-                app:itemIconTint="@color/stitch_primary"
-                app:itemTextColor="@color/white"
-                app:menu="@menu/bottom_nav_menu"
-                app:labelVisibilityMode="labeled"
-                app:elevation="8dp"/>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
-                android:src="@drawable/ic_add"
-                app:backgroundTint="@color/danger_red"
-                app:tint="@color/white"
-                app:fabSize="normal"
-                app:elevation="12dp"
-                app:borderWidth="0dp"/>
-        </RelativeLayout>
+        <include layout="@layout/layout_bottom_navigation"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
