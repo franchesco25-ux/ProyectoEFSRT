@@ -28,6 +28,10 @@
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
+            android:name=".AgregarMetaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
             android:name=".GestionarAhorrosActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
