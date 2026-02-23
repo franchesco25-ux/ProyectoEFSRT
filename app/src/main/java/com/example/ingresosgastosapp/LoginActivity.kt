@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
@@ -17,14 +18,27 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Scroll al campo enfocado cuando el teclado aparece
+        val contentFrame = findViewById<android.view.ViewGroup>(android.R.id.content)
+        val scrollView = contentFrame.getChildAt(0) as? ScrollView
+        fun scrollToFocused(view: android.view.View) {
+            scrollView?.postDelayed({
+                scrollView.smoothScrollTo(0, view.bottom + 200)
+            }, 300)
+        }
+
         val btnIngresar = findViewById<Button>(R.id.btnIngresar)
         val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
         val edtCorreo = findViewById<EditText>(R.id.edtCorreo)
         val edtClave = findViewById<EditText>(R.id.edtClave)
 
-        val db = AppDatabase.getDatabase(this)
-
         // TextInputLayout handles password toggle animation automatically
+
+        // Scroll al campo enfocado cuando el teclado aparece
+        edtCorreo.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtClave.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+
+        val db = AppDatabase.getDatabase(this)
 
         btnIngresar.setOnClickListener {
             val correo = edtCorreo.text.toString().trim()

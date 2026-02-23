@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        // Scroll al campo enfocado cuando el teclado aparece
+        val contentFrame = findViewById<android.view.ViewGroup>(android.R.id.content)
+        val scrollView = contentFrame.getChildAt(0) as? ScrollView
+        fun scrollToFocused(view: android.view.View) {
+            scrollView?.postDelayed({
+                scrollView.smoothScrollTo(0, view.bottom + 200)
+            }, 300)
+        }
+
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
         val imgAtras = findViewById<ImageButton>(R.id.imgAtras)
         val txtLogin = findViewById<TextView>(R.id.txtLogin)
@@ -26,6 +36,12 @@ class RegisterActivity : AppCompatActivity() {
         val edtCorreoReg = findViewById<EditText>(R.id.edtCorreoReg)
         val edtPais = findViewById<EditText>(R.id.edtPais)
         val edtClaveReg = findViewById<EditText>(R.id.edtClaveReg)
+
+        // Scroll al campo enfocado
+        edtNombre.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtPais.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtCorreoReg.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
+        edtClaveReg.setOnFocusChangeListener { v, hasFocus -> if (hasFocus) scrollToFocused(v) }
 
         val db = AppDatabase.getDatabase(this)
 
