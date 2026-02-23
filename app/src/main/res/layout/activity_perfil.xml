@@ -16,124 +16,152 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <!-- Header Toolbar Mockup -->
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbarPerfil"
+            <!-- Title Bar -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/bg_dark"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:navigationIconTint="@color/white">
+                android:paddingHorizontal="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Perfil"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btnSettings"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_settings"
+                <ImageView
+                    android:id="@+id/btnBackPerfil"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_back"
                     app:tint="@color/white" />
-            </com.google.android.material.appbar.MaterialToolbar>
+            </RelativeLayout>
 
+            <!-- Profile Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="20dp">
 
-                <!-- Avatar Section -->
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_height="wrap_content">
 
-                    <View
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@drawable/bg_profile_avatar" />
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
+                        android:padding="4dp"
                         android:src="@drawable/ic_person"
+                        app:contentPadding="15dp"
+                        app:strokeColor="@color/green_accent"
+                        app:strokeWidth="2dp"
+                        app:shapeAppearanceOverlay="@style/CircleImage"
+                        android:background="#20FFFFFF"
                         app:tint="@color/text_on_dark_muted" />
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginBottom="2dp">
-
-                        <View
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/bg_badge_camera" />
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="@color/bg_dark" />
-                    </FrameLayout>
                 </FrameLayout>
 
                 <TextView
                     android:id="@+id/tvNombreUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Alejandro García"
+                    android:layout_marginTop="12dp"
+                    android:text="Nombre Usuario"
                     android:textColor="@color/white"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEmailUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="alejandro.garcia@email.com"
+                    android:text="usuario@correo.com"
                     android:textColor="@color/text_on_dark_muted"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp" />
+            </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPlan"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minHeight="32dp"
-                    android:text="PLAN PREMIUM"
-                    android:textColor="@color/green_accent"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="20dp"
-                    app:strokeColor="@color/green_accent"
-                    app:strokeWidth="1dp" />
+            <!-- Sections Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
 
-                <!-- Support Section -->
+                <!-- CUENTA Y SEGURIDAD -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:layout_marginBottom="12dp"
-                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="16dp"
+                    android:text="CUENTA Y SEGURIDAD"
+                    android:textColor="@color/text_on_dark_muted"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card_menu"
+                    android:paddingVertical="8dp"
+                    android:orientation="vertical">
+
+                    <include 
+                        layout="@layout/item_profile_option" 
+                        android:id="@+id/rowChangePass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
+                    <include 
+                        layout="@layout/item_profile_switch" 
+                        android:id="@+id/rowFaceId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!-- PREFERENCIAS -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="PREFERENCIAS"
+                    android:textColor="@color/text_on_dark_muted"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card_menu"
+                    android:paddingVertical="8dp"
+                    android:orientation="vertical">
+
+                    <include 
+                        layout="@layout/item_profile_value" 
+                        android:id="@+id/rowCurrency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
+                    <include 
+                        layout="@layout/item_profile_switch" 
+                        android:id="@+id/rowNotifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#0DFFFFFF" />
+                    <include 
+                        layout="@layout/item_profile_value" 
+                        android:id="@+id/rowLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!-- AYUDA Y SOPORTE -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="16dp"
                     android:text="AYUDA Y SOPORTE"
                     android:textColor="@color/text_on_dark_muted"
                     android:textSize="12sp"
@@ -143,88 +171,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_menu"
+                    android:paddingVertical="8dp"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/btnAyuda"
+                    <include 
+                        layout="@layout/item_profile_option" 
+                        android:id="@+id/rowPrivacy"
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp">
+                        android:layout_height="wrap_content" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@android:drawable/ic_menu_help"
-                            app:tint="@color/green_accent" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Centro de Ayuda"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_more"
-                            android:rotation="270"
-                            app:tint="@color/text_on_dark_muted" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#0DFFFFFF" />
-
-                    <LinearLayout
-                        android:id="@+id/btnTerminos"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@android:drawable/ic_menu_info_details"
-                            app:tint="@color/green_accent" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Términos y Privacidad"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_more"
-                            android:rotation="270"
-                            app:tint="@color/text_on_dark_muted" />
-                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- Logout Button -->
+                <!-- Logout -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
                     android:backgroundTint="@color/bg_dark_card"
                     android:text="Cerrar Sesión"
                     android:textColor="@color/danger_red"
@@ -237,9 +201,10 @@
                     app:strokeWidth="1dp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
                     android:text="Versión 2.4.0 (Build 892)"
                     android:textColor="@color/text_on_dark_muted"
                     android:textSize="10sp" />
@@ -248,7 +213,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation with Central FAB (Copiado de MainMenu) -->
+    <!-- Bottom Navigation -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -257,11 +222,11 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_perfil"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             android:background="@drawable/bg_stitch_card"
-            app:backgroundTint="#E6102216"
+            app:backgroundTint="#FA102216"
             app:itemIconTint="@color/stitch_primary"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_nav_menu"
@@ -274,10 +239,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="2dp"
             android:src="@drawable/ic_add"
-            app:backgroundTint="@color/danger_red"
-            app:tint="@color/white"
+            app:backgroundTint="@color/green_accent"
+            app:tint="@color/bg_dark"
             app:fabSize="normal"
             app:elevation="12dp"
             app:borderWidth="0dp"/>

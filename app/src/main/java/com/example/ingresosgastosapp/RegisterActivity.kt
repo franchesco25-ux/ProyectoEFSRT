@@ -24,25 +24,62 @@ class RegisterActivity : AppCompatActivity() {
         
         val edtNombre = findViewById<EditText>(R.id.edtNombre)
         val edtCorreoReg = findViewById<EditText>(R.id.edtCorreoReg)
+        val edtPais = findViewById<EditText>(R.id.edtPais)
         val edtClaveReg = findViewById<EditText>(R.id.edtClaveReg)
 
         val db = AppDatabase.getDatabase(this)
 
+        var isPasswordVisible = false
+        edtClaveReg.setOnTouchListener { _, event ->
+            val DRAWABLE_RIGHT = 2
+            if (event.action == android.view.MotionEvent.ACTION_UP) {
+                val drawable = edtClaveReg.compoundDrawables[DRAWABLE_RIGHT]
+                if (drawable != null && event.rawX >= (edtClaveReg.right - drawable.bounds.width() - edtClaveReg.paddingRight)) {
+                    isPasswordVisible = !isPasswordVisible
+                    if (isPasswordVisible) {
+                        edtClaveReg.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
+                    } else {
+                        edtClaveReg.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+                    }
+                    edtClaveReg.setSelection(edtClaveReg.text.length)
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+
         btnRegistrar.setOnClickListener {
              val nombre = edtNombre.text.toString().trim()
+             val pais = edtPais.text.toString().trim()
              val correo = edtCorreoReg.text.toString().trim()
              val clave = edtClaveReg.text.toString().trim()
 
-             if (nombre.isNotEmpty() && correo.isNotEmpty() && clave.isNotEmpty()) {
+             if (nombre.isNotEmpty() && pais.isNotEmpty() && correo.isNotEmpty() && clave.isNotEmpty()) {
                  lifecycleScope.launch {
                      val usuarioExistente = db.userDao().getUserByEmail(correo)
                      if (usuarioExistente != null) {
                          Toast.makeText(this@RegisterActivity, "El correo ya está registrado", Toast.LENGTH_SHORT).show()
                      } else {
-                         val nuevoUsuario = User(nombre = nombre, email = correo, password = clave)
+                         val moneda = when (pais.lowercase()) {
+                             "peru", "perú" -> "PEN (S/)"
+                             "mexico", "méxico" -> "MXN ($)"
+                             "colombia" -> "COP ($)"
+                             "chile" -> "CLP ($)"
+                             "argentina" -> "ARS ($)"
+                             "españa", "espana" -> "EUR (€)"
+                             "estados unidos", "usa", "eeuu", "us" -> "USD ($)"
+                             else -> "USD ($)"
+                         }
+                         val nuevoUsuario = User(nombre = nombre, email = correo, password = clave, pais = pais, moneda = moneda)
                          db.userDao().insertUser(nuevoUsuario)
+
+                         // Resetear datos financieros para el nuevo usuario
+                         db.ingresosDao().deleteAllIngresos()
+                         db.gastosDao().deleteAllGastos()
+                         db.balanceDao().insertBalance(com.example.ingresosgastosapp.Data.Balance(id = 1, total = 0.0))
+
                          Toast.makeText(this@RegisterActivity, "Cuenta creada exitosamente!", Toast.LENGTH_SHORT).show()
-                         
+                          
                          val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                          intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK 
                          startActivity(intent)

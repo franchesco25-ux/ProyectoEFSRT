@@ -26,6 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -82,7 +83,7 @@ class addGastos : Fragment() {
             if (!TextUtils.isEmpty(montoStr) && !TextUtils.isEmpty(categoria)) {
                 val monto = montoStr.toDoubleOrNull()
                 if (monto != null && monto > 0) {
-                    val fechaGasto = selectedDate.atStartOfDay().toString()
+                    val fechaGasto = selectedDate.atTime(LocalTime.now()).toString()
                     val gasto = Gastos(0, descripcion.ifBlank { categoria }, monto, categoria, fechaGasto)
 
                     viewLifecycleOwner.lifecycleScope.launch {

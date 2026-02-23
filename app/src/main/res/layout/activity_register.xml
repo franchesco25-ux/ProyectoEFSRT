@@ -82,6 +82,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:text="País"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtPais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Ej. Perú, México..."
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="#64748B" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Correo Electrónico"
             android:textColor="@color/white"
             android:textStyle="bold" />
@@ -114,7 +133,9 @@
             android:inputType="textPassword"
             android:layout_marginBottom="24dp"
             android:textColor="@color/white"
-            android:textColorHint="#64748B" />
+            android:textColorHint="#64748B"
+            android:drawableEnd="@android:drawable/ic_menu_view"
+            android:drawableTint="#64748B" />
 
         <Button
             android:id="@+id/btnRegistrar"

@@ -178,7 +178,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro de Ingresos"
+                android:text="Ingresos"
                 android:textColor="@color/text_on_dark"
                 android:textSize="15sp"
                 android:layout_marginStart="20dp" />
@@ -205,7 +205,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro de Gastos"
+                android:text="Gastos"
                 android:textColor="@color/text_on_dark"
                 android:textSize="15sp"
                 android:layout_marginStart="20dp" />

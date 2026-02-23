@@ -10,6 +10,8 @@ import com.example.ingresosgastosapp.Data.TipoTransaccion
 import com.example.ingresosgastosapp.Data.TransaccionItem
 import com.example.ingresosgastosapp.R
 import com.google.android.material.button.MaterialButton
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HistorialAdapter(
     private val onEditClick: (TransaccionItem) -> Unit,
@@ -41,7 +43,7 @@ class HistorialAdapter(
 
         holder.tvDescripcion.text = transaccion.descripcion
         holder.tvCategoria.text = transaccion.categoria
-        holder.tvFecha.text = transaccion.fecha
+        holder.tvFecha.text = formatFecha(transaccion.fecha)
 
         // Configurar colores según el tipo
         when (transaccion.tipo) {
@@ -69,7 +71,34 @@ class HistorialAdapter(
     }
 
     fun setData(nuevasTransacciones: List<TransaccionItem>) {
-        this.transacciones = nuevasTransacciones.sortedByDescending { it.fecha }
+        this.transacciones = nuevasTransacciones.sortedByDescending { item ->
+            try {
+                val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+                sdf.parse(item.fecha)?.time ?: 0L
+            } catch (e: Exception) {
+                try {
+                    val sdf2 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    sdf2.parse(item.fecha)?.time ?: 0L
+                } catch (e2: Exception) {
+                    0L
+                }
+            }
+        }
         notifyDataSetChanged()
+    }
+
+    private fun formatFecha(fecha: String): String {
+        return try {
+            val inputFormat = if (fecha.contains("T")) {
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+            } else {
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            }
+            val date = inputFormat.parse(fecha)
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            outputFormat.format(date!!)
+        } catch (e: Exception) {
+            fecha
+        }
     }
 }

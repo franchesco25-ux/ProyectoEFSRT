@@ -13,5 +13,9 @@ data class User(
     @ColumnInfo(name = "email")
     val email: String,
     @ColumnInfo(name = "password")
-    val password: String
+    val password: String,
+    @ColumnInfo(name = "pais")
+    val pais: String = "",
+    @ColumnInfo(name = "moneda")
+    val moneda: String = "USD ($)"
 )

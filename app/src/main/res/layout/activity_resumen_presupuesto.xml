@@ -48,7 +48,7 @@
                     android:id="@+id/tv_saldo_restante"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S/ 400.00"
+                    android:text="S/ 0.00"
                     android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold"
@@ -88,7 +88,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="¡Atención! Has superado el 80% de tu presupuesto. Te quedan S/ 400.00 para el mes."
+                            android:text="Has usado el 0% de tu presupuesto. Te quedan S/ 0.00 para el mes."
                             android:textColor="@color/white"
                             android:layout_marginTop="8dp" />
                         <com.google.android.material.button.MaterialButton
@@ -126,7 +126,7 @@
                             android:id="@+id/tv_gasto_mensual"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="S/ 2,100.00"
+                            android:text="S/ 0.00"
                             android:textColor="@color/white"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -135,7 +135,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             android:layout_marginTop="8dp"
-                            android:progress="84"
+                            android:progress="0"
                             android:progressDrawable="@drawable/progress_bar_green" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -169,7 +169,7 @@
                                 android:id="@+id/tv_ahorrado"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="S/ 340.50"
+                                android:text="S/ 0.00"
                                 android:textColor="@color/white"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -198,7 +198,7 @@
                                 android:id="@+id/tv_promedio_diario"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="S/ 67.74"
+                                android:text="S/ 0.00"
                                 android:textColor="@color/white"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />

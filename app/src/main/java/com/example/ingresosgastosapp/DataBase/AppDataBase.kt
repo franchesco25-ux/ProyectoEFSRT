@@ -15,7 +15,7 @@ import android.content.Context
 
 @Database(
     entities = [Ingresos::class, Gastos::class, Balance::class, User::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

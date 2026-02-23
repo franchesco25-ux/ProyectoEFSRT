@@ -380,8 +380,5 @@ class HistorialGastosActivity : BaseActivity() {
             if (balanceCalculado >= 0) android.graphics.Color.parseColor("#28A745")
             else android.graphics.Color.parseColor("#DC3545")
         )
-        lifecycleScope.launch(Dispatchers.IO) {
-            balanceViewModel.updateBalance(balanceCalculado)
-        }
     }
 }

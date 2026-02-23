@@ -96,7 +96,7 @@
                     android:id="@+id/tv_total_ahorrado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$12,450.00"
+                    android:text="$0.00"
                     android:textColor="@color/white"
                     android:textSize="38sp"
                     android:textStyle="bold"
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="↗ +5.2%"
+                    android:text="↗ +0%"
                     android:textColor="@color/stitch_primary"
                     android:textStyle="bold"
                     android:textSize="14sp"
@@ -213,7 +213,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
                         android:layout_marginTop="40dp"
-                        android:progress="65"
+                        android:progress="0"
                         android:progressDrawable="@drawable/progress_bar_green"
                         app:layout_constraintTop_toBottomOf="@id/icon_bg_1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -274,7 +274,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
                         android:layout_marginTop="40dp"
-                        android:progress="30"
+                        android:progress="0"
                         android:progressDrawable="@drawable/progress_bar_green"
                         app:layout_constraintTop_toBottomOf="@id/icon_bg_2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
