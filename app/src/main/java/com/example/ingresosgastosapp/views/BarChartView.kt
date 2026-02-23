@@ -21,7 +21,7 @@ class BarChartView @JvmOverloads constructor(
         color = Color.parseColor("#0df259")
     }
     private val barPaint2 = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#3b82f6")
+        color = Color.parseColor("#ef4444")
     }
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.parseColor("#66FFFFFF")
@@ -114,7 +114,7 @@ class BarChartView @JvmOverloads constructor(
         canvas.drawText(legend1.uppercase(), legendCenterX - 108f, legendY, legendPaint)
 
         // Legend 2
-        dotPaint.color = Color.parseColor("#3b82f6")
+        dotPaint.color = Color.parseColor("#ef4444")
         canvas.drawCircle(legendCenterX + 30f, legendY - 8f, dotRadius, dotPaint)
         canvas.drawText(legend2.uppercase(), legendCenterX + 42f, legendY, legendPaint)
     }

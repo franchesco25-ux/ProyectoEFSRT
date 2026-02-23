@@ -1,12 +1,15 @@
 package com.example.ingresosgastosapp
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import com.example.ingresosgastosapp.Data.*
+import com.example.ingresosgastosapp.DataBase.AppDatabase
 import com.example.ingresosgastosapp.views.BarChartView
 import com.example.ingresosgastosapp.views.PieChartView
 import java.text.SimpleDateFormat
@@ -22,6 +25,8 @@ class AnalisisActivity : BaseActivity() {
     private lateinit var barChart: BarChartView
     private lateinit var layoutPieLegend: LinearLayout
     private lateinit var tvAlertaMsg: TextView
+    private lateinit var llMetasAnalisis: LinearLayout
+    private lateinit var tvSinMetasAnalisis: TextView
 
     private var todosLosGastos = listOf<Gastos>()
     private var todosLosIngresos = listOf<Ingresos>()
@@ -36,6 +41,8 @@ class AnalisisActivity : BaseActivity() {
         barChart = findViewById(R.id.barChart)
         layoutPieLegend = findViewById(R.id.layoutPieLegend)
         tvAlertaMsg = findViewById(R.id.tvAlertaMsg)
+        llMetasAnalisis = findViewById(R.id.ll_metas_analisis)
+        tvSinMetasAnalisis = findViewById(R.id.tvSinMetasAnalisis)
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         val btnVerDetalles = findViewById<TextView>(R.id.btnVerDetalles)
 
@@ -64,6 +71,137 @@ class AnalisisActivity : BaseActivity() {
         btnVerDetalles.setOnClickListener {
             startActivity(Intent(this, AhorrosActivity::class.java))
         }
+
+        // Load Metas de Ahorro
+        cargarMetasAhorro()
+    }
+
+    private fun cargarMetasAhorro() {
+        val dao = AppDatabase.getDatabase(this).metaAhorroDao()
+        dao.getAllMetas().observe(this) { metas ->
+            llMetasAnalisis.removeAllViews()
+
+            if (metas.isNullOrEmpty()) {
+                tvSinMetasAnalisis.visibility = View.VISIBLE
+                return@observe
+            }
+
+            tvSinMetasAnalisis.visibility = View.GONE
+
+            for (meta in metas) {
+                val card = crearMetaCard(meta)
+                llMetasAnalisis.addView(card)
+            }
+        }
+    }
+
+    private fun crearMetaCard(meta: MetaAhorro): LinearLayout {
+        val card = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dp(20), dp(16), dp(20), dp(16))
+            background = getDrawable(R.drawable.bg_stitch_card)
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { bottomMargin = dp(8) }
+        }
+
+        // Icon container
+        val iconFrame = FrameLayout(this).apply {
+            layoutParams = LinearLayout.LayoutParams(dp(48), dp(48))
+            background = getDrawable(R.drawable.bg_stitch_card)
+            try {
+                backgroundTintList = ColorStateList.valueOf(
+                    Color.argb(26,
+                        Color.red(Color.parseColor(meta.color)),
+                        Color.green(Color.parseColor(meta.color)),
+                        Color.blue(Color.parseColor(meta.color)))
+                )
+            } catch (_: Exception) {
+                backgroundTintList = ColorStateList.valueOf(Color.parseColor("#1A0DF259"))
+            }
+        }
+
+        val iconView = ImageView(this).apply {
+            layoutParams = FrameLayout.LayoutParams(dp(24), dp(24), Gravity.CENTER)
+            val resId = resources.getIdentifier(meta.icono, "drawable", packageName)
+            setImageResource(if (resId != 0) resId else R.drawable.ic_goal)
+            try {
+                imageTintList = ColorStateList.valueOf(Color.parseColor(meta.color))
+            } catch (_: Exception) {
+                imageTintList = ColorStateList.valueOf(Color.parseColor("#0DF259"))
+            }
+        }
+        iconFrame.addView(iconView)
+        card.addView(iconFrame)
+
+        // Text section (name + meta value)
+        val textSection = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                marginStart = dp(14)
+            }
+        }
+
+        val tvName = TextView(this).apply {
+            text = meta.nombre
+            setTextColor(Color.WHITE)
+            textSize = 15f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+        }
+
+        val tvMeta = TextView(this).apply {
+            text = "Meta: $currencySymbol${String.format("%.2f", meta.montoObjetivo)}"
+            setTextColor(Color.parseColor("#66FFFFFF"))
+            textSize = 12f
+        }
+
+        textSection.addView(tvName)
+        textSection.addView(tvMeta)
+        card.addView(textSection)
+
+        // Right side (total + percentage)
+        val rightSection = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.END
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+        val tvTotal = TextView(this).apply {
+            text = "$currencySymbol${String.format("%.2f", meta.montoActual)}"
+            setTextColor(Color.WHITE)
+            textSize = 15f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+        }
+
+        val pct = if (meta.montoObjetivo > 0) {
+            ((meta.montoActual / meta.montoObjetivo) * 100).toInt().coerceAtMost(100)
+        } else 0
+
+        val tvPct = TextView(this).apply {
+            text = "$pct% completado"
+            try {
+                setTextColor(Color.parseColor(meta.color))
+            } catch (_: Exception) {
+                setTextColor(Color.parseColor("#0DF259"))
+            }
+            textSize = 10f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+        }
+
+        rightSection.addView(tvTotal)
+        rightSection.addView(tvPct)
+        card.addView(rightSection)
+
+        return card
+    }
+
+    private fun dp(value: Int): Int {
+        return (value * resources.displayMetrics.density).toInt()
     }
 
     private fun actualizarPieChart() {
