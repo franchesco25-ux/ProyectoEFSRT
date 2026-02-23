@@ -58,7 +58,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -295,37 +294,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Bottom Navigation Adaptada al Modelo -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_metas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/stitch_background"
-        app:backgroundTint="@null"
-        app:elevation="0dp"
-        app:itemIconTint="@color/stitch_text_muted"
-        app:itemTextColor="@color/stitch_text_muted"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
-    <!-- FAB Central Verde Neón -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_metas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/stitch_primary"
-        app:borderWidth="0dp"
-        app:elevation="12dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_metas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottom_navigation_metas"
-        app:tint="@color/stitch_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
