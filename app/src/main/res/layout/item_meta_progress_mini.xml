@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stitch_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp">
+
+    <FrameLayout
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_stitch_card"
+        android:backgroundTint="#1A0DF259">
+
+        <View
+            android:id="@+id/mini_icon_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_stitch_card"
+            android:backgroundTint="#1A0DF259" />
+
+        <ImageView
+            android:id="@+id/iv_mini_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_goal"
+            app:tint="@color/stitch_primary" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_mini_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meta"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/tv_mini_porcentaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="0%"
+                android:textColor="@color/stitch_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_mini_monto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S/.0.00 / S/.0.00"
+            android:textColor="#66FFFFFF"
+            android:textSize="11sp"
+            android:layout_marginTop="2dp" />
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:id="@+id/mini_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_bar_green" />
+    </LinearLayout>
+</LinearLayout>

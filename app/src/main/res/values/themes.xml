@@ -26,4 +26,29 @@
     <style name="CircleImage">
         <item name="cornerSize">50%</item>
     </style>
+
+    <!-- DatePicker dark theme -->
+    <style name="DatePickerTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorPrimary">@color/stitch_primary</item>
+        <item name="android:windowBackground">@color/stitch_background</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">#B3FFFFFF</item>
+    </style>
+
+    <!-- AlertDialog dark theme -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@color/stitch_background</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/stitch_primary</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogPositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogNegativeButton</item>
+    </style>
+
+    <style name="AlertDialogPositiveButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#EF4444</item>
+    </style>
+
+    <style name="AlertDialogNegativeButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#B3FFFFFF</item>
+    </style>
 </resources>

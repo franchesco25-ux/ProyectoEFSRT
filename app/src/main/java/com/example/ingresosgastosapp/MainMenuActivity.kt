@@ -1,9 +1,15 @@
 package com.example.ingresosgastosapp
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +21,12 @@ import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
+import com.example.ingresosgastosapp.Data.MetaAhorro
+import com.example.ingresosgastosapp.DataBase.AppDatabase
 import com.google.android.material.imageview.ShapeableImageView
 import java.io.File
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class MainMenuActivity : BaseActivity() {
@@ -36,6 +46,10 @@ class MainMenuActivity : BaseActivity() {
     private val transaccionesAdapter = TransaccionRecienteAdapter()
     private var listaGastos = listOf<Gastos>()
     private var listaIngresos = listOf<Ingresos>()
+
+    // Metas de ahorro
+    private lateinit var llMetasProgress: LinearLayout
+    private lateinit var tvSinMetasMain: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,7 +119,19 @@ class MainMenuActivity : BaseActivity() {
         btnPresupuesto.setOnClickListener { startActivity(Intent(this, ResumenPresupuestoActivity::class.java)) }
         btnAnalisis.setOnClickListener { startActivity(Intent(this, AnalisisActivity::class.java)) }
 
+        // 5. Metas de Ahorro - Top 3 Progress
+        llMetasProgress = findViewById(R.id.ll_metas_progress)
+        tvSinMetasMain = findViewById(R.id.tv_sin_metas_main)
 
+        val tvVerTodoAhorro = findViewById<TextView>(R.id.tv_ver_todo_ahorro)
+        tvVerTodoAhorro.setOnClickListener {
+            startActivity(Intent(this, AhorrosActivity::class.java))
+        }
+
+        val metaDao = AppDatabase.getDatabase(this).metaAhorroDao()
+        metaDao.getTopMetas(3).observe(this) { metas ->
+            cargarMetasEnDashboard(metas)
+        }
 
         // 6. Últimas Transacciones
         rvTransacciones = findViewById(R.id.rvTransaccionesRecientes)
@@ -126,6 +152,68 @@ class MainMenuActivity : BaseActivity() {
         ingresosViewModel.readAllData.observe(this) { ingresos ->
             listaIngresos = ingresos
             actualizarTransaccionesRecientes()
+        }
+    }
+
+    private fun cargarMetasEnDashboard(metas: List<MetaAhorro>) {
+        llMetasProgress.removeAllViews()
+
+        if (metas.isEmpty()) {
+            tvSinMetasMain.visibility = View.VISIBLE
+            llMetasProgress.visibility = View.GONE
+            return
+        }
+
+        tvSinMetasMain.visibility = View.GONE
+        llMetasProgress.visibility = View.VISIBLE
+
+        val nf = NumberFormat.getNumberInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        }
+
+        for (meta in metas) {
+            val cardView = LayoutInflater.from(this).inflate(R.layout.item_meta_progress_mini, llMetasProgress, false)
+
+            val ivIcon = cardView.findViewById<ImageView>(R.id.iv_mini_icon)
+            val iconBg = cardView.findViewById<View>(R.id.mini_icon_bg)
+            val tvNombre = cardView.findViewById<TextView>(R.id.tv_mini_nombre)
+            val tvMonto = cardView.findViewById<TextView>(R.id.tv_mini_monto)
+            val tvPorcentaje = cardView.findViewById<TextView>(R.id.tv_mini_porcentaje)
+            val progressBar = cardView.findViewById<ProgressBar>(R.id.mini_progress_bar)
+
+            tvNombre.text = meta.nombre
+            tvMonto.text = "S/.${nf.format(meta.montoActual)} / S/.${nf.format(meta.montoObjetivo)}"
+
+            val porcentaje = if (meta.montoObjetivo > 0)
+                ((meta.montoActual / meta.montoObjetivo) * 100).toInt().coerceAtMost(100) else 0
+            tvPorcentaje.text = "${porcentaje}%"
+            progressBar.progress = porcentaje
+
+            // Apply meta color
+            try {
+                val metaColor = Color.parseColor(meta.color)
+                iconBg.backgroundTintList = ColorStateList.valueOf(Color.argb(26, Color.red(metaColor), Color.green(metaColor), Color.blue(metaColor)))
+                ivIcon.imageTintList = ColorStateList.valueOf(metaColor)
+                tvPorcentaje.setTextColor(metaColor)
+            } catch (_: Exception) { }
+
+            // Load custom icon
+            try {
+                val resId = resources.getIdentifier(meta.icono, "drawable", packageName)
+                if (resId != 0) {
+                    ivIcon.setImageResource(resId)
+                }
+            } catch (_: Exception) { }
+
+            // Click to open AhorrosActivity
+            cardView.setOnClickListener {
+                val intent = Intent(this, EditarMetaActivity::class.java)
+                intent.putExtra("META_ID", meta.id)
+                startActivity(intent)
+            }
+
+            llMetasProgress.addView(cardView)
         }
     }
 

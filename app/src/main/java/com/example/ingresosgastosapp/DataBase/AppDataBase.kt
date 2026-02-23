@@ -9,13 +9,15 @@ import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosDAO
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosDAO
+import com.example.ingresosgastosapp.Data.MetaAhorro
+import com.example.ingresosgastosapp.Data.MetaAhorroDAO
 import com.example.ingresosgastosapp.Data.User
 import com.example.ingresosgastosapp.Data.UserDAO
 import android.content.Context
 
 @Database(
-    entities = [Ingresos::class, Gastos::class, Balance::class, User::class],
-    version = 3,
+    entities = [Ingresos::class, Gastos::class, Balance::class, User::class, MetaAhorro::class],
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -24,6 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun gastosDao(): GastosDAO
     abstract fun balanceDao(): BalanceDAO
     abstract fun userDao(): UserDAO
+    abstract fun metaAhorroDao(): MetaAhorroDAO
 
     companion object {
         @Volatile

@@ -375,67 +375,26 @@
                             android:textStyle="bold" />
                     </RelativeLayout>
 
+                    <!-- Dynamic container for top 3 savings goals -->
                     <LinearLayout
-                        android:id="@+id/card_ahorro_tesla"
+                        android:id="@+id/ll_metas_progress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_sin_metas_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_stitch_card"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/bg_stitch_card"
-                            android:backgroundTint="#1A0DF259">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_history"
-                                app:tint="@color/stitch_primary" />
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Sin meta activa"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="0%"
-                                    android:textColor="@color/stitch_primary"
-                                    android:textStyle="bold" />
-                            </RelativeLayout>
-
-                            <ProgressBar
-                                style="@android:style/Widget.ProgressBar.Horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="4dp"
-                                android:layout_marginTop="8dp"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progress_bar_green" />
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:gravity="center"
+                        android:paddingVertical="24dp"
+                        android:text="No hay metas de ahorro"
+                        android:textColor="#44FFFFFF"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:visibility="gone" />
 
                 <!-- ─── Últimas Transacciones ─── -->
                 <RelativeLayout

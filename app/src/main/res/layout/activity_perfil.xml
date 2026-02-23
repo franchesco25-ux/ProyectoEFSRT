@@ -84,8 +84,8 @@
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imgPerfil"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:padding="4dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_person"
