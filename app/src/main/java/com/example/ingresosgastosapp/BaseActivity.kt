@@ -10,23 +10,22 @@ import androidx.core.view.WindowInsetsCompat
  * Actividad base: Configuración pura de pantalla completa para el diseño Stitch.
  */
 abstract class BaseActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // 1. Activamos pantalla completa (Edge-to-Edge)
         enableEdgeToEdge()
 
-        // 2. Aplicamos ajuste inteligente: 
+        // 2. Aplicamos ajuste inteligente:
         // Solo arriba (status bar) para no tapar la hora/batería.
-        // Abajo dejamos 0 para que nuestro menú flote perfectamente.
+        // Abajo dejamos 0 para que el menú flotante conserve su posición visual.
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
-                0 // Sin espacio extra abajo para evitar el "doble menú"
+                0
             )
             insets
         }
