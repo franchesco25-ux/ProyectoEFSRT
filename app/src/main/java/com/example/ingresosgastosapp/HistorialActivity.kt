@@ -3,78 +3,48 @@ package com.example.ingresosgastosapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.TextView
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.ingresosgastosapp.Adapter.HistorialAdapter
-import com.example.ingresosgastosapp.Data.IngresosViewModel
-import com.example.ingresosgastosapp.Data.TipoTransaccion
-import com.example.ingresosgastosapp.Data.TransaccionItem
+import android.widget.LinearLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HistorialActivity : BaseActivity() {
 
-    private lateinit var rvHistorial: RecyclerView
-    private lateinit var tvTotalMes: TextView
-    private lateinit var bottomNav: BottomNavigationView
-    
-    private val ingresosViewModel: IngresosViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
 
-        // 1. Inicialización de Vistas
-        tvTotalMes = findViewById(R.id.tvTotalMes)
-        rvHistorial = findViewById(R.id.rvIngresosHistorial) // Corregido el ID aquí
-        bottomNav = findViewById(R.id.bottom_navigation_historial)
-        
-        val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add_historial)
+        val btnVolver = findViewById<ImageButton>(R.id.btnVolverHistoriales)
+        val cardGastos = findViewById<LinearLayout>(R.id.cardHistorialGastos)
+        val cardIngresos = findViewById<LinearLayout>(R.id.cardHistorialIngresos)
+        val cardMetas = findViewById<LinearLayout>(R.id.cardHistorialMetas)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
 
-        // 2. Configuración del Adapter
-        val adapter = HistorialAdapter(
-            onEditClick = { /* Lógica de edición */ },
-            onDeleteClick = { /* Lógica de eliminación */ }
-        )
-        
-        rvHistorial.layoutManager = LinearLayoutManager(this)
-        rvHistorial.adapter = adapter
-
-        // 3. Observar datos reales de Ingresos
-        ingresosViewModel.readAllData.observe(this) { listaIngresos ->
-            val transacciones = listaIngresos.map { 
-                TransaccionItem(
-                    it.id, 
-                    it.descripcion, 
-                    it.monto, 
-                    it.categoria, 
-                    it.fecha, 
-                    TipoTransaccion.INGRESO
-                ) 
-            }
-            adapter.setData(transacciones)
-            
-            // Calcular Total Real del Mes (Suma de ingresos)
-            val total = listaIngresos.sumOf { it.monto }
-            val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
-            val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
-            val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
-            
-            tvTotalMes.text = "+$currencySymbol %.2f".format(total)
+        btnVolver.setOnClickListener {
+            finish()
         }
 
-        // 4. Configuración de Clics
-        btnBack.setOnClickListener { finish() }
-        
+        cardGastos.setOnClickListener {
+            val intent = Intent(this, HistorialGastosActivity::class.java)
+            intent.putExtra("FILTRO_TIPO", "Gastos")
+            startActivity(intent)
+        }
+
+        cardIngresos.setOnClickListener {
+            val intent = Intent(this, HistorialIngresosActivity::class.java)
+            startActivity(intent)
+        }
+
+        cardMetas.setOnClickListener {
+            val intent = Intent(this, AhorrosActivity::class.java)
+            startActivity(intent)
+        }
+
         fabAdd.setOnClickListener {
             val bottomSheet = QuickActionsBottomSheet()
             bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }
 
-        // 5. Configuración de Bottom Navigation
         // Para este activity desenmarcamos la navegación porque Historial no está predeterminado en el BottomNav
         val navMenu = bottomNav.menu
         navMenu.setGroupCheckable(0, false, true)
@@ -101,7 +71,14 @@ class HistorialActivity : BaseActivity() {
                     true
                 }
                 R.id.nav_perfil -> {
-                    startActivity(Intent(this, PerfilActivity::class.java))
+                    val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    val nombreUsuario = prefs.getString("NOMBRE_USUARIO", "Usuario") ?: "Usuario"
+                    val emailUsuario = prefs.getString("EMAIL_USUARIO", "") ?: ""
+                    
+                    val intent = Intent(this, PerfilActivity::class.java)
+                    intent.putExtra("NOMBRE_USUARIO", nombreUsuario)
+                    intent.putExtra("EMAIL_USUARIO", emailUsuario)
+                    startActivity(intent)
                     overridePendingTransition(0, 0)
                     finish()
                     true

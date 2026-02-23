@@ -58,6 +58,10 @@
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
+            android:name=".HistorialIngresosActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
             android:name=".AgregarIngresoActivity"
             android:exported="false" />
         <activity
