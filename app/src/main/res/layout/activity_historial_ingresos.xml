@@ -144,39 +144,13 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Barra de Navegación Inferior -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_historial"
+    <!-- Barra de Navegación Inferior Personalizada -->
+    <include
+        layout="@layout/layout_bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/bg_stitch_card"
-        app:backgroundTint="#E6102216"
-        app:elevation="8dp"
-        app:itemIconTint="@color/stitch_primary"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
-    <!-- FAB Central con elevación corregida para que flote encima -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_historial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/stitch_primary"
-        app:borderWidth="0dp"
-        app:elevation="12dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_historial"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottom_navigation_historial"
-        app:tint="@color/stitch_background" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
