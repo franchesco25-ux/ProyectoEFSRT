@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
- * Actividad base: Configuración pura de pantalla completa para el diseño Stitch.
+ * Actividad base: Configuración de pantalla completa adaptativa para el diseño Stitch.
  */
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +21,16 @@ abstract class BaseActivity : AppCompatActivity() {
         // 1. Activamos pantalla completa (Edge-to-Edge)
         enableEdgeToEdge()
 
-        // 2. Aplicamos ajuste inteligente:
-        // Solo arriba (status bar) para no tapar la hora/batería.
-        // Abajo dejamos 0 para que el menú flotante conserve su posición visual.
+        // 2. Ajuste dinámico de barras del sistema:
+        // Aplicamos padding superior para no tapar la hora/batería.
+        // Aplicamos padding inferior real para que el menú no se mezcle con los botones del sistema.
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
-                0
+                systemBars.bottom // Ajuste automático según el dispositivo (botones o gestos)
             )
             insets
         }
@@ -58,35 +58,37 @@ abstract class BaseActivity : AppCompatActivity() {
         for (item in items) {
             val icon = findViewById<ImageView>(item.iconId)
             val text = findViewById<TextView>(item.textId)
-            if (item.key == activeItem) {
-                icon.setColorFilter(greenColor)
-                text.setTextColor(greenColor)
-            } else {
-                icon.setColorFilter(mutedColor)
-                text.setTextColor(mutedColor)
+            if (icon != null && text != null) {
+                if (item.key == activeItem) {
+                    icon.setColorFilter(greenColor)
+                    text.setTextColor(greenColor)
+                } else {
+                    icon.setColorFilter(mutedColor)
+                    text.setTextColor(mutedColor)
+                }
             }
         }
 
         // Click listeners de navegación
-        findViewById<android.view.View>(R.id.nav_item_inicio).setOnClickListener {
+        findViewById<android.view.View>(R.id.nav_item_inicio)?.setOnClickListener {
             if (activeItem != "inicio") {
                 startActivity(Intent(this, MainMenuActivity::class.java))
                 finish()
             }
         }
-        findViewById<android.view.View>(R.id.nav_item_presupuesto).setOnClickListener {
+        findViewById<android.view.View>(R.id.nav_item_presupuesto)?.setOnClickListener {
             if (activeItem != "presupuesto") {
-                startActivity(Intent(this, ResumenPresupuestoActivity::class.java))
+                startActivity(Intent(this, AnalisisActivity::class.java))
                 finish()
             }
         }
-        findViewById<android.view.View>(R.id.nav_item_ahorros).setOnClickListener {
+        findViewById<android.view.View>(R.id.nav_item_ahorros)?.setOnClickListener {
             if (activeItem != "ahorros") {
                 startActivity(Intent(this, AhorrosActivity::class.java))
                 finish()
             }
         }
-        findViewById<android.view.View>(R.id.nav_item_ajustes).setOnClickListener {
+        findViewById<android.view.View>(R.id.nav_item_ajustes)?.setOnClickListener {
             if (activeItem != "ajustes") {
                 startActivity(Intent(this, PerfilActivity::class.java))
                 finish()
@@ -94,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         // FAB
-        findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.fab_add)?.setOnClickListener {
             val bottomSheet = QuickActionsBottomSheet()
             bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
         }

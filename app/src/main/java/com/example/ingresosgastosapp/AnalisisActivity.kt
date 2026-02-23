@@ -36,7 +36,10 @@ class AnalisisActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_analisis)
 
-        // Views
+        // 1. Inicializar Barra de Navegación (CRÍTICO)
+        setupCustomBottomNav("presupuesto")
+
+        // 2. Inicializar Vistas
         pieChart = findViewById(R.id.pieChart)
         barChart = findViewById(R.id.barChart)
         layoutPieLegend = findViewById(R.id.layoutPieLegend)
@@ -46,15 +49,19 @@ class AnalisisActivity : BaseActivity() {
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         val btnVerDetalles = findViewById<TextView>(R.id.btnVerDetalles)
 
-        btnBack.setOnClickListener { finish() }
+        // Botón atrás: volver al menú principal de forma segura
+        btnBack.setOnClickListener {
+            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+        }
 
-        // Currency
+        // Configuración de Moneda
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
         currencySymbol = if (monedaPref != null && monedaPref.contains("("))
             monedaPref.substringAfter("(").replace(")", "") else "$"
 
-        // Observe data
+        // Observar datos de Room
         gastosViewModel.readAllData.observe(this) { gastos ->
             todosLosGastos = gastos
             actualizarPieChart()
@@ -72,7 +79,6 @@ class AnalisisActivity : BaseActivity() {
             startActivity(Intent(this, AhorrosActivity::class.java))
         }
 
-        // Load Metas de Ahorro
         cargarMetasAhorro()
     }
 
@@ -80,17 +86,13 @@ class AnalisisActivity : BaseActivity() {
         val dao = AppDatabase.getDatabase(this).metaAhorroDao()
         dao.getAllMetas().observe(this) { metas ->
             llMetasAnalisis.removeAllViews()
-
             if (metas.isNullOrEmpty()) {
                 tvSinMetasAnalisis.visibility = View.VISIBLE
                 return@observe
             }
-
             tvSinMetasAnalisis.visibility = View.GONE
-
             for (meta in metas) {
-                val card = crearMetaCard(meta)
-                llMetasAnalisis.addView(card)
+                llMetasAnalisis.addView(crearMetaCard(meta))
             }
         }
     }
@@ -107,17 +109,11 @@ class AnalisisActivity : BaseActivity() {
             ).apply { bottomMargin = dp(8) }
         }
 
-        // Icon container
         val iconFrame = FrameLayout(this).apply {
             layoutParams = LinearLayout.LayoutParams(dp(48), dp(48))
             background = getDrawable(R.drawable.bg_stitch_card)
             try {
-                backgroundTintList = ColorStateList.valueOf(
-                    Color.argb(26,
-                        Color.red(Color.parseColor(meta.color)),
-                        Color.green(Color.parseColor(meta.color)),
-                        Color.blue(Color.parseColor(meta.color)))
-                )
+                backgroundTintList = ColorStateList.valueOf(Color.argb(26, Color.red(Color.parseColor(meta.color)), Color.green(Color.parseColor(meta.color)), Color.blue(Color.parseColor(meta.color))))
             } catch (_: Exception) {
                 backgroundTintList = ColorStateList.valueOf(Color.parseColor("#1A0DF259"))
             }
@@ -136,12 +132,9 @@ class AnalisisActivity : BaseActivity() {
         iconFrame.addView(iconView)
         card.addView(iconFrame)
 
-        // Text section (name + meta value)
         val textSection = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                marginStart = dp(14)
-            }
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = dp(14) }
         }
 
         val tvName = TextView(this).apply {
@@ -161,14 +154,10 @@ class AnalisisActivity : BaseActivity() {
         textSection.addView(tvMeta)
         card.addView(textSection)
 
-        // Right side (total + percentage)
         val rightSection = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.END
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         }
 
         val tvTotal = TextView(this).apply {
@@ -178,17 +167,10 @@ class AnalisisActivity : BaseActivity() {
             setTypeface(typeface, android.graphics.Typeface.BOLD)
         }
 
-        val pct = if (meta.montoObjetivo > 0) {
-            ((meta.montoActual / meta.montoObjetivo) * 100).toInt().coerceAtMost(100)
-        } else 0
-
+        val pct = if (meta.montoObjetivo > 0) ((meta.montoActual / meta.montoObjetivo) * 100).toInt().coerceAtMost(100) else 0
         val tvPct = TextView(this).apply {
             text = "$pct% completado"
-            try {
-                setTextColor(Color.parseColor(meta.color))
-            } catch (_: Exception) {
-                setTextColor(Color.parseColor("#0DF259"))
-            }
+            try { setTextColor(Color.parseColor(meta.color)) } catch (_: Exception) { setTextColor(Color.parseColor("#0DF259")) }
             textSize = 10f
             setTypeface(typeface, android.graphics.Typeface.BOLD)
         }
@@ -200,9 +182,7 @@ class AnalisisActivity : BaseActivity() {
         return card
     }
 
-    private fun dp(value: Int): Int {
-        return (value * resources.displayMetrics.density).toInt()
-    }
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
     private fun actualizarPieChart() {
         if (todosLosGastos.isEmpty()) {
@@ -210,8 +190,6 @@ class AnalisisActivity : BaseActivity() {
             layoutPieLegend.removeAllViews()
             return
         }
-
-        // Filtrar gastos del mes actual
         val calendar = Calendar.getInstance()
         val mesActual = calendar.get(Calendar.MONTH)
         val anioActual = calendar.get(Calendar.YEAR)
@@ -224,65 +202,42 @@ class AnalisisActivity : BaseActivity() {
             } else false
         }
 
-        // Agrupar por categoría
         val porCategoria = gastosMes.groupBy { it.categoria.ifBlank { "Otros" } }
             .mapValues { it.value.sumOf { g -> g.monto } }
-            .toList()
-            .sortedByDescending { it.second }
+            .toList().sortedByDescending { it.second }
 
         val totalGastos = porCategoria.sumOf { it.second }
-
         val slices = porCategoria.mapIndexed { index, (cat, monto) ->
-            PieChartView.Slice(
-                label = cat,
-                value = monto.toFloat(),
-                color = PieChartView.CHART_COLORS[index % PieChartView.CHART_COLORS.size]
-            )
+            PieChartView.Slice(cat, monto.toFloat(), PieChartView.CHART_COLORS[index % PieChartView.CHART_COLORS.size])
         }
 
         pieChart.setData(slices, "$currencySymbol${String.format("%.0f", totalGastos)}")
-
-        // Build legend dynamically
         layoutPieLegend.removeAllViews()
 
-        // Create rows of 2 items
         var rowLayout: LinearLayout? = null
         for ((index, slice) in slices.withIndex()) {
             if (index % 2 == 0) {
                 rowLayout = LinearLayout(this).apply {
                     orientation = LinearLayout.HORIZONTAL
-                    layoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    ).apply { topMargin = 8 }
+                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = 8 }
                 }
                 layoutPieLegend.addView(rowLayout)
             }
-
             val itemLayout = LinearLayout(this).apply {
                 orientation = LinearLayout.HORIZONTAL
                 gravity = Gravity.CENTER_VERTICAL
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             }
-
-            val dot = android.view.View(this).apply {
+            val dot = View(this).apply {
                 layoutParams = LinearLayout.LayoutParams(24, 24).apply { marginEnd = 16 }
-                setBackgroundColor(slice.color)
+                background = android.graphics.drawable.GradientDrawable().apply { shape = android.graphics.drawable.GradientDrawable.OVAL; setColor(slice.color) }
             }
-            // Make dot circular
-            val dotDrawable = android.graphics.drawable.GradientDrawable().apply {
-                shape = android.graphics.drawable.GradientDrawable.OVAL
-                setColor(slice.color)
-            }
-            dot.background = dotDrawable
-
-            val pct = if (totalGastos > 0) (slice.value / totalGastos.toFloat() * 100).toInt() else 0
             val label = TextView(this).apply {
+                val pct = if (totalGastos > 0) (slice.value / totalGastos.toFloat() * 100).toInt() else 0
                 text = "${slice.label} ($pct%)"
                 setTextColor(Color.parseColor("#B3FFFFFF"))
                 textSize = 13f
             }
-
             itemLayout.addView(dot)
             itemLayout.addView(label)
             rowLayout?.addView(itemLayout)
@@ -293,44 +248,20 @@ class AnalisisActivity : BaseActivity() {
         val calendar = Calendar.getInstance()
         val mesActual = calendar.get(Calendar.MONTH)
         val anioActual = calendar.get(Calendar.YEAR)
-
-        val mesesNombres = arrayOf("Ene", "Feb", "Mar", "Abr", "May", "Jun",
-            "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
-
+        val mesesNombres = arrayOf("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
         val groups = mutableListOf<BarChartView.BarGroup>()
 
         for (i in 5 downTo 0) {
             val cal = Calendar.getInstance().apply {
                 set(Calendar.MONTH, mesActual - i)
                 set(Calendar.YEAR, anioActual)
-                // Handle year rollover
-                if (get(Calendar.MONTH) < 0) {
-                    set(Calendar.MONTH, get(Calendar.MONTH) + 12)
-                    set(Calendar.YEAR, get(Calendar.YEAR) - 1)
-                }
+                if (get(Calendar.MONTH) < 0) { set(Calendar.MONTH, get(Calendar.MONTH) + 12); set(Calendar.YEAR, get(Calendar.YEAR) - 1) }
             }
-            val mes = cal.get(Calendar.MONTH)
-            val anio = cal.get(Calendar.YEAR)
-
-            val ingMes = todosLosIngresos.filter { ing ->
-                val fecha = parseFecha(ing.fecha)
-                if (fecha != null) {
-                    val c = Calendar.getInstance().apply { time = fecha }
-                    c.get(Calendar.MONTH) == mes && c.get(Calendar.YEAR) == anio
-                } else false
-            }.sumOf { it.monto }
-
-            val gasMes = todosLosGastos.filter { gas ->
-                val fecha = parseFecha(gas.fecha)
-                if (fecha != null) {
-                    val c = Calendar.getInstance().apply { time = fecha }
-                    c.get(Calendar.MONTH) == mes && c.get(Calendar.YEAR) == anio
-                } else false
-            }.sumOf { it.monto }
-
+            val mes = cal.get(Calendar.MONTH); val anio = cal.get(Calendar.YEAR)
+            val ingMes = todosLosIngresos.filter { it -> val f = parseFecha(it.fecha); if (f != null) { val c = Calendar.getInstance().apply { time = f }; c.get(Calendar.MONTH) == mes && c.get(Calendar.YEAR) == anio } else false }.sumOf { it.monto }
+            val gasMes = todosLosGastos.filter { it -> val f = parseFecha(it.fecha); if (f != null) { val c = Calendar.getInstance().apply { time = f }; c.get(Calendar.MONTH) == mes && c.get(Calendar.YEAR) == anio } else false }.sumOf { it.monto }
             groups.add(BarChartView.BarGroup(mesesNombres[mes], ingMes.toFloat(), gasMes.toFloat()))
         }
-
         barChart.setData(groups)
     }
 
@@ -338,33 +269,18 @@ class AnalisisActivity : BaseActivity() {
         val calendar = Calendar.getInstance()
         val mesActual = calendar.get(Calendar.MONTH)
         val anioActual = calendar.get(Calendar.YEAR)
-
-        val totalIngresosMes = todosLosIngresos.filter { ing ->
-            val fecha = parseFecha(ing.fecha)
-            if (fecha != null) {
-                val c = Calendar.getInstance().apply { time = fecha }
-                c.get(Calendar.MONTH) == mesActual && c.get(Calendar.YEAR) == anioActual
-            } else false
-        }.sumOf { it.monto }
-
-        val totalGastosMes = todosLosGastos.filter { gas ->
-            val fecha = parseFecha(gas.fecha)
-            if (fecha != null) {
-                val c = Calendar.getInstance().apply { time = fecha }
-                c.get(Calendar.MONTH) == mesActual && c.get(Calendar.YEAR) == anioActual
-            } else false
-        }.sumOf { it.monto }
+        val totalIngresosMes = todosLosIngresos.filter { it -> val f = parseFecha(it.fecha); if (f != null) { val c = Calendar.getInstance().apply { time = f }; c.get(Calendar.MONTH) == mesActual && c.get(Calendar.YEAR) == anioActual } else false }.sumOf { it.monto }
+        val totalGastosMes = todosLosGastos.filter { it -> val f = parseFecha(it.fecha); if (f != null) { val c = Calendar.getInstance().apply { time = f }; c.get(Calendar.MONTH) == mesActual && c.get(Calendar.YEAR) == anioActual } else false }.sumOf { it.monto }
 
         if (totalIngresosMes > 0) {
             val pct = ((totalGastosMes / totalIngresosMes) * 100).toInt()
             tvAlertaMsg.text = when {
-                pct >= 100 -> "⚠ ¡Has superado tu presupuesto! Gastos: ${currencySymbol}${String.format("%.2f", totalGastosMes)}"
-                pct >= 80 -> "¡Atención! Has usado el $pct% de tus ingresos este mes."
-                pct >= 50 -> "Vas bien. Has usado el $pct% de tus ingresos este mes."
-                else -> "¡Excelente! Solo has usado el $pct% de tus ingresos."
+                pct >= 100 -> "⚠ ¡Presupuesto superado! Gastos: $currencySymbol%.2f".format(totalGastosMes)
+                pct >= 80 -> "¡Atención! Has usado el $pct% de tus ingresos."
+                else -> "Balance positivo. Has usado el $pct% de tus ingresos."
             }
         } else {
-            tvAlertaMsg.text = "No hay ingresos registrados este mes."
+            tvAlertaMsg.text = "Registra ingresos para ver tu análisis."
         }
     }
 
@@ -373,11 +289,7 @@ class AnalisisActivity : BaseActivity() {
             val parte = fecha.split("T")[0]
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(parte)
         } catch (e: Exception) {
-            try {
-                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fecha)
-            } catch (e2: Exception) {
-                null
-            }
+            try { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fecha) } catch (e2: Exception) { null }
         }
     }
 }
