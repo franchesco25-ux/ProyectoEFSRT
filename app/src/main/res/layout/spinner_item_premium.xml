@@ -22,5 +22,5 @@
         android:layout_height="16dp"
         android:src="@drawable/ic_arrow_back"
         android:rotation="270"
-        app:tint="#800DF259" />
+        app:tint="#4DFFFFFF" />
 </LinearLayout>
