@@ -1,29 +1,27 @@
 package com.example.ingresosgastosapp.Fragments.Add
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
+import com.example.ingresosgastosapp.HistorialActivity
 import com.example.ingresosgastosapp.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
-import kotlin.jvm.java
 
 // Archivo: AddFragment.kt (Para Ingresos)
 class AddFragment : Fragment() {
@@ -60,7 +58,6 @@ class AddFragment : Fragment() {
                     viewLifecycleOwner.lifecycleScope.launch {
 
                         val currentBalance = balanceViewModel.getCurrentBalance()
-
                         val newBalance = currentBalance + monto
 
                         mIngresosViewModel.addIngresos(ingreso)
@@ -68,7 +65,12 @@ class AddFragment : Fragment() {
 
                         withContext(Dispatchers.Main) {
                             Toast.makeText(requireContext(), "Ingreso agregado correctamente", Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+
+                            // CAMBIO: Redirigir a HistorialActivity en lugar de ListFragment
+                            val intent = Intent(requireContext(), HistorialActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            requireActivity().finish() // Opcional: cierra la actividad actual si no quieres volver al form
                         }
                     }
                 } else {
