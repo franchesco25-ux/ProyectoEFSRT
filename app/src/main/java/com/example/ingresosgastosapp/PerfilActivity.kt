@@ -243,4 +243,12 @@ class PerfilActivity : BaseActivity() {
             .setNegativeButton("Cancelar", null)
             .show()
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        val intent = Intent(this, MainMenuActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        finish()
+    }
 }
