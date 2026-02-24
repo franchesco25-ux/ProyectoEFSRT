@@ -25,3 +25,4 @@ data class MetaAhorro(
     @ColumnInfo(name = "completada")
     val completada: Boolean = false
 )
+

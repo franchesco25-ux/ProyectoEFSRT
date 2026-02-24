@@ -55,13 +55,13 @@ class HistorialAdapter(
             TipoTransaccion.INGRESO -> {
                 holder.tvTipo.text = "INGRESO"
                 holder.tvTipo.setTextColor(Color.parseColor("#28A745"))
-                holder.tvMonto.text = "+ $currencySymbol ${String.format("%.2f", transaccion.monto)}"
+                holder.tvMonto.text = "+ $currencySymbol ${String.format("%,.2f", transaccion.monto)}"
                 holder.tvMonto.setTextColor(Color.parseColor("#28A745"))
             }
             TipoTransaccion.GASTO -> {
                 holder.tvTipo.text = "GASTO"
                 holder.tvTipo.setTextColor(Color.parseColor("#DC3545"))
-                holder.tvMonto.text = "- $currencySymbol ${String.format("%.2f", transaccion.monto)}"
+                holder.tvMonto.text = "- $currencySymbol ${String.format("%,.2f", transaccion.monto)}"
                 holder.tvMonto.setTextColor(Color.parseColor("#DC3545"))
             }
         }
@@ -107,3 +107,4 @@ class HistorialAdapter(
         }
     }
 }
+

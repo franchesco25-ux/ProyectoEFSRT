@@ -18,3 +18,4 @@ interface UserDAO {
     @Query("UPDATE usuarios SET password = :newPassword WHERE email = :email")
     suspend fun updatePassword(email: String, newPassword: String)
 }
+

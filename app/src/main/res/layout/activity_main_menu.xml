@@ -126,26 +126,6 @@
                                 android:textColor="@color/stitch_primary"
                                 android:textStyle="bold" />
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnMainAgregar"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:backgroundTint="@color/stitch_primary"
-                                android:text="Agregar Ingreso"
-                                android:textAllCaps="false"
-                                android:textColor="@color/stitch_background"
-                                android:textStyle="bold"
-                                app:cornerRadius="12dp"
-                                app:icon="@drawable/ic_add"
-                                app:iconTint="@color/stitch_background" />
-                        </LinearLayout>
                     </LinearLayout>
 
                     <!-- Quick Actions Grid -->

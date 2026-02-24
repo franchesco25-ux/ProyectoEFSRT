@@ -13,3 +13,4 @@ enum class TipoTransaccion {
     INGRESO,
     GASTO
 }
+

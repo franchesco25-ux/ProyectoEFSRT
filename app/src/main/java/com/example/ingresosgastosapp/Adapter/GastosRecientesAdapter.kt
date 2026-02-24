@@ -39,7 +39,7 @@ class GastosRecientesAdapter(
             val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
             val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
 
-            tvMonto.text = "-$currencySymbol %.2f".format(gasto.monto)
+            tvMonto.text = "-$currencySymbol %,.2f".format(gasto.monto)
             tvFecha.text = formatFecha(gasto.fecha)
             itemView.setOnClickListener { onItemClick?.invoke(gasto) }
         }
@@ -65,3 +65,4 @@ class GastosRecientesAdapter(
         override fun areContentsTheSame(old: Gastos, new: Gastos) = old == new
     }
 }
+

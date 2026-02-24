@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
+import java.text.SimpleDateFormat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ingresosgastosapp.Adapter.TransaccionReciente
@@ -59,7 +60,6 @@ class MainMenuActivity : BaseActivity() {
         tvBalance = findViewById(R.id.tvMainBalance)
         val tvSaludo = findViewById<TextView>(R.id.tvSaludoDashboard)
         val imgProfile = findViewById<ShapeableImageView>(R.id.imgProfile)
-        val btnAgregar = findViewById<View>(R.id.btnMainAgregar)
 
         // Cargar foto de perfil guardada
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
@@ -97,7 +97,7 @@ class MainMenuActivity : BaseActivity() {
 
         balanceViewModel.balance.observe(this) { balanceEntity ->
             val totalReal = balanceEntity?.total ?: 0.0
-            tvBalance.text = "$currencySymbol %.2f".format(totalReal)
+            tvBalance.text = "$currencySymbol %,.2f".format(totalReal)
             if (totalReal < 0) {
                 tvBalance.setTextColor(android.graphics.Color.parseColor("#EF4444"))
             } else {
@@ -105,12 +105,8 @@ class MainMenuActivity : BaseActivity() {
             }
         }
 
-        // 4. Configuración de clics
+        // 4. Configurar clics
         imgProfile.setOnClickListener { abrirPerfil() }
-        btnAgregar.setOnClickListener {
-            val bottomSheet = QuickActionsBottomSheet()
-            bottomSheet.show(supportFragmentManager, "QuickActionsBottomSheet")
-        }
 
         btnHistorial.setOnClickListener { startActivity(Intent(this, HistorialActivity::class.java)) }
 
@@ -246,12 +242,22 @@ class MainMenuActivity : BaseActivity() {
             )
         }
 
-        // Orden por fecha descendente y tomar solo 5
-        val ultimas5 = transacciones.sortedByDescending { it.fecha }.take(5)
+        // Orden por fecha descendente y tomar solo 2
+        val sdfIso = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
+        val sdfShort = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-        transaccionesAdapter.submitList(ultimas5)
-        tvSinTransacciones.visibility = if (ultimas5.isEmpty()) View.VISIBLE else View.GONE
-        rvTransacciones.visibility = if (ultimas5.isEmpty()) View.GONE else View.VISIBLE
+        val ultimas = transacciones.sortedByDescending {
+            try {
+                if (it.fecha.contains("T")) sdfIso.parse(it.fecha)?.time ?: 0L
+                else sdfShort.parse(it.fecha)?.time ?: 0L
+            } catch (e: Exception) {
+                0L
+            }
+        }.take(2)
+
+        transaccionesAdapter.submitList(ultimas)
+        tvSinTransacciones.visibility = if (ultimas.isEmpty()) View.VISIBLE else View.GONE
+        rvTransacciones.visibility = if (ultimas.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun abrirPerfil() {

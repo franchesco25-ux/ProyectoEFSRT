@@ -125,3 +125,4 @@ class BarChartView @JvmOverloads constructor(
         setMeasuredDimension(w, h)
     }
 }
+

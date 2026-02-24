@@ -32,7 +32,7 @@ class ListGastosFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list_gastos, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewGastos)
-        val btnVolver = view.findViewById<ImageButton>(R.id.btnVolverMainGastos)
+
         val fab = view.findViewById<FloatingActionButton>(R.id.floatingActionButtonGasto)
 
         mGastosViewModel = ViewModelProvider(this)[GastosViewModel::class.java]
@@ -67,11 +67,7 @@ class ListGastosFragment : Fragment() {
             findNavController().navigate(R.id.action_listGastosFragment_to_addGastosFragment)
         }
 
-        btnVolver.setOnClickListener {
-            val intent = Intent(requireContext(), MainMenuActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
+
 
         return view
     }

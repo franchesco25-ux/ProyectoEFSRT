@@ -27,3 +27,4 @@ interface MetaAhorroDAO {
     @Query("DELETE FROM meta_ahorro WHERE id = :id")
     suspend fun deleteMetaById(id: Int)
 }
+

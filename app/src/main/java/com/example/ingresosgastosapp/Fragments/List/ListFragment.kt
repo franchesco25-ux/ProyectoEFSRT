@@ -32,7 +32,7 @@ class ListFragment : Fragment() {
 
         val verView = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        val btnVolver = view.findViewById<AndroidView>(R.id.btnVolverMain)
+
 
         mIngresosViewModel = ViewModelProvider(this)[IngresosViewModel::class.java]
 
@@ -66,11 +66,7 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
-        btnVolver.setOnClickListener {
-            val intent = Intent(requireContext(), MainMenuActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
+
 
         return view
     }
