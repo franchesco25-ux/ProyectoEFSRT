@@ -3,6 +3,9 @@ package com.example.ingresosgastosapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+
+import android.widget.LinearLayout
+
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 
@@ -17,6 +20,16 @@ class HistorialActivity : BaseActivity() {
         val cardIngresos = findViewById<CardView>(R.id.cardIngresos)
         val cardMetas = findViewById<CardView>(R.id.cardMetas)
         val cardExportar = findViewById<CardView>(R.id.cardExportar)
+
+
+
+
+        findViewById<LinearLayout>(R.id.btnIrAReporte).setOnClickListener {
+            val intent = Intent(this, ReporteContableActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         btnBack.setOnClickListener { finish() }
 

@@ -16,4 +16,9 @@ data class Ingresos(
     val categoria: String,
     @ColumnInfo(name = "fecha")
     val fecha: String
+
+
+
+
 )
+

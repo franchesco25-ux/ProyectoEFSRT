@@ -135,13 +135,14 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
+            <!-- Ingresos vs Gastos -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_stitch_card"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="20dp"
-                android:gravity="center_horizontal">
+                android:padding="20dp">
 
                 <com.example.ingresosgastosapp.views.PieChartView
                     android:id="@+id/pieChart"
@@ -155,11 +156,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:orientation="vertical"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:orientation="vertical" />
             </LinearLayout>
 
-            <!-- Ingresos vs Gastos -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,6 +244,21 @@
                 android:textColor="#44FFFFFF"
                 android:textSize="14sp"
                 android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnReporteContable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/stitch_primary"
+                android:paddingVertical="12dp"
+                android:text="Ver Reporte Contable"
+                android:textColor="@color/stitch_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

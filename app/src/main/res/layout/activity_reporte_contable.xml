@@ -1,0 +1,155 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/stitch_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <ImageButton
+                android:id="@+id/btnBackReporte"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_stitch_card"
+                android:backgroundTint="#1AFFFFFF"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Exportar Reporte"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerMes"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner_redondeado"
+                android:popupBackground="@drawable/bg_stitch_card"
+                android:paddingStart="12dp"
+                android:spinnerMode="dropdown"
+                android:paddingEnd="12dp" />
+
+            <Switch
+                android:id="@+id/switchAcumulado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Acumulado"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_stitch_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvTituloReporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESUMEN FINANCIERO"
+                android:textColor="@color/stitch_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvIngresosTotales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Ingresos: S/ 0.00"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Gastos por categoría"
+                android:textColor="@color/stitch_text_muted"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/containerGastos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/tvTotalGastos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Total Gastos: S/ 0.00"
+                android:textColor="#FF9800"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#33FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvResultadoPeriodo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resultado: S/ 0.00"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEstadoEmoji"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Estado: -" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInterpretacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_stitch_card"
+            android:backgroundTint="#1A0df259"
+            android:padding="16dp"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnCompartir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Compartir por WhatsApp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/stitch_primary"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

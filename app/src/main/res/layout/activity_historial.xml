@@ -290,6 +290,9 @@
                         app:tint="@color/stitch_primary" />
 
                     <LinearLayout
+
+                        android:id="@+id/btnIrAReporte"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -334,10 +337,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_marginStart="12dp"
                 android:text="Puedes filtrar por fecha y categoría dentro de cada historial para una búsqueda más precisa."
                 android:textColor="@color/stitch_primary"
                 android:textSize="12sp" />
+
+
+
+
+            <!-- Empty State -->
+            <TextView
+                android:id="@+id/tvSinTransacciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="40dp"
+                android:text="No hay transacciones que mostrar"
+                android:textColor="@color/stitch_text_muted"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+            <!-- RecyclerView for transactions -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHistorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_historial_transaccion" />
+
+
         </LinearLayout>
     </LinearLayout>
 
