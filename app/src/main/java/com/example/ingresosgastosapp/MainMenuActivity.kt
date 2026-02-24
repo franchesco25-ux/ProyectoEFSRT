@@ -202,9 +202,9 @@ class MainMenuActivity : BaseActivity() {
                 }
             } catch (_: Exception) { }
 
-            // Click to open AhorrosActivity
+            // Click to open DetalleMetaActivity
             cardView.setOnClickListener {
-                val intent = Intent(this, EditarMetaActivity::class.java)
+                val intent = Intent(this, DetalleMetaActivity::class.java)
                 intent.putExtra("META_ID", meta.id)
                 startActivity(intent)
             }

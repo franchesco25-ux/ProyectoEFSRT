@@ -29,6 +29,7 @@ interface GastosDAO {
     @Query("SELECT * FROM gastos WHERE id = :id LIMIT 1")
     suspend fun getGastoById(id: Int): Gastos?
 
+
     @Query("SELECT categoria, SUM(monto) as total FROM gastos WHERE (fecha LIKE :anio || '-' || :mes || '%') OR (fecha LIKE '%' || :mes || '/' || :anio || '%') GROUP BY categoria")
     fun getGastosResumenMensual(mes: String, anio: String): List<GastoResumen>
 
@@ -37,3 +38,6 @@ interface GastosDAO {
 
 
 }
+
+
+

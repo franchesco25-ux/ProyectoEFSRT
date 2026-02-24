@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Gastos
+import android.content.Intent
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.CurrencyTextWatcher
 import com.example.ingresosgastosapp.R
@@ -117,7 +118,8 @@ class addGastos : Fragment() {
                                 balanceViewModel.updateBalance(newBalance)
                                 withContext(Dispatchers.Main) {
                                     Toast.makeText(requireContext(), "Gasto agregado correctamente", Toast.LENGTH_SHORT).show()
-                                    findNavController().navigate(R.id.action_addFragment_to_listFragment)
+                                    startActivity(Intent(requireContext(), com.example.ingresosgastosapp.HistorialGastosActivity::class.java))
+                                    requireActivity().finish()
                                 }
                             } else {
                                 withContext(Dispatchers.Main) {

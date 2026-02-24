@@ -312,4 +312,3 @@ class AnalisisActivity : BaseActivity() {
     }
 }
 
-

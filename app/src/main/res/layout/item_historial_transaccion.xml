@@ -1,119 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="0dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/bg_dark_card">
+    android:background="@drawable/bg_stitch_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="16dp">
 
+    <!-- Icon Container -->
+    <FrameLayout
+        android:id="@+id/iconContainer"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_stitch_card"
+        android:backgroundTint="#1AFFFFFF">
+
+        <ImageView
+            android:id="@+id/ivTipoIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_history"
+            app:tint="@color/stitch_primary" />
+    </FrameLayout>
+
+    <!-- Texts -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/tvTipoTransaccion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="INGRESO"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="@color/green_accent"/>
-
-            <TextView
-                android:id="@+id/tvFechaHistorial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="01/01/2024"
-                android:textSize="12sp"
-                android:textColor="@color/text_on_dark_muted"/>
-
-        </LinearLayout>
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvDescripcionHistorial"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Descripción"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_on_dark"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvCategoriaHistorial"
-            android:layout_width="match_parent"
+            android:id="@+id/tvFechaHistorial"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Categoría"
-            android:textSize="14sp"
-            android:textColor="@color/text_on_dark_muted"/>
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="13:45"
+            android:textColor="@color/stitch_text_muted"
+            android:textSize="12sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Categoria invisible but kept for model binding if needed -->
+        <TextView
+            android:id="@+id/tvCategoriaHistorial"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/tvMontoHistorial"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+ S/. 1000.00"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/green_accent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditarTransaccion"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                app:icon="@drawable/ic_edit"
-                app:iconSize="18dp"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="@color/white"
-                app:cornerRadius="8dp"
-                app:backgroundTint="@color/green_accent"
-                android:layout_marginEnd="8dp"
-                style="@style/Widget.Material3.Button"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEliminarTransaccion"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                app:icon="@drawable/ic_delete"
-                app:iconSize="18dp"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="@color/white"
-                app:cornerRadius="8dp"
-                app:backgroundTint="@color/danger_red"
-                style="@style/Widget.Material3.Button"/>
-
-        </LinearLayout>
-
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/tvTipoTransaccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+    <!-- Amount -->
+    <TextView
+        android:id="@+id/tvMontoHistorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-$18.00"
+        android:textColor="#FF5252"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Three Dots -->
+    <ImageButton
+        android:id="@+id/btnOpciones"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_more_vert"
+        app:tint="@color/stitch_text_muted" />
+
+</LinearLayout>

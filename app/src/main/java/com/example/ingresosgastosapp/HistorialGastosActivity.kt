@@ -1,15 +1,22 @@
 package com.example.ingresosgastosapp
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ingresosgastosapp.Adapter.HistorialAdapter
 import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.Data.TipoTransaccion
 import com.example.ingresosgastosapp.Data.TransaccionItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HistorialGastosActivity : BaseActivity() {
 
@@ -30,8 +37,14 @@ class HistorialGastosActivity : BaseActivity() {
 
         // 2. Configuración del Adapter
         val adapter = HistorialAdapter(
-            onEditClick = { /* Lógica de edición */ },
-            onDeleteClick = { /* Lógica de eliminación */ }
+            onEditClick = { transaccion ->
+                val intent = Intent(this, EditarGastoActivity::class.java)
+                intent.putExtra("GASTO_ID", transaccion.id)
+                startActivity(intent)
+            },
+            onDeleteClick = { transaccion ->
+                confirmarEliminar(transaccion)
+            }
         )
 
         rvHistorial.layoutManager = LinearLayoutManager(this)
@@ -65,6 +78,25 @@ class HistorialGastosActivity : BaseActivity() {
 
         // 5. Configuración de Bottom Navigation personalizada
         setupCustomBottomNav("")
+    }
+
+    private fun confirmarEliminar(transaccion: TransaccionItem) {
+        AlertDialog.Builder(this, R.style.AlertDialogTheme)
+            .setTitle("Eliminar Gasto")
+            .setMessage("¿Estás seguro de que deseas eliminar este gasto?")
+            .setPositiveButton("Eliminar") { _, _ ->
+                lifecycleScope.launch {
+                    val gasto = gastosViewModel.getGastoById(transaccion.id)
+                    if (gasto != null) {
+                        gastosViewModel.deleteGastoWithBalance(gasto)
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@HistorialGastosActivity, "Gasto eliminado y balance restaurado", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 }
 
