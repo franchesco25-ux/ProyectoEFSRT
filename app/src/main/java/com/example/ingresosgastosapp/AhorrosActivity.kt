@@ -38,7 +38,7 @@ class AhorrosActivity : BaseActivity() {
 
         // Adapter
         adapter = MetaAhorroAdapter { meta ->
-            val intent = Intent(this, EditarMetaActivity::class.java)
+            val intent = Intent(this, DetalleMetaActivity::class.java)
             intent.putExtra("META_ID", meta.id)
             startActivity(intent)
         }
