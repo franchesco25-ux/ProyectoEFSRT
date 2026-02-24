@@ -335,19 +335,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-<<<<<<< Updated upstream
+
                 android:layout_marginStart="12dp"
                 android:text="Puedes filtrar por fecha y categoría dentro de cada historial para una búsqueda más precisa."
                 android:textColor="@color/stitch_primary"
                 android:textSize="12sp" />
-=======
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="12dp"
-                android:letterSpacing="0.1"
-                android:text="REGISTROS"
-                android:textColor="@color/stitch_text_muted"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+
+
 
 
             <!-- Empty State -->
@@ -370,7 +364,7 @@
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_historial_transaccion" />
 
->>>>>>> Stashed changes
+
         </LinearLayout>
     </LinearLayout>
 
