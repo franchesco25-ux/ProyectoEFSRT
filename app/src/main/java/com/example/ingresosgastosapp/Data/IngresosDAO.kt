@@ -30,15 +30,9 @@ interface IngresosDAO {
     @Query("SELECT * FROM ingresos WHERE id = :id LIMIT 1")
     suspend fun getIngresoById(id: Int): Ingresos?
 
-    @Query("SELECT SUM(monto) FROM ingresos WHERE strftime('%m', fecha) = :mes AND strftime('%Y', fecha) = :anio")
+    @Query("SELECT SUM(monto) FROM ingresos WHERE (fecha LIKE :anio || '-' || :mes || '%') OR (fecha LIKE '%' || :mes || '/' || :anio || '%')")
     fun getTotalIngresosMensual(mes: String, anio: String): Double
 
-    @Query("SELECT SUM(monto) FROM ingresos WHERE strftime('%Y', fecha) <= :anio")
-    fun getIngresosAcumulados(anio: String): Double
-
-
+    @Query("SELECT SUM(monto) FROM ingresos WHERE fecha <= :anio || '-' || :mes || '-31'")
+    fun getIngresosAcumulados(mes: String, anio: String): Double
 }
-
-
-
-

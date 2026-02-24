@@ -81,6 +81,12 @@
             android:name=".AhorrosActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
+        <activity
+            android:name=".ReporteContableActivity"
+            android:exported="false" />
+
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"
