@@ -4,12 +4,13 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ingresosgastosapp.Data.TipoTransaccion
 import com.example.ingresosgastosapp.Data.TransaccionItem
 import com.example.ingresosgastosapp.R
-import com.google.android.material.button.MaterialButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,8 +27,7 @@ class HistorialAdapter(
         val tvCategoria: TextView = itemView.findViewById(R.id.tvCategoriaHistorial)
         val tvFecha: TextView = itemView.findViewById(R.id.tvFechaHistorial)
         val tvMonto: TextView = itemView.findViewById(R.id.tvMontoHistorial)
-        val btnEditar: MaterialButton = itemView.findViewById(R.id.btnEditarTransaccion)
-        val btnEliminar: MaterialButton = itemView.findViewById(R.id.btnEliminarTransaccion)
+        val btnOpciones: ImageButton = itemView.findViewById(R.id.btnOpciones)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransaccionViewHolder {
@@ -66,12 +66,23 @@ class HistorialAdapter(
             }
         }
 
-        holder.btnEditar.setOnClickListener {
-            onEditClick(transaccion)
-        }
-
-        holder.btnEliminar.setOnClickListener {
-            onDeleteClick(transaccion)
+        holder.btnOpciones.setOnClickListener { view ->
+            val popup = PopupMenu(context, view)
+            popup.inflate(R.menu.menu_opciones_transaccion)
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.action_editar -> {
+                        onEditClick(transaccion)
+                        true
+                    }
+                    R.id.action_eliminar -> {
+                        onDeleteClick(transaccion)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popup.show()
         }
     }
 
