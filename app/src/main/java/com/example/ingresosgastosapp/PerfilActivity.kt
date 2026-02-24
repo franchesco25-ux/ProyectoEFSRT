@@ -139,11 +139,10 @@ class PerfilActivity : BaseActivity() {
         setupOption(R.id.rowChangePass, R.drawable.ic_settings, "Cambiar Contraseña") {
             startActivity(Intent(this, CambiarContrasenaActivity::class.java))
         }
-        setupSwitch(R.id.rowFaceId, R.drawable.ic_person, "Face ID / Touch ID", touchIdPref) { isChecked ->
+        setupSwitch(R.id.rowFaceId, R.drawable.ic_person, "Touch ID", touchIdPref) { isChecked ->
             prefs.edit().putBoolean("TOUCH_ID_ENABLED", isChecked).apply()
             Toast.makeText(this, if (isChecked) "Touch ID Activado" else "Touch ID Desactivado", Toast.LENGTH_SHORT).show()
         }
-        setupStatus(R.id.rowVerificacion, R.drawable.ic_check_circle, "Verificación en dos pasos", "Activado")
 
         // 3. Configurar Secciones (PREFERENCIAS)
         setupValue(R.id.rowCurrency, R.drawable.ic_attach_money, "Moneda Principal", monedaPref!!)
@@ -156,7 +155,6 @@ class PerfilActivity : BaseActivity() {
         }
 
         // 4. Configurar Secciones (AYUDA Y SOPORTE)
-        setupOption(R.id.rowHelp, R.drawable.ic_help, "Centro de Ayuda") {}
         setupOption(R.id.rowPrivacy, R.drawable.ic_history, "Términos y Privacidad") {
             startActivity(Intent(this, TerminosPrivacidadActivity::class.java))
         }

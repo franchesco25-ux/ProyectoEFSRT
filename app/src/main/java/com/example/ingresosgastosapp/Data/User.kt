@@ -19,3 +19,4 @@ data class User(
     @ColumnInfo(name = "moneda")
     val moneda: String = "USD ($)"
 )
+

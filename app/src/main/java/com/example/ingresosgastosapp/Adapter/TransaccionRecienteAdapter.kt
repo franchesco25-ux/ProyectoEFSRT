@@ -60,12 +60,12 @@ class TransaccionRecienteAdapter(
                 monedaPref.substringAfter("(").replace(")", "") else "$"
 
             if (item.esIngreso) {
-                tvMonto.text = "+$sym%.2f".format(item.monto)
+                tvMonto.text = "+$sym%,.2f".format(item.monto)
                 tvMonto.setTextColor(Color.parseColor("#0df259"))
                 ivTipoIcon.setImageResource(R.drawable.ic_attach_money)
                 ivTipoIcon.setColorFilter(Color.parseColor("#0df259"))
             } else {
-                tvMonto.text = "-$sym%.2f".format(item.monto)
+                tvMonto.text = "-$sym%,.2f".format(item.monto)
                 tvMonto.setTextColor(Color.parseColor("#ef4444"))
                 ivTipoIcon.setImageResource(R.drawable.ic_shopping_cart)
                 ivTipoIcon.setColorFilter(Color.parseColor("#ef4444"))
@@ -88,3 +88,4 @@ class TransaccionRecienteAdapter(
         }
     }
 }
+

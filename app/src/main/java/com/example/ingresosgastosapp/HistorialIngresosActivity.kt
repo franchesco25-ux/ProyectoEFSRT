@@ -57,7 +57,7 @@ class HistorialIngresosActivity : BaseActivity() {
             val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
             val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
 
-            tvTotalMes.text = "+$currencySymbol %.2f".format(total)
+            tvTotalMes.text = "+$currencySymbol %,.2f".format(total)
         }
 
         // 4. Configuración de Clics
@@ -67,3 +67,4 @@ class HistorialIngresosActivity : BaseActivity() {
         setupCustomBottomNav("")
     }
 }
+

@@ -16,3 +16,4 @@ class TerminosPrivacidadActivity : BaseActivity() {
         }
     }
 }
+

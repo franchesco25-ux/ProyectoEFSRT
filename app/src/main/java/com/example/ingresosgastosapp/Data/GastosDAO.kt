@@ -30,6 +30,7 @@ interface GastosDAO {
     suspend fun getGastoById(id: Int): Gastos?
 
 
+
     @Query("""
     SELECT categoria, SUM(monto) as total 
     FROM gastos 

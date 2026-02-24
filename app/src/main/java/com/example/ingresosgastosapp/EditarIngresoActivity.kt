@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.ingresosgastosapp.CurrencyTextWatcher
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
@@ -52,6 +53,7 @@ class EditarIngresoActivity : BaseActivity() {
 
         etDescripcion = findViewById(R.id.etDescripcion)
         etMonto = findViewById(R.id.etMonto)
+        etMonto.addTextChangedListener(CurrencyTextWatcher(etMonto))
         spinnerCategoria = findViewById(R.id.spinnerCategoriaIngreso)
 
         // Configurar spinner de categorías
@@ -103,7 +105,7 @@ class EditarIngresoActivity : BaseActivity() {
 
     private fun actualizarIngreso() {
         val descripcion = etDescripcion.text.toString()
-        val montoStr = etMonto.text.toString()
+        val montoStr = etMonto.text.toString().replace(",", "")
         val categoria = spinnerCategoria.selectedItem?.toString() ?: ""
 
         if (TextUtils.isEmpty(descripcion) || TextUtils.isEmpty(montoStr) || TextUtils.isEmpty(categoria)) {
@@ -146,3 +148,4 @@ class EditarIngresoActivity : BaseActivity() {
         }
     }
 }
+

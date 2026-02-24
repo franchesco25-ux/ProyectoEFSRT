@@ -25,6 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Ingresos
 import com.example.ingresosgastosapp.Data.IngresosViewModel
+import com.example.ingresosgastosapp.CurrencyTextWatcher
 
 import com.example.ingresosgastosapp.R
 import kotlinx.coroutines.Dispatchers
@@ -63,6 +64,7 @@ class AddFragment : Fragment() {
 
         val descripcionEt = view.findViewById<EditText>(R.id.addDescripcion_et)
         val montoEt = view.findViewById<EditText>(R.id.addMonto_et)
+        montoEt.addTextChangedListener(CurrencyTextWatcher(montoEt))
         val categoriaEt = view.findViewById<AutoCompleteTextView>(R.id.addCategoria_et)
         val btnAddCategoria = view.findViewById<ImageView>(R.id.btnAddCategoriaIngreso)
         val button = view.findViewById<View>(R.id.add_btn)
@@ -243,3 +245,4 @@ class AddFragment : Fragment() {
         }
     }
 }
+

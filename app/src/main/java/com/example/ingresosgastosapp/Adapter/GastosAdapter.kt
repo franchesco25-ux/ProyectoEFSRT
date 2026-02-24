@@ -45,7 +45,7 @@ class ListGastosAdapter(
         val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
         val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
 
-        holder.monto_txt.text = "-$currencySymbol ${String.format("%.2f", currentGasto.monto)}"
+        holder.monto_txt.text = "-$currencySymbol ${String.format("%,.2f", currentGasto.monto)}"
         holder.categoria_txt.text = currentGasto.categoria
         holder.fecha_txt.text = formatFecha(currentGasto.fecha)
 

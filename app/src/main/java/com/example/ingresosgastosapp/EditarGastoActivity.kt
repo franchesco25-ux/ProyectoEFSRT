@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.ingresosgastosapp.CurrencyTextWatcher
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosViewModel
@@ -52,6 +53,7 @@ class EditarGastoActivity : BaseActivity() {
 
         etDescripcion = findViewById(R.id.etDescripcionGasto)
         etMonto = findViewById(R.id.etMontoGasto)
+        etMonto.addTextChangedListener(CurrencyTextWatcher(etMonto))
         spinnerCategoria = findViewById(R.id.spinnerCategoriaGasto)
 
         // Configurar spinner de categorías
@@ -103,7 +105,7 @@ class EditarGastoActivity : BaseActivity() {
 
     private fun actualizarGasto() {
         val descripcion = etDescripcion.text.toString()
-        val montoStr = etMonto.text.toString()
+        val montoStr = etMonto.text.toString().replace(",", "")
         val categoria = spinnerCategoria.selectedItem?.toString() ?: ""
 
         if (TextUtils.isEmpty(descripcion) || TextUtils.isEmpty(montoStr) || TextUtils.isEmpty(categoria)) {
@@ -152,7 +154,7 @@ class EditarGastoActivity : BaseActivity() {
 
                     Toast.makeText(
                         this@EditarGastoActivity,
-                        "No tienes suficiente balance para este monto (Balance actual: $currencySymbol %.2f)".format(currentBalance),
+                        "No tienes suficiente balance para este monto (Balance actual: $currencySymbol %,.2f)".format(currentBalance),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -160,3 +162,4 @@ class EditarGastoActivity : BaseActivity() {
         }
     }
 }
+

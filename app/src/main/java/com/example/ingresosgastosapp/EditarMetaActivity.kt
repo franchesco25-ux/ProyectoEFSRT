@@ -19,6 +19,7 @@ import com.example.ingresosgastosapp.Data.GastosViewModel
 import com.example.ingresosgastosapp.Data.MetaAhorro
 import com.example.ingresosgastosapp.DataBase.AppDatabase
 import com.example.ingresosgastosapp.Data.MetaAhorroDAO
+import com.example.ingresosgastosapp.CurrencyTextWatcher
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +78,9 @@ class EditarMetaActivity : BaseActivity() {
         // Initialize views
         etNombre = findViewById(R.id.et_nombre_meta)
         etMontoObjetivo = findViewById(R.id.et_monto_objetivo)
+        etMontoObjetivo.addTextChangedListener(CurrencyTextWatcher(etMontoObjetivo))
         etMontoActual = findViewById(R.id.et_monto_actual)
+        etMontoActual.addTextChangedListener(CurrencyTextWatcher(etMontoActual))
         etFechaLimite = findViewById(R.id.et_fecha_limite)
         spinnerFrecuencia = findViewById(R.id.spinner_frecuencia)
         btnSave = findViewById(R.id.btn_save_meta_changes)
@@ -243,8 +246,8 @@ class EditarMetaActivity : BaseActivity() {
             if (meta != null) {
                 metaActual = meta
                 etNombre.setText(meta.nombre)
-                etMontoObjetivo.setText("%.2f".format(meta.montoObjetivo))
-                etMontoActual.setText("%.2f".format(meta.montoActual))
+                etMontoObjetivo.setText("%,.2f".format(meta.montoObjetivo))
+                etMontoActual.setText("%,.2f".format(meta.montoActual))
                 if (meta.fechaLimite.isNotEmpty()) {
                     etFechaLimite.setText(meta.fechaLimite)
                 }
@@ -279,7 +282,7 @@ class EditarMetaActivity : BaseActivity() {
             .setMessage("Este monto se registrará como un gasto y se descontará de tu balance.\n¿Cuánto deseas agregar a esta meta?")
             .setView(input)
             .setPositiveButton("Agregar") { _, _ ->
-                val montoAgregar = input.text.toString().toDoubleOrNull()
+                val montoAgregar = input.text.toString().replace(",", "").toDoubleOrNull()
                 if (montoAgregar != null && montoAgregar > 0) {
                     lifecycleScope.launch {
                         val currentBalance = balanceViewModel.getCurrentBalance()
@@ -299,13 +302,13 @@ class EditarMetaActivity : BaseActivity() {
                             gastosViewModel.addGasto(gasto)
 
                             // 3. Add to current goal amount
-                            val montoActualVal = etMontoActual.text.toString().toDoubleOrNull() ?: 0.0
+                            val montoActualVal = etMontoActual.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
                             val nuevoMonto = montoActualVal + montoAgregar
-                            etMontoActual.setText("%.2f".format(nuevoMonto))
+                            etMontoActual.setText("%,.2f".format(nuevoMonto))
 
-                            Toast.makeText(this@EditarMetaActivity, "S/. %.2f agregados a la meta".format(montoAgregar), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@EditarMetaActivity, "S/. %,.2f agregados a la meta".format(montoAgregar), Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(this@EditarMetaActivity, "Saldo insuficiente. Tu balance es S/. %.2f".format(currentBalance), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@EditarMetaActivity, "Saldo insuficiente. Tu balance es S/. %,.2f".format(currentBalance), Toast.LENGTH_LONG).show()
                         }
                     }
                 } else {
@@ -318,8 +321,8 @@ class EditarMetaActivity : BaseActivity() {
 
     private fun guardarMeta() {
         val nombre = etNombre.text.toString().trim()
-        val montoObjetivoStr = etMontoObjetivo.text.toString().trim()
-        val montoActualStr = etMontoActual.text.toString().trim()
+        val montoObjetivoStr = etMontoObjetivo.text.toString().replace(",", "").trim()
+        val montoActualStr = etMontoActual.text.toString().replace(",", "").trim()
         val fechaLimite = etFechaLimite.text.toString().trim()
         val frecuenciaSel = frecuenciaValues[spinnerFrecuencia.selectedItemPosition]
 
@@ -450,3 +453,4 @@ class EditarMetaActivity : BaseActivity() {
         override fun getItemCount() = icons.size
     }
 }
+

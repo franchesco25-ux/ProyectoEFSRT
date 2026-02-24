@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.ingresosgastosapp.Data.BalanceViewModel
 import com.example.ingresosgastosapp.Data.Gastos
 import com.example.ingresosgastosapp.Data.GastosViewModel
+import com.example.ingresosgastosapp.CurrencyTextWatcher
 import com.example.ingresosgastosapp.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,6 +61,7 @@ class addGastos : Fragment() {
 
         val descripcionEt = view.findViewById<EditText>(R.id.addDescripcionGasto_et)
         val montoEt = view.findViewById<EditText>(R.id.addMontoGasto_et)
+        montoEt.addTextChangedListener(CurrencyTextWatcher(montoEt))
         val categoriaEt = view.findViewById<AutoCompleteTextView>(R.id.addCategoriaGasto_et)
         val btnAddCategoria = view.findViewById<ImageView>(R.id.btnAddCategoriaGasto)
         val button = view.findViewById<View>(R.id.addGasto_btn)
@@ -122,7 +124,7 @@ class addGastos : Fragment() {
                                     val prefs = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
                                     val monedaPref = prefs.getString("MONEDA_PRINCIPAL", "USD ($)")
                                     val currencySymbol = if (monedaPref != null && monedaPref.contains("(")) monedaPref.substringAfter("(").replace(")", "") else "$"
-                                    Toast.makeText(requireContext(), "Ingreso insuficiente. Balance actual: $currencySymbol %.2f".format(currentBalance), Toast.LENGTH_LONG).show()
+                                    Toast.makeText(requireContext(), "Ingreso insuficiente. Balance actual: $currencySymbol %,.2f".format(currentBalance), Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -249,3 +251,4 @@ class addGastos : Fragment() {
         }
     }
 }
+

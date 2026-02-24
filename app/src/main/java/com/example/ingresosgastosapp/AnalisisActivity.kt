@@ -155,7 +155,7 @@ class AnalisisActivity : BaseActivity() {
         }
 
         val tvMeta = TextView(this).apply {
-            text = "Meta: $currencySymbol${String.format("%.2f", meta.montoObjetivo)}"
+            text = "Meta: $currencySymbol${String.format("%,.2f", meta.montoObjetivo)}"
             setTextColor(Color.parseColor("#66FFFFFF"))
             textSize = 12f
         }
@@ -171,7 +171,7 @@ class AnalisisActivity : BaseActivity() {
         }
 
         val tvTotal = TextView(this).apply {
-            text = "$currencySymbol${String.format("%.2f", meta.montoActual)}"
+            text = "$currencySymbol${String.format("%,.2f", meta.montoActual)}"
             setTextColor(Color.WHITE)
             textSize = 15f
             setTypeface(typeface, android.graphics.Typeface.BOLD)
@@ -285,7 +285,7 @@ class AnalisisActivity : BaseActivity() {
         if (totalIngresosMes > 0) {
             val pct = ((totalGastosMes / totalIngresosMes) * 100).toInt()
             tvAlertaMsg.text = when {
-                pct >= 100 -> "⚠ ¡Presupuesto superado! Gastos: $currencySymbol%.2f".format(totalGastosMes)
+                pct >= 100 -> "⚠ ¡Presupuesto superado! Gastos: $currencySymbol%,.2f".format(totalGastosMes)
                 pct >= 80 -> "¡Atención! Has usado el $pct% de tus ingresos."
                 else -> "Balance positivo. Has usado el $pct% de tus ingresos."
             }
@@ -311,3 +311,4 @@ class AnalisisActivity : BaseActivity() {
         finish()
     }
 }
+
