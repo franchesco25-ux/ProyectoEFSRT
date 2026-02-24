@@ -49,11 +49,21 @@ class AnalisisActivity : BaseActivity() {
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         val btnVerDetalles = findViewById<TextView>(R.id.btnVerDetalles)
 
+<<<<<<< Updated upstream
         // Botón atrás: volver al menú principal de forma segura
         btnBack.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
             finish()
         }
+=======
+        val btnReporte = findViewById<Button>(R.id.btnReporteContable)
+        btnReporte.setOnClickListener {
+            val intent = Intent(this, ReporteContableActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnBack.setOnClickListener { finish() }
+>>>>>>> Stashed changes
 
         // Configuración de Moneda
         val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
